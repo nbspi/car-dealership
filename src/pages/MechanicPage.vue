@@ -31,7 +31,7 @@
                         <b-col md="12" lg="12" xl="8" class="py-2">
                             <b-col class="table-container">
                                 <b-container class="left-card rounded p-3">
-                                    <h5 class="px-3 mb-3">Mechanics</h5>
+                                    <h5 class="px-3 mb-3">Mechanic Records</h5>
                                     <b-table striped hover :items="items"></b-table>
                                 </b-container>
                             </b-col>

@@ -74,6 +74,7 @@ export default {
 
 #sidebar-title {
     font-weight: 600;
+    color: #4A5376;
 }
 
 .mb-3 {
