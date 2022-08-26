@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #33323D;
+}
+
+.page-item.active .page-link {
+    border: none !important;
+    background-color: #4A5376 !important;
+    color: #fff !important;
+}
+
+.btn-success {
+    background-color: #40916c !important;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #386641 !important;
+}
+
+.page-link {
+    color: #4A5376 !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-secondary,
+.show>.btn-secondary.dropdown-toggle {
+    background-color: #4A5376 !important;
+    border-color: #4A5376 !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #829BB8 !important;
+    border-color: #829BB8 !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active {
+    background-color: #4A5376;
+    outline: none !important;
+}
+
+svg {
+    color: #4A5376;
+}
+
+@media (max-width:1200px) {
+    .table-container {
+        padding-top: 25px !important;
+        padding-bottom: 50px !important;
+    }
+}
+
+.form-control {
+    outline: none !important;
+}
