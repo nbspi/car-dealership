@@ -28,6 +28,26 @@ h2 {
     color: #fff !important;
 }
 
+svg {
+    color: #4A5376;
+}
+
+@media (max-width:1200px) {
+    .table-container {
+        padding-top: 25px !important;
+        padding-bottom: 50px !important;
+    }
+}
+
+.form-control {
+    outline: none !important;
+}
+
+.page-link {
+    color: #4A5376 !important;
+    font-family: 'Poppins', sans-serif;
+}
+
 .btn-success {
     background-color: #40916c !important;
     border: none;
@@ -35,11 +55,6 @@ h2 {
 
 .btn-success:hover {
     background-color: #386641 !important;
-}
-
-.page-link {
-    color: #4A5376 !important;
-    font-family: 'Poppins', sans-serif;
 }
 
 .btn-secondary,
@@ -56,20 +71,5 @@ h2 {
 
 .btn-primary:not(:disabled):not(.disabled).active {
     background-color: #4A5376;
-    outline: none !important;
-}
-
-svg {
-    color: #4A5376;
-}
-
-@media (max-width:1200px) {
-    .table-container {
-        padding-top: 25px !important;
-        padding-bottom: 50px !important;
-    }
-}
-
-.form-control {
     outline: none !important;
 }
