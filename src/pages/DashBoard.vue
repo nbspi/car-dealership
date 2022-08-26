@@ -16,7 +16,8 @@
               <b-row class="mt-5 d-flex flex-column justify-content-between">
                 <h4 class="pl-2">Top Selling | <span>This Month</span></h4>
                 <b-col class="mt-3">
-                  <b-table hover :items="items"></b-table>
+                  <b-table hover :items="items">
+                  </b-table>
                 </b-col>
               </b-row>
             </b-col>
@@ -60,10 +61,10 @@ export default {
   data() {
     return {
       items: [
-        { product: 40, price: 'Dickerson', sold: 'Macdonald', actions: '' },
-        { product: 40, price: 'Dickerson', sold: 'Macdonald' },
-        { product: 40, price: 'Dickerson', sold: 'Macdonald' },
-        { product: 40, price: 'Dickerson', sold: 'Macdonald' }
+        { product: 40, price: '$23434', sold: '134' },
+        { product: 40, price: '$23434', sold: '134' },
+        { product: 40, price: '$23434', sold: '134' },
+        { product: 40, price: '$23434', sold: '134' },
       ]
     }
   }
@@ -86,5 +87,9 @@ p {
 span {
   font-size: 18px;
   color: #687097;
+}
+
+h4 {
+  color: #4a5376;
 }
 </style>

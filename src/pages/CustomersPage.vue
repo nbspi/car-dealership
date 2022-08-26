@@ -5,7 +5,7 @@
             <b-col xl="10" lg="9" sm="9">
                 <HeaderComponent title="Customers" />
                 <b-container fluid class="pt-2">
-                    <b-row class=" my-3">
+                    <b-row class="my-3">
                         <!-- whole container-->
                         <b-col class="py-2">
                             <!-- left container-->
@@ -32,7 +32,18 @@
                             <b-col class="table-container ">
                                 <b-container class="left-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
-                                    <b-table striped hover :items="items"></b-table>
+                                    <b-table hover :items="items" :fields="fields">
+                                        <template v-slot:cell(actions)="{ item }">
+                                            <span>
+                                                <b-btn class="mr-2" @click="editItem(item)">
+                                                    <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                </b-btn>
+                                                <b-btn @click="editItem(item)">
+                                                    <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                                                </b-btn>
+                                            </span>
+                                        </template>
+                                    </b-table>
                                     <div class="overflow-auto">
                                         <div class="mt-5 d-flex justify-content-end">
                                             <b-pagination v-model="currentPage" pills :total-rows="rows"></b-pagination>
@@ -67,6 +78,7 @@ export default {
             rows: 50,
             currentPage: 1,
             value: '',
+            fields: ['ID', 'first_name', 'last_name', 'phone_number', 'address', 'actions'],
             items: [
                 { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
                 { ID: 40, first_name: 'Renjun', last_name: 'Huang', phone_number: '4546766', address: 'Pol' },
@@ -94,5 +106,10 @@ div.py-2 {
 .left-card {
     background-color: #F6F9FF;
     border-radius: 20px !important;
+}
+
+.edit-btn,
+.delete-btn {
+    color: #fff;
 }
 </style>

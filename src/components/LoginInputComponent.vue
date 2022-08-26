@@ -13,9 +13,15 @@
 export default {
     name: "LoginInputComponent",
     props: {
-        label: String,
-        type: String,
-        placeholder: String,
+        label: {
+            type: String
+        },
+        type: {
+            type: String
+        },
+        placeholder: {
+            type: String
+        }
     }
 }
 </script>

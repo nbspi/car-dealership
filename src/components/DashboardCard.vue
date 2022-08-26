@@ -1,6 +1,6 @@
 <template>
     <b-col cols="3" class="sales-card p-2">
-        <b-row class="d-flex pl-4">
+        <b-row class="d-flex pl-3">
             <div>{{ title }} | <span>Today</span> </div>
         </b-row>
         <b-row class="px-1">
@@ -24,10 +24,18 @@
 export default {
     name: "DashboardCard",
     props: {
-        title: String,
-        icon: String,
-        description: String,
-        value: Number
+        title: {
+            type: String
+        },
+        icon: {
+            type: String
+        },
+        description: {
+            type: String
+        },
+        value: {
+            type: Number
+        }
     }
 }
 </script>

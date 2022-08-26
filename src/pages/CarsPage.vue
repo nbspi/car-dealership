@@ -7,7 +7,7 @@
                 <b-container fluid class="pt-2">
                     <b-row class=" my-3">
                         <!-- whole container-->
-                        <b-col class="py-2">
+                        <b-col xl="3" class="py-2">
                             <!-- left container-->
                             <b-col class="">
                                 <b-container class="left-card rounded p-3">
@@ -18,7 +18,6 @@
                                             <FormInput label="Brand" placeholder="Enter Brand" />
                                             <FormInput label="Model" placeholder="Enter Model" />
                                             <FormInput label="Color" placeholder="Enter Color" />
-                                            <FormInput label="Brand" placeholder="Enter Brand" />
                                             <FormInput label="Year" placeholder="Enter Year" />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2">Reset</b-button>
@@ -29,7 +28,7 @@
                                 </b-container>
                             </b-col>
                         </b-col>
-                        <b-col md="12" lg="12" xl="8" class="py-2">
+                        <b-col md="12" lg="12" xl="9" class="py-2">
                             <!-- left container-->
                             <b-col class="table-container">
                                 <b-container class="left-card rounded p-3">

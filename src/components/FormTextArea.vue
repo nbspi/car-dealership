@@ -11,7 +11,9 @@
     export default {
         name: "FormTextArea",
         props: {
-            label: String
+            label: {
+                type: String
+            }
         }
     }
 </script>

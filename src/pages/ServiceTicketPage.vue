@@ -7,7 +7,7 @@
                 <b-container fluid class="pt-2">
                     <b-row class=" my-3">
                         <!-- whole container-->
-                        <b-col class="py-2">
+                        <b-col xl="3" class="py-2">
                             <!-- left container-->
                             <b-col class="">
                                 <b-container class="left-card rounded p-3">
@@ -31,7 +31,7 @@
 
                             </b-col>
                         </b-col>
-                        <b-col cmd="12" lg="12" xl="8" class="table-container py-2">
+                        <b-col cmd="12" lg="12" xl="9" class="table-container py-2">
                             <!-- left container-->
                             <b-col class="table-container">
                                 <b-container class="left-card rounded p-3">
@@ -53,8 +53,8 @@
     </b-container>
 </template>
 
-<script>
 
+<script>
 import SideBar from "../components/SideBar.vue"
 import HeaderComponent from "../components/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
@@ -103,27 +103,3 @@ div.py-2 {
     border-radius: 20px !important;
 }
 </style>
-
-<!-- <template>
-    <b-container fluid>
-        <b-row>
-            <SideBar />
-            <b-col cols="10">
-                <HeaderComponent title="Service Ticket" />
-                <b-container fluid>
-
-                </b-container>
-            </b-col>
-        </b-row>
-    </b-container>
-</template>
-
-<script>
-import SideBar from '@/components/SideBar.vue';
-import HeaderComponent from '@/components/HeaderComponent.vue';
-
-    export default {
-    name: "ServiceTicketPage",
-    components: { SideBar, HeaderComponent }
-}
-</script> -->

@@ -32,7 +32,9 @@
 export default {
     name: "HeaderComponent",
     props: {
-        title: String
+        title: {
+            type: String
+        }
     }
     // setup(props) {
     //     console.log(props.title)
