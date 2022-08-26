@@ -15,7 +15,7 @@
                                     <b-col class="mt-3">
                                         <b-form>
                                             <FormInput label="Invoice Number" placeholder="Enter Invoice Number" />
-                                            <DatePicker label="Invoice Date" />
+                                            <DatePicker label="Invoice Date" disabled="True" />
                                             <FormInput label="Salesperson ID" placeholder="Enter Salesperson ID" />
                                             <FormInput label="Customer ID" placeholder="Enter Customer ID" />
                                             <FormInput label="Car ID" placeholder="Enter Car ID" />

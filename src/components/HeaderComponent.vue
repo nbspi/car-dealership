@@ -64,4 +64,8 @@ nav {
 .user-dropdown {
     outline: #829BB8 !important;
 }
+
+h2 {
+    color: #4a5376;
+}
 </style>

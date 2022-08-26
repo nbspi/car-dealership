@@ -27,7 +27,6 @@
                                         </b-form>
                                     </b-col>
                                 </b-container>
-
                             </b-col>
                         </b-col>
                         <b-col md="12" lg="12" xl="8" class="py-2">
