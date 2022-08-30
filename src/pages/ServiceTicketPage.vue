@@ -10,7 +10,7 @@
                         <b-col xl="3" class="py-2">
                             <!-- left container-->
                             <b-col class="">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Service Ticket</h4>
                                     <b-col class="mt-3">
                                         <b-form>
@@ -34,7 +34,7 @@
                         <b-col cmd="12" lg="12" xl="9" class="table-container py-2">
                             <!-- left container-->
                             <b-col class="table-container">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Service Records</h5>
                                     <b-table striped hover :items="items"></b-table>
                                     <div class="overflow-auto">
@@ -55,8 +55,8 @@
 
 
 <script>
-import SideBar from "../components/SideBar.vue"
-import HeaderComponent from "../components/HeaderComponent.vue"
+import SideBar from "../layouts/SideBar.vue"
+import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import FormTextArea from "../components/FormTextArea.vue"
 import DatePicker from "../components/DatePicker.vue"
@@ -98,8 +98,4 @@ div.py-2 {
     padding: 0 !important;
 }
 
-.left-card {
-    background-color: #F6F9FF;
-    border-radius: 20px !important;
-}
 </style>

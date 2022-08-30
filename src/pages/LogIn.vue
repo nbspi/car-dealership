@@ -1,4 +1,5 @@
 <template>
+
   <body>
     <b-container fluid>
       <b-row id="header" class="d-flex justify-content-center">
@@ -18,12 +19,7 @@
       </b-row>
 
       <b-row fluid>
-        <b-col
-          cols="12"
-          md="12"
-          lg="5"
-          class="left d-flex justify-content-center"
-        >
+        <b-col cols="12" md="12" lg="5" class="left d-flex justify-content-center">
           <b-col cols="8" class="d-flex flex-column align-items-center">
             <img src="../assets/img/lougeh.png" alt="" class="lou-geh" />
             <h1>LOGIN</h1>
@@ -31,16 +27,8 @@
             <br />
             <div class="d-flex justify-content-center">
               <b-form class="d-flex flex-column">
-                <LoginInputComponent
-                  label="ID Number"
-                  type="text"
-                  placeholder="Enter ID Number"
-                />
-                <LoginInputComponent
-                  label="Password"
-                  type="password"
-                  placeholder="Enter Password"
-                />
+                <LoginInputComponent label="ID Number" type="text" placeholder="Enter ID Number" />
+                <LoginInputComponent label="Password" type="password" placeholder="Enter Password" />
                 <br />
                 <div class="d-flex justify-content-center">
                   <a href="./dashboard" class="col-6 btn btn-block">LOG IN</a>
@@ -49,12 +37,7 @@
             </div>
           </b-col>
         </b-col>
-        <b-col
-          cols="12"
-          md="12"
-          lg="7"
-          class="right d-flex justify-content-center align-items-center"
-        >
+        <b-col cols="12" md="12" lg="7" class="right d-flex justify-content-center align-items-center">
           <img src="../assets/img/car.svg" alt="" class="car" />
         </b-col>
       </b-row>
@@ -74,11 +57,10 @@ export default {
 </script>
 
 <style scoped>
-
 body {
-    height: 100vh;
-    background-image: url(../assets/img/background.svg);
-    overflow: hidden;
+  height: 100vh;
+  background-image: url(../assets/img/background.svg);
+  overflow: hidden;
 }
 
 #header {
@@ -123,9 +105,10 @@ body {
 }
 
 @media (max-width: 1080px) {
+
   .navbar a,
   .navbar a:focus {
-    color: #4a5376;
+    color: var(--primary-color);
   }
 
   .navbar a:hover {
@@ -143,8 +126,8 @@ body {
 .navbar a:hover,
 .navbar .active,
 .navbar .active:focus,
-.navbar li:hover > a {
-  color: #4a5376;
+.navbar li:hover>a {
+  color: var(--primary-color);
 }
 
 .navbar .active {
@@ -189,7 +172,7 @@ body {
 }
 
 .btn {
-  background-color: #829bb8;
+  background-color: var(--secondary-color);
   color: #fff;
   font-size: 18px;
   font-weight: 500;
@@ -198,7 +181,7 @@ body {
 }
 
 .btn:hover {
-  background-color: #4a5376;
+  background-color: var(--primary-color);
   color: #fff;
 }
 </style>

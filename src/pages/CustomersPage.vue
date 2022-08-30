@@ -10,7 +10,7 @@
                         <b-col class="py-2">
                             <!-- left container-->
                             <b-col class="">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Customers</h4>
                                     <b-col class="mt-3">
                                         <b-form>
@@ -30,7 +30,7 @@
                         <b-col md="12" lg="12" xl="8" class="py-2">
                             <!-- left container-->
                             <b-col class="table-container ">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
                                     <b-table hover :items="items" :fields="fields">
                                         <template v-slot:cell(actions)="{ item }">
@@ -62,8 +62,8 @@
 
 <script>
 
-import SideBar from "../components/SideBar.vue"
-import HeaderComponent from "../components/HeaderComponent.vue"
+import SideBar from "../layouts/SideBar.vue"
+import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 
 export default {
@@ -101,11 +101,6 @@ nav {
 
 div.py-2 {
     padding: 0 !important;
-}
-
-.left-card {
-    background-color: #F6F9FF;
-    border-radius: 20px !important;
 }
 
 .edit-btn,

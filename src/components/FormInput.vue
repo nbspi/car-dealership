@@ -2,7 +2,7 @@
     <div class="mb-3">
         <b-form-group :label="label" id="label" class="ml-2">
         </b-form-group>
-        <b-form-input :placeholder="placeholder" v-model="text"></b-form-input>
+        <b-form-input :placeholder="placeholder" v-model="invoice"></b-form-input>
         <!-- <div class="mt-2">Value: {{ text }}</div> -->
     </div>
 </template>
@@ -20,3 +20,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+input:focus {
+    border: solid 1px var(--primary-color);
+}
+</style>

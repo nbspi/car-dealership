@@ -34,13 +34,13 @@ export default {
             type: String
         },
         value: {
-            type: Number
+            type: String
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
 .sales-card {
     background-color: #829BB8 !important;
     border-radius: 10px;
@@ -62,4 +62,9 @@ export default {
 .sales-card span {
     font-size: 14px;
 }
+
+svg {
+    color: #4A5376;
+}
+
 </style>

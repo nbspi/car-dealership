@@ -10,7 +10,7 @@
                         <b-col class="py-2">
                             <!-- left container-->
                             <b-col class="">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Salesperson</h4>
                                     <b-col class="mt-3">
                                         <b-form>
@@ -19,7 +19,7 @@
                                             <FormInput label="Phone Number" placeholder="Enter Phone Number" />
                                             <FormInput label="Address" placeholder="Enter Address" />
                                             <b-container class="button-container d-flex justify-content-end">
-                                                <b-button class="mr-2">Reset</b-button>
+                                                <!-- <b-button class="mr-2">Reset</b-button> -->
                                                 <b-button variant="success">Save</b-button>
                                             </b-container>
                                         </b-form>
@@ -31,8 +31,8 @@
                         <b-col md="12" lg="12" xl="8" class="py-2">
                             <!-- left container-->
                             <b-col class="table-container">
-                                <b-container class="left-card rounded p-3">
-                                    <h5 class="px-3 mb-3">Salespersons</h5>
+                                <b-container class="container-card rounded p-3">
+                                    <h5 class="px-3 mb-3">Salespersons Records</h5>
                                     <b-table striped hover :items="items"></b-table>
                                 </b-container>
 
@@ -47,8 +47,8 @@
 
 <script>
 
-import SideBar from "../components/SideBar.vue"
-import HeaderComponent from "../components/HeaderComponent.vue"
+import SideBar from "../layouts/SideBar.vue"
+import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 
 export default {
@@ -85,8 +85,4 @@ div.py-2 {
     padding: 0 !important;
 }
 
-.left-card {
-    background-color: #F6F9FF;
-    border-radius: 20px !important;
-}
 </style>

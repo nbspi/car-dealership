@@ -6,12 +6,13 @@
                     <h2>{{ title }}</h2>
                 </div>
             </b-col>
-            <b-col sm="12" xl="10" class="d-flex justify-content-sm-center justify-content-xl-end">
+            <b-col sm="12" xl="10" class="search-container d-flex justify-content-sm-center justify-content-xl-end">
                 <b-nav-form class="mr-3">
                     <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
                     <b-button variant="outline-light" class="my-sm-0 btn d-flex " type="submit"><b-icon icon="search"></b-icon></b-button>
                 </b-nav-form>
-                <div>
+                <div class="">
+                    <b-avatar variant="secondary"></b-avatar>
                     <b-dropdown text="UserName" variant="secondary" class="user-dropdown m-2">
                         <b-dropdown-item href="#">Profile</b-dropdown-item>
                         <b-dropdown-item href="/">Sign Out</b-dropdown-item>
@@ -44,13 +45,13 @@ export default {
 
 <style scoped>
 .btn {
-    border: solid 1px #829BB8;
-    color: #4a5376;
+    border: solid 1px var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .btn:hover,
 .btn:focus {
-    background-color: #4a5376 !important;
+    background-color: var(--primary-color) !important;
     color: white !important;
     outline: none !important;
 }
@@ -60,14 +61,22 @@ nav {
 }
 
 .breadcrumb {
-    background-color: #F6F9FF;
+    background-color: var(--background-color);
 }
 
 .user-dropdown {
-    outline: #829BB8 !important;
+    outline: var(--secondary-color) !important;
 }
 
 h2 {
-    color: #4a5376;
+    color: var(--primary-color);
+}
+
+.badge-secondary {
+  background-color: var(--primary-color) ;
+}
+
+.search-container {
+    padding-right: 5px !important;
 }
 </style>

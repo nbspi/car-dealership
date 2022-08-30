@@ -10,7 +10,7 @@
                         <b-col xl="3" class="py-2">
                             <!-- left container-->
                             <b-col class="">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Car</h4>
                                     <b-col class="mt-3">
                                         <b-form>
@@ -19,6 +19,7 @@
                                             <FormInput label="Model" placeholder="Enter Model" />
                                             <FormInput label="Color" placeholder="Enter Color" />
                                             <FormInput label="Year" placeholder="Enter Year" />
+                                            <RadioComponent />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2">Reset</b-button>
                                                 <b-button variant="success">Save</b-button>
@@ -31,7 +32,7 @@
                         <b-col md="12" lg="12" xl="9" class="py-2">
                             <!-- left container-->
                             <b-col class="table-container">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Car Records</h5>
                                     <b-table striped hover :items="items"></b-table>
                                     <div class="overflow-auto">
@@ -51,9 +52,10 @@
 
 <script>
 
-import SideBar from "../components/SideBar.vue"
-import HeaderComponent from "../components/HeaderComponent.vue"
+import SideBar from "../layouts/SideBar.vue"
+import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
+import RadioComponent from "../components/RadioComponent.vue"
 
 export default {
     name: "CarsPage",
@@ -61,6 +63,7 @@ export default {
         SideBar,
         HeaderComponent,
         FormInput,
+        RadioComponent
     },
     data() {
         return {
@@ -86,10 +89,5 @@ nav {
 
 div.py-2 {
     padding: 0 !important;
-}
-
-.left-card {
-    background-color: #F6F9FF;
-    border-radius: 20px !important;
 }
 </style>

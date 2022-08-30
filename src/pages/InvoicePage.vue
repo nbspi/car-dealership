@@ -10,12 +10,12 @@
                         <b-col class="py-2">
                             <!-- left container-->
                             <b-col class="">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Invoice</h4>
                                     <b-col class="mt-3">
                                         <b-form>
                                             <FormInput label="Invoice Number" placeholder="Enter Invoice Number" />
-                                            <DatePicker label="Invoice Date" disabled="True" />
+                                            <DatePicker label="Invoice Date" />
                                             <FormInput label="Salesperson ID" placeholder="Enter Salesperson ID" />
                                             <FormInput label="Customer ID" placeholder="Enter Customer ID" />
                                             <FormInput label="Car ID" placeholder="Enter Car ID" />
@@ -32,7 +32,7 @@
                         <b-col md="12" lg="12" xl="8" class="py-2">
                             <!-- left container-->
                             <b-col class="table-container">
-                                <b-container class="left-card rounded p-3">
+                                <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Invoice Records</h5>
                                     <b-table striped hover :items="items"></b-table>
                                     <div class="overflow-auto">
@@ -53,8 +53,8 @@
 
 <script>
 
-import SideBar from "../components/SideBar.vue"
-import HeaderComponent from "../components/HeaderComponent.vue"
+import SideBar from "../layouts/SideBar.vue"
+import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import DatePicker from "@/components/DatePicker.vue"
 
@@ -94,8 +94,4 @@ div.py-2 {
     padding: 0 !important;
 }
 
-.left-card {
-    background-color: #F6F9FF;
-    border-radius: 20px !important;
-}
 </style>
