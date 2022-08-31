@@ -17,7 +17,6 @@
                                             <FormInput label="First Name" placeholder="Enter First Name" />
                                             <FormInput label="Last Name" placeholder="Enter Last Name" />
                                             <FormInput label="Phone Number" placeholder="Enter Phone Number" />
-                                            <FormInput label="Address" placeholder="Enter Address" />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2">Reset</b-button>
                                                 <b-button variant="success">Save</b-button>
@@ -41,8 +40,11 @@
                                                 <!-- <b-btn v-b-modal.modal-1 @click="editItem(item)">
                                                     <b-icon class="delete-btn" icon="trash-fill"></b-icon>
                                                 </b-btn> -->
-                                                <b-button @click="modalShow = !modalShow">Open Modal</b-button>
-                                                <b-modal v-model="modalShow">Hello From Modal!</b-modal>
+                                                <b-button v-b-modal.modal-center><b-icon class="delete-btn" icon="trash-fill"></b-icon></b-button>
+
+                                                <b-modal id="modal-center" title="Delete Confirmation">
+                                                    <p class="my-4">Are you sure you want to proceed?</p>
+                                                </b-modal>
                                             </span>
                                         </template>
                                     </b-table>
@@ -83,7 +85,6 @@ export default {
             fields: ['ID', 'first_name', 'last_name', 'phone_number', 'actions'],
             items: [
                 { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Renjun', last_name: 'Huang', phone_number: '4546766', address: 'Pol' },
             ]
         }
     }
@@ -98,4 +99,5 @@ nav {
 div.py-2 {
     padding: 0 !important;
 }
+
 </style>

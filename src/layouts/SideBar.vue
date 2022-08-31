@@ -108,7 +108,7 @@ export default {
     }
 }
 
-.sidebar-container {
+/* .sidebar-container {
     border-right: solid 2px var(--background-color);
-}
+} */
 </style>

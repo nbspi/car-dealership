@@ -14,6 +14,7 @@
                                     <h4 class="px-3">Add Customers</h4>
                                     <b-col class="mt-3">
                                         <b-form>
+                                            <FormInput :value="value" @input="$emit('update', $event.target.value)" />
                                             <FormInput label="First Name" placeholder="Enter First Name" />
                                             <FormInput label="Last Name" placeholder="Enter Last Name" />
                                             <FormInput label="Phone Number" placeholder="Enter Phone Number" />
@@ -73,11 +74,15 @@ export default {
         HeaderComponent,
         FormInput
     },
+    props: ["value"],
+    model: {
+        prop: "value",
+        event: "update"
+    },
     data() {
         return {
             rows: 50,
             currentPage: 1,
-            value: '',
             fields: ['ID', 'first_name', 'last_name', 'phone_number', 'address', 'actions'],
             items: [
                 { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },

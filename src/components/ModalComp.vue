@@ -1,11 +1,11 @@
 <template>
-    <b-container class="vh-100 vw-100 bg-danger">
-        <h1>hello</h1>        <b-button v-b-modal.modal-center>Vue Bootstrap Modal Example</b-button>
+    <div>
+        <b-button v-b-modal.modal-1>Launch demo modal</b-button>
 
-        <b-modal id="modal-center" centered title="Vue Bootstrap Centered Modal Example">
-            <p class="my-4">Knowing yourself is the beginning of all wisdom.</p>
+        <b-modal id="modal-1" title="BootstrapVue">
+            <p class="my-4">Are you sure you want to proceed?</p>
         </b-modal>
-    </b-container>
+    </div>
 </template>
 
 <script>
@@ -16,3 +16,20 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.mymodal > div {
+    position: absolute !important;
+    top: 300px !important;
+    right: 100px;
+    background-color: yellow;
+}
+
+p {
+    color: black !important;
+}
+
+title {
+    color: black !important;
+}
+</style>

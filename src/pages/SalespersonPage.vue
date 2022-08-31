@@ -17,7 +17,6 @@
                                             <FormInput label="First Name" placeholder="Enter First Name" />
                                             <FormInput label="Last Name" placeholder="Enter Last Name" />
                                             <FormInput label="Phone Number" placeholder="Enter Phone Number" />
-                                            <FormInput label="Address" placeholder="Enter Address" />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <!-- <b-button class="mr-2">Reset</b-button> -->
                                                 <b-button variant="success">Save</b-button>
@@ -62,13 +61,13 @@ export default {
         return {
             value: '',
             items: [
-                { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Renjun', last_name: 'Huang', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Jeno', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Haechan', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Jaemin', last_name: 'Na', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Chenle', last_name: 'Zhong', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Jisung', last_name: 'Park', phone_number: '4546766', address: 'Pol' },
+                { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766' },
+                { ID: 40, first_name: 'Renjun', last_name: 'Huang', phone_number: '4546766' },
+                { ID: 40, first_name: 'Jeno', last_name: 'Lee', phone_number: '4546766' },
+                { ID: 40, first_name: 'Haechan', last_name: 'Lee', phone_number: '4546766' },
+                { ID: 40, first_name: 'Jaemin', last_name: 'Na', phone_number: '4546766' },
+                { ID: 40, first_name: 'Chenle', last_name: 'Zhong', phone_number: '4546766' },
+                { ID: 40, first_name: 'Jisung', last_name: 'Park', phone_number: '4546766' },
 
             ]
         }

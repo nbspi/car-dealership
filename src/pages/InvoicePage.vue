@@ -13,7 +13,11 @@
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Invoice</h4>
                                     <b-col class="mt-3">
-                                        <b-form>
+                                        <b-form @submit.prevent="onSubmit">
+                                            <!-- <b-form-group label="sample" id="label" class="ml-2">
+                                            </b-form-group>
+                                            <b-form-input type="email" required v-model="email"></b-form-input>
+                                            <p>email: {{ email }}</p> -->
                                             <FormInput label="Invoice Number" placeholder="Enter Invoice Number" />
                                             <DatePicker label="Invoice Date" />
                                             <FormInput label="Salesperson ID" placeholder="Enter Salesperson ID" />
@@ -79,7 +83,8 @@ export default {
                 { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
                 { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
                 { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-            ]
+            ],
+            email: ''
         }
     }
 }
@@ -93,5 +98,4 @@ nav {
 div.py-2 {
     padding: 0 !important;
 }
-
 </style>

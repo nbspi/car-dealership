@@ -78,6 +78,15 @@ h2 {
     outline: none !important;
 }
 
+.btn-primary {
+    background-color: #941b0c !important;
+    border: none;
+}
+
+.btn-secondary {
+    margin-right: 5px !important;
+}
+
 th,
 td {
     text-align: center !important;
@@ -93,8 +102,19 @@ td {
     padding-left: 0px !important;
 }
 
-.custom-control-input:checked ~ .custom-control-label::before {
+.custom-control-input:checked~.custom-control-label::before {
     outline: none !important;
     border: none !important;
     background-color: #4A5376;
+}
+
+.modal-content {
+    margin-top: 50% !important;
+    margin-left: 35vw !important;
+}
+
+
+
+.modal-header .close {
+    padding: 0px !important;
 }
