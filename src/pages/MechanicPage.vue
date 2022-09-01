@@ -14,9 +14,9 @@
                                     <h4 class="px-3">Add Mechanic</h4>
                                     <b-col class="mt-3">
                                         <b-form>
-                                            <FormInput label="First Name" placeholder="Enter First Name" />
-                                            <FormInput label="Last Name" placeholder="Enter Last Name" />
-                                            <FormInput label="Phone Number" placeholder="Enter Phone Number" />
+                                            <FormInput label="First Name" />
+                                            <FormInput label="Last Name" />
+                                            <FormInput label="Phone Number" />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2">Reset</b-button>
                                                 <b-button variant="success">Save</b-button>
@@ -34,25 +34,16 @@
                                     <b-table hover :items="items" :fields="fields">
                                         <template v-slot:cell(actions)="{ item }">
                                             <span>
-                                                <b-btn class="mr-2" @click="editItem(item)">
-                                                    <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                                                </b-btn>
-                                                <!-- <b-btn v-b-modal.modal-1 @click="editItem(item)">
-                                                    <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                </b-btn> -->
-                                                <b-button v-b-modal.modal-center><b-icon class="delete-btn" icon="trash-fill"></b-icon></b-button>
-
-                                                <b-modal id="modal-center" title="Delete Confirmation">
-                                                    <p class="my-4">Are you sure you want to proceed?</p>
-                                                </b-modal>
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-btn class="mr-2" @click="editItem(item)">
+                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                    </b-btn>
+                                                    <ModalComponent />
+                                                </b-row>
                                             </span>
                                         </template>
                                     </b-table>
-                                    <div class="overflow-auto">
-                                        <div class="mt-5 d-flex justify-content-end">
-                                            <b-pagination v-model="currentPage" pills :total-rows="rows"></b-pagination>
-                                        </div>
-                                    </div>
+                                    <PaginationComponent />
                                 </b-container>
                             </b-col>
                         </b-col>
@@ -68,18 +59,20 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
+import ModalComponent from "@/components/ModalComponent.vue"
+import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {
     name: "MechanicPage",
     components: {
-        SideBar,
-        HeaderComponent,
-        FormInput
-    },
+    SideBar,
+    HeaderComponent,
+    FormInput,
+    ModalComponent,
+    PaginationComponent
+},
     data() {
         return {
-            rows: 50,
-            currentPage: 1,
             value: '',
             modalShow: false,
             fields: ['ID', 'first_name', 'last_name', 'phone_number', 'actions'],
@@ -99,5 +92,4 @@ nav {
 div.py-2 {
     padding: 0 !important;
 }
-
 </style>

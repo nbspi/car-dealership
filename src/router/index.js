@@ -8,8 +8,6 @@ import InvoicePage from "../pages/InvoicePage.vue";
 import SalespersonPage from "../pages/SalespersonPage.vue";
 import MechanicPage from "../pages/MechanicPage.vue";
 import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
-import ModalComp from "../components/ModalComp.vue";
-
 
 Vue.use(VueRouter);
 
@@ -58,12 +56,7 @@ const routes = [
     path: "/service-ticket",
     name: "ServiceTicketPage",
     component: ServiceTicketPage
-  },
-  {
-    path: "/modal",
-    name: "ModalComp",
-    component: ModalComp
-  },
+  }
 
 ];
 

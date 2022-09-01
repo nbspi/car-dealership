@@ -14,11 +14,10 @@
                                     <h4 class="px-3">Add Customers</h4>
                                     <b-col class="mt-3">
                                         <b-form>
-                                            <FormInput :value="value" @input="$emit('update', $event.target.value)" />
-                                            <FormInput label="First Name" placeholder="Enter First Name" />
-                                            <FormInput label="Last Name" placeholder="Enter Last Name" />
-                                            <FormInput label="Phone Number" placeholder="Enter Phone Number" />
-                                            <FormInput label="Address" placeholder="Enter Address" />
+                                            <FormInput label="First Name" />
+                                            <FormInput label="Last Name" />
+                                            <FormInput label="Phone Number" />
+                                            <FormInput label="Address" />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2">Reset</b-button>
                                                 <b-button variant="success">Save</b-button>
@@ -36,20 +35,16 @@
                                     <b-table hover :items="items" :fields="fields">
                                         <template v-slot:cell(actions)="{ item }">
                                             <span>
-                                                <b-btn class="mr-2" @click="editItem(item)">
-                                                    <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                                                </b-btn>
-                                                <b-btn @click="editItem(item)">
-                                                    <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                </b-btn>
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-btn class="mr-2" @click="editItem(item)">
+                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                    </b-btn>
+                                                    <ModalComponent />
+                                                </b-row>
                                             </span>
                                         </template>
                                     </b-table>
-                                    <div class="overflow-auto">
-                                        <div class="mt-5 d-flex justify-content-end">
-                                            <b-pagination v-model="currentPage" pills :total-rows="rows"></b-pagination>
-                                        </div>
-                                    </div>
+                                    <PaginationComponent />
                                 </b-container>
 
                             </b-col>
@@ -66,14 +61,18 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
+import ModalComponent from "@/components/ModalComponent.vue"
+import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {
     name: "CarsPage",
     components: {
-        SideBar,
-        HeaderComponent,
-        FormInput
-    },
+    SideBar,
+    HeaderComponent,
+    FormInput,
+    ModalComponent,
+    PaginationComponent
+},
     props: ["value"],
     model: {
         prop: "value",
@@ -81,17 +80,16 @@ export default {
     },
     data() {
         return {
-            rows: 50,
-            currentPage: 1,
+            modalShow: false,
             fields: ['ID', 'first_name', 'last_name', 'phone_number', 'address', 'actions'],
             items: [
-                { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Renjun', last_name: 'Huang', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Jeno', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Haechan', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Jaemin', last_name: 'Na', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Chenle', last_name: 'Zhong', phone_number: '4546766', address: 'Pol' },
-                { ID: 40, first_name: 'Jisung', last_name: 'Park', phone_number: '4546766', address: 'Pol' },
+                { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766', address: 'Pol' }
+                // { ID: 40, first_name: 'Renjun', last_name: 'Huang', phone_number: '4546766', address: 'Pol' },
+                // { ID: 40, first_name: 'Jeno', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
+                // { ID: 40, first_name: 'Haechan', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
+                // { ID: 40, first_name: 'Jaemin', last_name: 'Na', phone_number: '4546766', address: 'Pol' },
+                // { ID: 40, first_name: 'Chenle', last_name: 'Zhong', phone_number: '4546766', address: 'Pol' },
+                // { ID: 40, first_name: 'Jisung', last_name: 'Park', phone_number: '4546766', address: 'Pol' },
 
             ]
         }

@@ -14,15 +14,11 @@
                                     <h4 class="px-3">Add Invoice</h4>
                                     <b-col class="mt-3">
                                         <b-form @submit.prevent="onSubmit">
-                                            <!-- <b-form-group label="sample" id="label" class="ml-2">
-                                            </b-form-group>
-                                            <b-form-input type="email" required v-model="email"></b-form-input>
-                                            <p>email: {{ email }}</p> -->
-                                            <FormInput label="Invoice Number" placeholder="Enter Invoice Number" />
+                                            <FormInput label="Invoice Number" />
                                             <DatePicker label="Invoice Date" />
-                                            <FormInput label="Salesperson ID" placeholder="Enter Salesperson ID" />
-                                            <FormInput label="Customer ID" placeholder="Enter Customer ID" />
-                                            <FormInput label="Car ID" placeholder="Enter Car ID" />
+                                            <FormInput label="Salesperson ID" />
+                                            <FormInput label="Customer ID" />
+                                            <FormInput label="Car ID" />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2">Reset</b-button>
                                                 <b-button variant="success" class="success">Save</b-button>
@@ -38,12 +34,19 @@
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Invoice Records</h5>
-                                    <b-table striped hover :items="items"></b-table>
-                                    <div class="overflow-auto">
-                                        <div class="mt-5 d-flex justify-content-end">
-                                            <b-pagination v-model="currentPage" pills :total-rows="rows"></b-pagination>
-                                        </div>
-                                    </div>
+                                    <b-table striped hover :items="items" :fields="fields">
+                                        <template v-slot:cell(actions)="{ item }">
+                                            <span>
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-btn class="mr-2" @click="editItem(item)">
+                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                    </b-btn>
+                                                    <ModalComponent />
+                                                </b-row>
+                                            </span>
+                                        </template>
+                                    </b-table>
+                                    <PaginationComponent />
                                 </b-container>
 
                             </b-col>
@@ -61,28 +64,31 @@ import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import DatePicker from "@/components/DatePicker.vue"
+import ModalComponent from "@/components/ModalComponent.vue"
+import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {
     name: "InvoicePage",
     components: {
-        SideBar,
-        HeaderComponent,
-        FormInput,
-        DatePicker
-    },
+    SideBar,
+    HeaderComponent,
+    FormInput,
+    DatePicker,
+    ModalComponent,
+    PaginationComponent
+},
     data() {
         return {
-            rows: 50,
-            currentPage: 1,
             value: '',
+            fields: ['ID', 'invoice_number', 'date', 'salesperson_ID', 'customer_ID', 'car_ID', 'actions'],
             items: [
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' }
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
             ],
             email: ''
         }

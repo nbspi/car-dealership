@@ -14,10 +14,9 @@
                                     <h4 class="px-3">Add Service Ticket</h4>
                                     <b-col class="mt-3">
                                         <b-form>
-                                            <FormInput label="Service Ticket Number"
-                                                placeholder="Enter Invoice Number" />
-                                            <FormInput label="Car ID" placeholder="Enter Salesperson ID" />
-                                            <FormInput label="Customer ID" placeholder="Enter Customer ID" />
+                                            <FormInput label="Service Ticket Number" />
+                                            <FormInput label="Car ID" />
+                                            <FormInput label="Customer ID" />
                                             <DatePicker label="Date Received" />
                                             <DatePicker label="Date Returned" />
                                             <FormTextArea label="Comments" />
@@ -35,13 +34,20 @@
                             <!-- left container-->
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
-                                    <h5 class="px-3 mb-3">Service Records</h5>
-                                    <b-table striped hover :items="items"></b-table>
-                                    <div class="overflow-auto">
-                                        <div class="mt-5 d-flex justify-content-end">
-                                            <b-pagination v-model="currentPage" pills :total-rows="rows"></b-pagination>
-                                        </div>
-                                    </div>
+                                    <h5 class="px-3 mb-3">Service Ticket Records</h5>
+                                    <b-table hover :items="items" :fields="fields">
+                                        <template v-slot:cell(actions)="{ item }">
+                                            <span>
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-btn class="mr-2" @click="editItem(item)">
+                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                    </b-btn>
+                                                    <ModalComponent />
+                                                </b-row>
+                                            </span>
+                                        </template>
+                                    </b-table>
+                                    <PaginationComponent />
                                 </b-container>
 
                             </b-col>
@@ -60,6 +66,8 @@ import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import FormTextArea from "../components/FormTextArea.vue"
 import DatePicker from "../components/DatePicker.vue"
+import ModalComponent from "@/components/ModalComponent.vue"
+import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {
     name: "ServiceTicketPage",
@@ -68,21 +76,22 @@ export default {
     HeaderComponent,
     FormInput,
     FormTextArea,
-    DatePicker
+    DatePicker,
+    ModalComponent,
+    PaginationComponent
 },
     data() {
         return {
-            rows: 50,
-            currentPage: 1,
             value: '',
+            fields: ['ID', 'car_ID', 'customer_ID', 'received', 'returned', 'comments', 'actions'],
             items: [
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                { ID: 1, car_ID: '54543', customer_ID: 'August 24, 2020', received: '4546766', returned: '35345', comments: '123' }
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
+                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
             ]
         }
     }
@@ -97,5 +106,4 @@ nav {
 div.py-2 {
     padding: 0 !important;
 }
-
 </style>

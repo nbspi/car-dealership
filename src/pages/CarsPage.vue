@@ -14,11 +14,11 @@
                                     <h4 class="px-3">Add Car</h4>
                                     <b-col class="mt-3">
                                         <b-form>
-                                            <FormInput label="Serial" placeholder="Enter Serial Number" />
-                                            <FormInput label="Brand" placeholder="Enter Brand" />
-                                            <FormInput label="Model" placeholder="Enter Model" />
-                                            <FormInput label="Color" placeholder="Enter Color" />
-                                            <FormInput label="Year" placeholder="Enter Year" />
+                                            <FormInput label="Serial" />
+                                            <FormInput label="Brand" />
+                                            <FormInput label="Model" />
+                                            <FormInput label="Color" />
+                                            <FormInput label="Year" />
                                             <RadioComponent />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2">Reset</b-button>
@@ -34,12 +34,19 @@
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Car Records</h5>
-                                    <b-table striped hover :items="items"></b-table>
-                                    <div class="overflow-auto">
-                                        <div class="mt-5 d-flex justify-content-end">
-                                            <b-pagination v-model="currentPage" pills :total-rows="rows"></b-pagination>
-                                        </div>
-                                    </div>
+                                    <b-table hover :items="items" :fields="fields">
+                                        <template v-slot:cell(actions)="{ item }">
+                                            <span>
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-btn class="mr-2" @click="editItem(item)">
+                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                    </b-btn>
+                                                    <ModalComponent />
+                                                </b-row>
+                                            </span>
+                                        </template>
+                                    </b-table>
+                                    <PaginationComponent />
                                 </b-container>
                             </b-col>
                         </b-col>
@@ -56,26 +63,29 @@ import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import RadioComponent from "../components/RadioComponent.vue"
+import ModalComponent from "@/components/ModalComponent.vue"
+import PaginationComponent from "../components/PaginationComponent.vue"
 
 export default {
     name: "CarsPage",
     components: {
-        SideBar,
-        HeaderComponent,
-        FormInput,
-        RadioComponent
-    },
+    SideBar,
+    HeaderComponent,
+    FormInput,
+    RadioComponent,
+    ModalComponent,
+    PaginationComponent
+},
     data() {
         return {
-            rows: 50,
-            currentPage: 1,
             value: '',
+            fields: ['ID', 'serial_number', 'brand', 'model', 'color', 'year', 'actions'],
             items: [
-                { ID: 1, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
-                { ID: 2, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
-                { ID: 3, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
-                { ID: 4, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
-                { ID: 5, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                { ID: 1, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' }
+                // { ID: 2, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                // { ID: 3, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                // { ID: 4, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                // { ID: 5, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
             ]
         }
     }

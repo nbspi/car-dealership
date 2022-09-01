@@ -90,6 +90,7 @@ h2 {
 th,
 td {
     text-align: center !important;
+    vertical-align: middle !important;
 }
 
 .container-card {
@@ -108,12 +109,18 @@ td {
     background-color: #4A5376;
 }
 
-.modal-content {
-    margin-top: 50% !important;
-    margin-left: 35vw !important;
+
+.modal-backdrop {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-
+#modal-center {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
 .modal-header .close {
     padding: 0px !important;

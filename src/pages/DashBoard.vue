@@ -22,37 +22,6 @@
               </b-row>
             </b-col>
             <b-col cols="4">
-              <b-container class="recent-activity">
-                <!-- <div>
-                  <b-carousel id="carousel-fade" style="text-shadow: 0px 0px 2px #000" fade indicators img-width="1024"
-                    img-height="480">
-                    <b-carousel-slide caption="First Slide" img-src="https://picsum.photos/1024/480/?image=10">
-                    </b-carousel-slide>
-                    <b-carousel-slide caption="Second Slide" img-src="https://picsum.photos/1024/480/?image=12">
-                    </b-carousel-slide>
-                    <b-carousel-slide caption="Third Slide" img-src="https://picsum.photos/1024/480/?image=22">
-                    </b-carousel-slide>
-                  </b-carousel>
-                </div> -->
-
-                <!-- <h5 class="px-3 mt-2">
-                  <p>Recent Activity | <span>Today</span></p>
-                </h5>
-                <div class="mt-2">
-                  <ul>
-                    <li>Quia quae rerum explicabo officiis beatae</li>
-                    <li>oluptatem blanditiis blanditiis eveniet</li>
-                    <li>Voluptates corrupti molestias voluptatem</li>
-                    <li>Quia quae rerum explicabo officiis beatae</li>
-                    <li>oluptatem blanditiis blanditiis eveniet</li>
-                    <li>Voluptates corrupti molestias voluptatem</li>
-                  </ul>
-                </div> -->
-                <!-- 
-                <b-calendar block selected-variant="success" today-variant="info" nav-button-variant="primary"
-                  hide-header></b-calendar> -->
-              </b-container>
-
               <b-container class="recent-activity p-2">
                 <h5 class="px-3 mt-1">
                   <p>Recent Activity | <span>Today</span></p>
