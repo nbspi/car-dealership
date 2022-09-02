@@ -31,7 +31,7 @@
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Mechanic Records</h5>
-                                    <b-table hover :items="items" :fields="fields">
+                                    <b-table hover :items="mechanicsState" :fields="fields">
                                         <template v-slot:cell(actions)="{ item }">
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
@@ -55,31 +55,41 @@
 </template>
 
 <script>
-
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
-import ModalComponent from "@/components/ModalComponent.vue"
+import ModalComponent from "@/components/DeleteModalComponent.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
+import { mapGetters } from 'vuex'
 
 export default {
     name: "MechanicPage",
     components: {
-    SideBar,
-    HeaderComponent,
-    FormInput,
-    ModalComponent,
-    PaginationComponent
-},
+        SideBar,
+        HeaderComponent,
+        FormInput,
+        ModalComponent,
+        PaginationComponent
+    },
+    computed: {
+        ...mapGetters({
+            mechanicsState: "getListMechanics"
+        })
+    },
     data() {
         return {
             value: '',
             modalShow: false,
-            fields: ['ID', 'first_name', 'last_name', 'phone_number', 'actions'],
-            items: [
-                { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
+            fields: [
+            { key: "first_name", label: "First Name"},
+            { key: "last_name", label: "Last Name"}, 
+            { key: "phone_number", label: "Phone Number"},
+            { key: "actions", label: "Actions"},
             ]
         }
+    },
+    async beforeCreate() {
+        await this.$store.dispatch("fetchListMechanics").then(res => console.log(res));
     }
 }
 </script>

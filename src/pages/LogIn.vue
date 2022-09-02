@@ -25,8 +25,12 @@
             <h1>LOGIN</h1>
             <h2>Log In your account here</h2>
             <br />
-            <div class="d-flex justify-content-center">
+            <div class="mt-3 d-flex justify-content-center">
               <b-form class="d-flex flex-column">
+                <!-- <b-form class="d-flex flex-column" action="" @submit="login()">
+                          <LoginInputComponent v-model="id_number" label="ID Number" type="text" placeholder="Enter ID Number" />
+                          <LoginInputComponent v-model="password" label="Password" type="password" placeholder="Enter Password" />         
+                </b-form> -->
                 <LoginInputComponent label="ID Number" type="text" placeholder="Enter ID Number" />
                 <LoginInputComponent label="Password" type="password" placeholder="Enter Password" />
                 <br />
@@ -53,6 +57,12 @@ export default {
   components: {
     LoginInputComponent,
   },
+  data() {
+    return {
+      id_number: "",
+      password: ""
+    }
+  }
 };
 </script>
 

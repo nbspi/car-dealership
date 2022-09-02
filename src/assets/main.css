@@ -81,6 +81,7 @@ h2 {
 .btn-primary {
     background-color: #941b0c !important;
     border: none;
+    height: 38px !important;
 }
 
 .btn-secondary {
@@ -95,7 +96,7 @@ td {
 
 .container-card {
     background-color: var(--background-color);
-    border-radius: 20px !important;
+    border-radius: 10px !important;
 }
 
 .button-container {

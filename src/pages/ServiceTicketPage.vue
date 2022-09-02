@@ -66,7 +66,7 @@ import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import FormTextArea from "../components/FormTextArea.vue"
 import DatePicker from "../components/DatePicker.vue"
-import ModalComponent from "@/components/ModalComponent.vue"
+import ModalComponent from "@/components/DeleteModalComponent.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {

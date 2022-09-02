@@ -16,7 +16,7 @@
 
 <script>
 export default {
-    name: "ModalComponent",
+    name: "DeleteModalComponent",
     
 }
 </script>

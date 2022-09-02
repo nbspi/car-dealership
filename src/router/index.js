@@ -8,6 +8,9 @@ import InvoicePage from "../pages/InvoicePage.vue";
 import SalespersonPage from "../pages/SalespersonPage.vue";
 import MechanicPage from "../pages/MechanicPage.vue";
 import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
+import AddCar from "../pages/AddCar.vue";
+import AddServiceTicket from "../pages/AddServiceTicket.vue";
+
 
 Vue.use(VueRouter);
 
@@ -56,6 +59,16 @@ const routes = [
     path: "/service-ticket",
     name: "ServiceTicketPage",
     component: ServiceTicketPage
+  },
+  {
+    path: "/add-car",
+    name: "AddCar",
+    component: AddCar
+  },
+  {
+    path: "/add-service-ticket",
+    name: "AddServiceTicket",
+    component: AddServiceTicket
   }
 
 ];

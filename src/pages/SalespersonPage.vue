@@ -61,7 +61,7 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
-import ModalComponent from "@/components/ModalComponent.vue"
+import ModalComponent from "@/components/DeleteModalComponent.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {

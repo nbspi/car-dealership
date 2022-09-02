@@ -32,7 +32,7 @@
                             <b-col class="table-container ">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
-                                    <b-table hover :items="items" :fields="fields">
+                                    <b-table hover :items="fetchCustomers" :fields="fields">
                                         <template v-slot:cell(actions)="{ item }">
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
@@ -44,7 +44,10 @@
                                             </span>
                                         </template>
                                     </b-table>
-                                    <PaginationComponent />
+                                    <!-- <b-table hover :items="itemsState" :fields="fields">
+                                            <b-button variant="secondary" @click>Archive</b-button>
+                                    </b-table> -->
+                                    <!-- <PaginationComponent /> -->
                                 </b-container>
 
                             </b-col>
@@ -57,22 +60,23 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
-import ModalComponent from "@/components/ModalComponent.vue"
-import PaginationComponent from "@/components/PaginationComponent.vue"
+import ModalComponent from "@/components/DeleteModalComponent.vue"
 
 export default {
     name: "CarsPage",
     components: {
-    SideBar,
-    HeaderComponent,
-    FormInput,
-    ModalComponent,
-    PaginationComponent
-},
+        SideBar,
+        HeaderComponent,
+        FormInput,
+        ModalComponent,
+    },
+    computed: {
+        ...mapGetters(['fetchCustomers'])
+    },
     props: ["value"],
     model: {
         prop: "value",
@@ -81,19 +85,26 @@ export default {
     data() {
         return {
             modalShow: false,
-            fields: ['ID', 'first_name', 'last_name', 'phone_number', 'address', 'actions'],
-            items: [
-                { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766', address: 'Pol' }
-                // { ID: 40, first_name: 'Renjun', last_name: 'Huang', phone_number: '4546766', address: 'Pol' },
-                // { ID: 40, first_name: 'Jeno', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                // { ID: 40, first_name: 'Haechan', last_name: 'Lee', phone_number: '4546766', address: 'Pol' },
-                // { ID: 40, first_name: 'Jaemin', last_name: 'Na', phone_number: '4546766', address: 'Pol' },
-                // { ID: 40, first_name: 'Chenle', last_name: 'Zhong', phone_number: '4546766', address: 'Pol' },
-                // { ID: 40, first_name: 'Jisung', last_name: 'Park', phone_number: '4546766', address: 'Pol' },
-
-            ]
+            fields: [
+                { key: "ID", label: "ID" },
+                { key: "first_name", label: "First Name" },
+                { key: "last_name", label: "Last Name" },
+                { key: "phone_number", label: "Phone Number" },
+                { key: "address", label: "Address" },
+                { key: "actions", label: "Actions"}
+            ],
+            items: {
+                ID: null,
+                first_name: null,
+                last_name: null,
+                phone_number: null,
+                address: null
+            }
         }
-    }
+    },
+    // async beforeCreate() {
+    //     await this.$store.dispatch("allCustomers").then(res => console.log(res));
+    // },
 }
 </script>
 
