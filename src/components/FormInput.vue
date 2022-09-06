@@ -19,10 +19,6 @@ export default {
         label: {
             type: String
         }
-        // modelValue: {
-        //     type: [String, Number],
-        //     default: ''
-        // }
     }
 }
 </script>

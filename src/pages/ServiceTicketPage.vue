@@ -21,8 +21,8 @@
                                             <DatePicker label="Date Returned" />
                                             <FormTextArea label="Comments" />
                                             <b-container class="button-container d-flex justify-content-end">
-                                                <b-button class="mr-2">Reset</b-button>
-                                                <b-button variant="success" class="success">Save</b-button>
+                                                <b-button class="mr-2" type="reset">Reset</b-button>
+                                                <b-button variant="success" type="submit">Save</b-button>
                                             </b-container>
                                         </b-form>
                                     </b-col>
@@ -72,14 +72,14 @@ import PaginationComponent from "@/components/PaginationComponent.vue"
 export default {
     name: "ServiceTicketPage",
     components: {
-    SideBar,
-    HeaderComponent,
-    FormInput,
-    FormTextArea,
-    DatePicker,
-    ModalComponent,
-    PaginationComponent
-},
+        SideBar,
+        HeaderComponent,
+        FormInput,
+        FormTextArea,
+        DatePicker,
+        ModalComponent,
+        PaginationComponent
+    },
     data() {
         return {
             value: '',

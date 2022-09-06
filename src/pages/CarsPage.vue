@@ -6,7 +6,7 @@
                 <HeaderComponent title="Cars" />
                 <b-container fluid class="pt-2">
                     <b-row class="my-2 d-flex justify-content-end px-3">
-                        <a href="./add-car" class="btn btn-success" role="button">Add Car</a>
+                        <router-link to="/add-car" class="btn btn-success" exact>Add Car</router-link>
                     </b-row>
                     <b-row class="d-flex justify-content-center my-3">
                         <b-col md="12" lg="12" xl="12" class="py-2">
@@ -14,7 +14,7 @@
                             <b-col class="table-container">
                                 <b-container fluid class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Car Records</h5>
-                                    <b-table hover :items="fetchCars" :fields="fields">
+                                    <b-table hover :items="listCars" :fields="fields">
                                         <template v-slot:cell(actions)="{ item }">
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
@@ -53,7 +53,11 @@ export default {
         PaginationComponent
     },
     computed: {
-        ...mapGetters(['fetchCars'])
+        ...mapGetters({ listCars: "carsList" }),
+
+    },
+    async mounted() {
+        return await this.$store.dispatch("fetchCarsList");
     },
     data() {
         return {
@@ -65,6 +69,7 @@ export default {
                 { key: "model", label: "Model" },
                 { key: "color", label: "Color" },
                 { key: "year", label: "Year" },
+                { key: "price", label: "Price" },
                 { key: "actions", label: "Actions" },
             ],
             // items: [

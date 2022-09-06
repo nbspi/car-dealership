@@ -14,12 +14,12 @@
                                     <h4 class="px-3">Add Mechanic</h4>
                                     <b-col class="mt-3">
                                         <b-form>
-                                            <FormInput label="First Name" />
+                                            <FormInput label="First Name" ref="first_name" />
                                             <FormInput label="Last Name" />
                                             <FormInput label="Phone Number" />
                                             <b-container class="button-container d-flex justify-content-end">
-                                                <b-button class="mr-2">Reset</b-button>
-                                                <b-button variant="success">Save</b-button>
+                                                <b-button class="mr-2" type="reset">Reset</b-button>
+                                                <b-button variant="success" type="submit">Save</b-button>
                                             </b-container>
                                         </b-form>
                                     </b-col>
@@ -31,14 +31,12 @@
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Mechanic Records</h5>
-                                    <b-table hover :items="mechanicsState" :fields="fields">
-                                        <template v-slot:cell(actions)="{ item }">
+                                    <b-table hover :items="items" :fields="fields">
+                                        <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-btn class="mr-2" @click="editItem(item)">
-                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                                                    </b-btn>
-                                                    <ModalComponent />
+                                                    <EditModal title="Edit Mechanic" />
+                                                    <DeleteModalComponent />
                                                 </b-row>
                                             </span>
                                         </template>
@@ -58,9 +56,11 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
-import ModalComponent from "@/components/DeleteModalComponent.vue"
+import EditModal from "@/components/EditModal.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
 import { mapGetters } from 'vuex'
+import DeleteModalComponent from "@/components/DeleteModalComponent.vue"
+
 
 export default {
     name: "MechanicPage",
@@ -68,28 +68,41 @@ export default {
         SideBar,
         HeaderComponent,
         FormInput,
-        ModalComponent,
+        DeleteModalComponent,
+        EditModal,
         PaginationComponent
     },
     computed: {
-        ...mapGetters({
-            mechanicsState: "getListMechanics"
-        })
+        ...mapGetters(['fetchMechanic'])
+    },
+    methods: {
+        resetInput() {
+            this.$refs["first_name"].value = "";
+        }
     },
     data() {
         return {
             value: '',
             modalShow: false,
-            fields: [
-            { key: "first_name", label: "First Name"},
-            { key: "last_name", label: "Last Name"}, 
-            { key: "phone_number", label: "Phone Number"},
-            { key: "actions", label: "Actions"},
+            currentPage: 1,
+            fields: ['ID', 'first_name', 'last_name', 'phone_number', 'actions'],
+            items: [
+                { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766' }
             ]
+            // fields: [
+            //     { key: "ID", label: "ID" },
+            //     { key: "first_name", label: "First Name" },
+            //     { key: "last_name", label: "Last Name" },
+            //     { key: "phone_number", label: "Phone Number" },
+            //     { key: "actions", label: "Actions" },
+            // ],
+            // items: {
+            //     first_name: null,
+            //     last_name: null,
+            //     phone_number: null,
+            //     address: null
+            // }
         }
-    },
-    async beforeCreate() {
-        await this.$store.dispatch("fetchListMechanics").then(res => console.log(res));
     }
 }
 </script>

@@ -19,27 +19,27 @@
                                             <FormInput label="Phone Number" />
                                             <FormInput label="Address" />
                                             <b-container class="button-container d-flex justify-content-end">
-                                                <b-button class="mr-2">Reset</b-button>
-                                                <b-button variant="success">Save</b-button>
+                                                <b-button class="mr-2" type="reset">Reset</b-button>
+                                                <b-button variant="success" type="submit">Save</b-button>
                                             </b-container>
                                         </b-form>
                                     </b-col>
                                 </b-container>
                             </b-col>
                         </b-col>
-                        <b-col md="12" lg="12" xl="8" class="py-2">
+                        <b-col md="12" lg="12" xl="9" class="py-2">
                             <!-- left container-->
                             <b-col class="table-container ">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
-                                    <b-table hover :items="fetchCustomers" :fields="fields">
+                                    <b-table hover :items="listCustomers" :fields="fields">
                                         <template v-slot:cell(actions)="{ item }">
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
                                                     <b-btn class="mr-2" @click="editItem(item)">
                                                         <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                     </b-btn>
-                                                    <ModalComponent />
+                                                    <DeleteModalComponent />
                                                 </b-row>
                                             </span>
                                         </template>
@@ -64,7 +64,7 @@ import { mapGetters } from 'vuex'
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
-import ModalComponent from "@/components/DeleteModalComponent.vue"
+import DeleteModalComponent from "@/components/DeleteModalComponent.vue"
 
 export default {
     name: "CarsPage",
@@ -72,10 +72,13 @@ export default {
         SideBar,
         HeaderComponent,
         FormInput,
-        ModalComponent,
+        DeleteModalComponent,
     },
     computed: {
-        ...mapGetters(['fetchCustomers'])
+        ...mapGetters({ listCustomers: "customersList" }),
+    },
+    async mounted() {
+        return await this.$store.dispatch("fetchCustomersList");
     },
     props: ["value"],
     model: {
@@ -87,11 +90,11 @@ export default {
             modalShow: false,
             fields: [
                 { key: "ID", label: "ID" },
-                { key: "first_name", label: "First Name" },
-                { key: "last_name", label: "Last Name" },
-                { key: "phone_number", label: "Phone Number" },
+                { key: "firstname", label: "First Name" },
+                { key: "lastname", label: "Last Name" },
+                { key: "contact", label: "Phone Number" },
                 { key: "address", label: "Address" },
-                { key: "actions", label: "Actions"}
+                { key: "actions", label: "Actions" }
             ],
             items: {
                 ID: null,

@@ -18,8 +18,8 @@
                                             <FormInput label="Last Name" />
                                             <FormInput label="Phone Number" />
                                             <b-container class="button-container d-flex justify-content-end">
-                                                <!-- <b-button class="mr-2">Reset</b-button> -->
-                                                <b-button variant="success">Save</b-button>
+                                                <b-button class="mr-2" type="reset">Reset</b-button>
+                                                <b-button variant="success" type="submit">Save</b-button>
                                             </b-container>
                                         </b-form>
                                     </b-col>
@@ -33,12 +33,10 @@
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Salespersons Records</h5>
                                     <b-table hover :items="items" :fields="fields">
-                                        <template v-slot:cell(actions)="{ item }">
+                                        <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-btn class="mr-2" @click="editItem(item)">
-                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                                                    </b-btn>
+                                                    <EditModal title="Edit Salesperson" />
                                                     <ModalComponent />
                                                 </b-row>
                                             </span>
@@ -63,15 +61,20 @@ import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import ModalComponent from "@/components/DeleteModalComponent.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
+import EditModal from "../components/EditModal.vue"
 
 export default {
     name: "SalespersonPage",
+    methods: {
+        editItem(item) { console.log(item); }
+    },
     components: {
     SideBar,
     HeaderComponent,
     FormInput,
     ModalComponent,
-    PaginationComponent
+    PaginationComponent,
+    EditModal
 },
     data() {
         return {

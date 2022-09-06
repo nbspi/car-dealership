@@ -15,13 +15,13 @@
                                     <b-col class="mt-3">
                                         <b-form @submit.prevent="onSubmit">
                                             <!-- <FormInput label="Invoice Number" /> -->
-                                            <DatePicker label="Invoice Date" />
+                                            <DatePicker label="Invoice Date" disabled/>
                                             <FormInput label="Salesperson ID" />
                                             <FormInput label="Customer ID" />
                                             <FormInput label="Car ID" />
                                             <b-container class="button-container d-flex justify-content-end">
-                                                <b-button class="mr-2">Reset</b-button>
-                                                <b-button variant="success" class="success">Save</b-button>
+                                                <b-button class="mr-2" type="reset">Reset</b-button>
+                                                <b-button variant="success" type="submit">Save</b-button>
                                             </b-container>
                                         </b-form>
                                     </b-col>
@@ -29,7 +29,7 @@
 
                             </b-col>
                         </b-col>
-                        <b-col md="12" lg="12" xl="8" class="py-2">
+                        <b-col md="12" lg="12" xl="9" class="py-2">
                             <!-- left container-->
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
@@ -70,26 +70,26 @@ import PaginationComponent from "@/components/PaginationComponent.vue"
 export default {
     name: "InvoicePage",
     components: {
-    SideBar,
-    HeaderComponent,
-    FormInput,
-    DatePicker,
-    ModalComponent,
-    PaginationComponent
-},
-computed: {
-    ...mapGetters(['fetchInvoice'])
-},
+        SideBar,
+        HeaderComponent,
+        FormInput,
+        DatePicker,
+        ModalComponent,
+        PaginationComponent
+    },
+    computed: {
+        ...mapGetters(['fetchInvoice'])
+    },
     data() {
         return {
             value: '',
             fields: [
-                { key: "invoice_number", label: "Invoice Number"},
-                { key: "invoice_date", label: "Invoice Date"},
-                { key: "salesperson_ID", label: "Salesperson ID"},
-                { key: "customer_ID", label: "Customer ID"},
-                { key: "car_ID", label: "Car ID"},
-                { key: "actions", label: "Actions"},
+                { key: "invoice_number", label: "Invoice Number" },
+                { key: "invoice_date", label: "Invoice Date" },
+                { key: "salesperson_ID", label: "Salesperson ID" },
+                { key: "customer_ID", label: "Customer ID" },
+                { key: "car_ID", label: "Car ID" },
+                { key: "actions", label: "Actions" },
             ],
             items: []
         }

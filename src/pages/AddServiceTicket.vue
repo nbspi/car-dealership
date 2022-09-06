@@ -28,8 +28,8 @@
                                                 <FormInput label="Year" />
                                                 <RadioComponent class="mt-4" />
                                                 <b-container class="button-container d-flex justify-content-end">
-                                                    <b-button class="mr-2">Reset</b-button>
-                                                    <b-button variant="success">Save</b-button>
+                                                    <b-button class="mr-2" type="reset">Reset</b-button>
+                                                    <b-button variant="success" type="submit">Save</b-button>
                                                 </b-container>
                                             </b-form>
                                         </b-col>

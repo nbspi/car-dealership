@@ -11,7 +11,7 @@
                     <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
                     <b-button variant="outline-light" class="my-sm-0 btn d-flex " type="submit"><b-icon icon="search"></b-icon></b-button>
                 </b-nav-form>
-                <div class="">
+                <div>
                     <b-avatar variant="secondary"></b-avatar>
                     <b-dropdown text="UserName" variant="secondary" class="user-dropdown m-2">
                         <b-dropdown-item href="#">Profile</b-dropdown-item>
