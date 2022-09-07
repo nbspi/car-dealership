@@ -13,9 +13,9 @@
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Invoice</h4>
                                     <b-col class="mt-3">
-                                        <b-form @submit.prevent="onSubmit">
+                                        <b-form>
                                             <!-- <FormInput label="Invoice Number" /> -->
-                                            <DatePicker label="Invoice Date" disabled/>
+                                            <DatePicker label="Invoice Date" :disabled="True" />
                                             <FormInput label="Salesperson ID" />
                                             <FormInput label="Customer ID" />
                                             <FormInput label="Car ID" />
@@ -35,10 +35,10 @@
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Invoice Records</h5>
                                     <b-table hover :items="items" :fields="fields">
-                                        <template v-slot:cell(actions)="{ item }">
+                                        <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-btn class="mr-2" @click="editItem(item)">
+                                                    <b-btn class="mr-2">
                                                         <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                     </b-btn>
                                                     <ModalComponent />

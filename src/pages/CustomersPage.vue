@@ -20,7 +20,7 @@
                                             <FormInput label="Address" />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2" type="reset">Reset</b-button>
-                                                <b-button variant="success" type="submit" @click="submitForm">Save</b-button>
+                                                <b-button variant="success" type="submit">Save</b-button>
                                             </b-container>
                                         </b-form>
                                     </b-col>
@@ -36,7 +36,7 @@
                                         <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-btn class="mr-2" @click="editItem(item)">
+                                                    <b-btn class="mr-2">
                                                         <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                     </b-btn>
                                                     <DeleteModalComponent />

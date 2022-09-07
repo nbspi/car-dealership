@@ -72,9 +72,6 @@ h2 {
     color: var(--primary-color);
 }
 
-.badge-secondary {
-  background-color: var(--primary-color) ;
-}
 
 .search-container {
     padding-right: 5px !important;

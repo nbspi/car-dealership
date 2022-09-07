@@ -79,7 +79,7 @@ export default {
         return {
             value: '',
             modalShow: false,
-            currentPage: 1,
+            // currentPage: 1,
             // fields: ['ID', 'first_name', 'last_name', 'phone_number', 'actions'],
             // items: [
             //     { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766' }

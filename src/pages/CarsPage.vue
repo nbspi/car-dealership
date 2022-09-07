@@ -15,10 +15,10 @@
                                 <b-container fluid class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Car Records</h5>
                                     <b-table hover :items="listCars" :fields="fields">
-                                        <template v-slot:cell(actions)="{ item }">
+                                        <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-btn class="mr-2" @click="editItem(item)">
+                                                    <b-btn class="mr-2" >
                                                         <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                     </b-btn>
                                                     <ModalComponent />
