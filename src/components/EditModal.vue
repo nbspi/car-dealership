@@ -18,7 +18,7 @@
 import FormInput from "./FormInput.vue"
 
 export default {
-    name: "EditMechanicModal",
+    name: "EditModal",
     components: {
         FormInput
     }, 

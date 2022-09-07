@@ -16,22 +16,23 @@
                                         <b-col cols="6" class="mt-3">
                                             <b-form>
                                                 <FormInput label="Serial Number" />
-                                                <FormInput label="Model" />
+                                                <SelectComponent label="Model" />
                                                 <FormInput label="Year" />
-                                                <FormInput label="Price" />
+                                                <RadioComponent class="mt-4" />
                                             </b-form>
                                         </b-col>
                                         <b-col cols="6" class="mt-3">
                                             <b-form>
                                                 <FormInput label="Brand" />
                                                 <FormInput label="Color" />
-                                                <FormInput label="Year" />
-                                                <RadioComponent class="mt-4" />
-                                                <b-container class="button-container d-flex justify-content-end">
-                                                    <b-button class="mr-2" type="reset">Reset</b-button>
-                                                    <b-button variant="success" type="submit">Save</b-button>
-                                                </b-container>
+                                                <FormInput label="Price" />
                                             </b-form>
+                                        </b-col>
+                                        <b-col>
+                                            <b-container class="button-container d-flex justify-content-end">
+                                                <b-button class="mr-2" type="reset">Reset</b-button>
+                                                <b-button variant="success" type="submit">Save</b-button>
+                                            </b-container>
                                         </b-col>
                                     </b-row>
                                 </b-container>
@@ -50,6 +51,7 @@ import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import RadioComponent from "../components/RadioComponent.vue"
+import SelectComponent from "../components/SelectComponent.vue"
 
 export default {
     name: "AddCar",
@@ -58,6 +60,7 @@ export default {
         HeaderComponent,
         FormInput,
         RadioComponent,
+        SelectComponent
     },
     data() {
         return {

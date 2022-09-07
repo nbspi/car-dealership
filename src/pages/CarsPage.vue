@@ -26,7 +26,7 @@
                                             </span>
                                         </template>
                                     </b-table>
-                                    <PaginationComponent />
+                                    <!-- <PaginationComponent /> -->
                                 </b-container>
                             </b-col>
                         </b-col>
@@ -42,7 +42,7 @@ import { mapGetters } from 'vuex'
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import ModalComponent from "@/components/DeleteModalComponent.vue"
-import PaginationComponent from "../components/PaginationComponent.vue"
+// import PaginationComponent from "../components/PaginationComponent.vue"
 
 export default {
     name: "CarsPage",
@@ -50,7 +50,7 @@ export default {
         SideBar,
         HeaderComponent,
         ModalComponent,
-        PaginationComponent
+        // PaginationComponent
     },
     computed: {
         ...mapGetters({ listCars: "carsList" }),
@@ -63,13 +63,13 @@ export default {
         return {
             value: '',
             fields: [
-                { key: "ID", label: "ID" },
-                { key: "serial_number", label: "Serial Number" },
-                { key: "brand", label: "Brand" },
-                { key: "model", label: "Model" },
-                { key: "color", label: "Color" },
-                { key: "year", label: "Year" },
-                { key: "price", label: "Price" },
+                { key: "car_id", label: "ID", sortable: true},
+                { key: "serial_number", label: "Serial Number", sortable: true },
+                { key: "brand", label: "Brand", sortable: true },
+                { key: "model", label: "Model", sortable: true },
+                { key: "color", label: "Color", sortable: true },
+                { key: "year", label: "Year", sortable: true },
+                { key: "price", label: "Price", sortable: true },
                 { key: "actions", label: "Actions" },
             ],
             // items: [

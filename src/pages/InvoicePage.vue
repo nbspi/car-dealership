@@ -34,7 +34,7 @@
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Invoice Records</h5>
-                                    <b-table hover :items="fetchInvoice" :fields="fields">
+                                    <b-table hover :items="items" :fields="fields">
                                         <template v-slot:cell(actions)="{ item }">
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
@@ -46,7 +46,7 @@
                                             </span>
                                         </template>
                                     </b-table>
-                                    <PaginationComponent />
+                                    <!-- <PaginationComponent /> -->
                                 </b-container>
 
                             </b-col>
@@ -59,13 +59,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
 import DatePicker from "@/components/DatePicker.vue"
 import ModalComponent from "@/components/DeleteModalComponent.vue"
-import PaginationComponent from "@/components/PaginationComponent.vue"
+// import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {
     name: "InvoicePage",
@@ -75,11 +75,11 @@ export default {
         FormInput,
         DatePicker,
         ModalComponent,
-        PaginationComponent
+        // PaginationComponent
     },
-    computed: {
-        ...mapGetters(['fetchInvoice'])
-    },
+    // computed: {
+    //     ...mapGetters(['fetchInvoice'])
+    // },
     data() {
         return {
             value: '',

@@ -20,7 +20,7 @@
                                             <FormInput label="Address" />
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2" type="reset">Reset</b-button>
-                                                <b-button variant="success" type="submit">Save</b-button>
+                                                <b-button variant="success" type="submit" @click="submitForm">Save</b-button>
                                             </b-container>
                                         </b-form>
                                     </b-col>
@@ -33,7 +33,7 @@
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
                                     <b-table hover :items="listCustomers" :fields="fields">
-                                        <template v-slot:cell(actions)="{ item }">
+                                        <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
                                                     <b-btn class="mr-2" @click="editItem(item)">
@@ -76,10 +76,23 @@ export default {
     },
     computed: {
         ...mapGetters({ listCustomers: "customersList" }),
+        // ...mapState({
+        //     firstname: state => state.firstname,
+        //     lastname: state => state.lastname,
+        //     contact: state => state.contact,
+        //     address: state => state.address
+        // })
     },
     async mounted() {
         return await this.$store.dispatch("fetchCustomersList");
     },
+    // methods: {
+    //     ...mapMutations(["ADD_CUSTOMER"]),
+    //     addcustomer: function () {
+    //         this.ADD_CUSTOMER(this.customer);
+    //         this.customer = [];
+    //     }
+    // },
     props: ["value"],
     model: {
         prop: "value",
@@ -89,11 +102,11 @@ export default {
         return {
             modalShow: false,
             fields: [
-                { key: "ID", label: "ID" },
-                { key: "firstname", label: "First Name" },
-                { key: "lastname", label: "Last Name" },
-                { key: "contact", label: "Phone Number" },
-                { key: "address", label: "Address" },
+                { key: "customer_id", label: "ID", sortable: true },
+                { key: "firstname", label: "First Name", sortable: true },
+                { key: "lastname", label: "Last Name", sortable: true },
+                { key: "contact", label: "Phone Number", sortable: true},
+                { key: "address", label: "Address", sortable: true },
                 { key: "actions", label: "Actions" }
             ],
             items: {
