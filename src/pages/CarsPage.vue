@@ -6,7 +6,7 @@
                 <HeaderComponent title="Cars" />
                 <b-container fluid class="pt-2">
                     <b-row class="my-2 d-flex justify-content-end px-3">
-                        <router-link to="/add-car" class="btn btn-success" exact>Add Car</router-link>
+                        <router-link to="/cars/add-car" class="btn btn-success" exact>Add Car</router-link>
                     </b-row>
                     <b-row class="d-flex justify-content-center my-3">
                         <b-col md="12" lg="12" xl="12" class="py-2">

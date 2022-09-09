@@ -61,7 +61,7 @@ const routes = [
     component: ServiceTicketPage
   },
   {
-    path: "/add-car",
+    path: "/cars/add-car",
     name: "AddCar",
     component: AddCar
   },

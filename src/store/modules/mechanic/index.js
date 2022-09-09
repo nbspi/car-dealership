@@ -1,13 +1,6 @@
 export default {
   state: {
-    mechanicState: [
-      {
-        first_name: "John",
-        last_name: "Doe",
-        phone_number: "495945745"
-
-      }
-    ],
+    mechanicState: [],
   },
   getters: {
     fetchMechanic: (state) => {
@@ -15,11 +8,19 @@ export default {
     },
   },
 
-  actions: {},
+  actions: {
+    addMechanic({ commit }, payload) {
+      commit("addMechanic", payload)
+    }
+  },
 
   mutations: {
     SET_CARSLIST(state, mechanics) {
       state.mechanics = mechanics;
+    },
+
+    addMechanic(state, payload) {
+      state.mechanicState = state.mechanicState.concat(payload.data);
     },
   },
 };

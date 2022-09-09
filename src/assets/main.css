@@ -131,3 +131,7 @@ td {
 .modal-header .close {
     padding: 0px !important;
 }
+
+.badge-secondary {
+    background-color: #4A5376 !important;
+}

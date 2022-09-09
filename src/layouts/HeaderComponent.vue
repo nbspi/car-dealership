@@ -64,10 +64,6 @@ nav {
     background-color: var(--background-color);
 }
 
-.user-dropdown {
-    outline: var(--secondary-color) !important;
-}
-
 h2 {
     color: var(--primary-color);
 }
@@ -76,4 +72,5 @@ h2 {
 .search-container {
     padding-right: 5px !important;
 }
+
 </style>

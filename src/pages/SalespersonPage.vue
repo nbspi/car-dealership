@@ -5,7 +5,7 @@
             <b-col xl="10" lg="9" sm="9">
                 <HeaderComponent title="Salesperson" />
                 <b-container fluid class="pt-2">
-                    <b-row class=" my-3">
+                    <b-row class="my-3">
                         <!-- whole container-->
                         <b-col class="py-2">
                             <!-- left container-->
@@ -13,10 +13,33 @@
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Salesperson</h4>
                                     <b-col class="mt-3">
-                                        <b-form>
-                                            <FormInput label="First Name" />
+                                        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+                                            <!-- <FormInput label="First Name" />
                                             <FormInput label="Last Name" />
                                             <FormInput label="Phone Number" />
+                                            <b-container class="button-container d-flex justify-content-end">
+                                                <b-button class="mr-2" type="reset">Reset</b-button>
+                                                <b-button variant="success" type="submit">Save</b-button>
+                                            </b-container> -->
+                                            <div class="mb-3">
+                                                <b-form-group label="First Name" label-for="firstname">
+                                                    <b-form-input id="firstname" v-model="form.firstname"
+                                                        placeholder="Enter First Name" required></b-form-input>
+                                                </b-form-group>
+                                            </div>
+                                            <div class="mb-3">
+                                                <b-form-group label="Last Name" label-for="input-1">
+                                                    <b-form-input id="lastname" v-model="form.lastname"
+                                                        placeholder="Enter Last Name" required></b-form-input>
+                                                </b-form-group>
+                                            </div>
+                                            <div class="mb-3">
+                                                <b-form-group label="Phone Number" label-for="contact">
+                                                    <b-form-input id="contact" v-model="form.contact"
+                                                        placeholder="Enter Phone Number" required></b-form-input>
+                                                </b-form-group>
+                                            </div>
+
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2" type="reset">Reset</b-button>
                                                 <b-button variant="success" type="submit">Save</b-button>
@@ -24,7 +47,6 @@
                                         </b-form>
                                     </b-col>
                                 </b-container>
-
                             </b-col>
                         </b-col>
                         <b-col md="12" lg="12" xl="8" class="py-2">
@@ -42,9 +64,8 @@
                                             </span>
                                         </template>
                                     </b-table>
-                                    <PaginationComponent />
+                                    <!-- <PaginationComponent /> -->
                                 </b-container>
-
                             </b-col>
                         </b-col>
                     </b-row>
@@ -55,13 +76,12 @@
 </template>
 
 <script>
-
-import SideBar from "../layouts/SideBar.vue"
-import HeaderComponent from "../layouts/HeaderComponent.vue"
-import FormInput from "../components/FormInput.vue"
-import ModalComponent from "@/components/DeleteModalComponent.vue"
-import PaginationComponent from "@/components/PaginationComponent.vue"
-import EditModal from "../components/EditModal.vue"
+import SideBar from "../layouts/SideBar.vue";
+import HeaderComponent from "../layouts/HeaderComponent.vue";
+// import FormInput from "../components/FormInput.vue"
+import ModalComponent from "@/components/DeleteModalComponent.vue";
+// import PaginationComponent from "@/components/PaginationComponent.vue"
+import EditModal from "../components/EditModal.vue";
 
 export default {
     name: "SalespersonPage",
@@ -69,30 +89,52 @@ export default {
     //     editItem(item) { console.log(item); }
     // },
     components: {
-    SideBar,
-    HeaderComponent,
-    FormInput,
-    ModalComponent,
-    PaginationComponent,
-    EditModal
-},
+        SideBar,
+        HeaderComponent,
+        // FormInput,
+        ModalComponent,
+        // PaginationComponent,
+        EditModal,
+    },
     data() {
         return {
-            value: '',
-            fields: ['ID', 'first_name', 'last_name', 'phone_number', 'actions'],
+            form: {
+                firstname: "",
+                lastname: "",
+                contact: ""
+            },
+            show: true,
+            value: "",
+            fields: ["ID", "first_name", "last_name", "phone_number", "actions"],
             items: [
-                { ID: 40, first_name: 'Mark', last_name: 'Lee', phone_number: '4546766' }
+                {
+                    ID: 40,
+                    first_name: "Mark",
+                    last_name: "Lee",
+                    phone_number: "4546766",
+                },
                 // { ID: 40, first_name: 'Renjun', last_name: 'Huang', phone_number: '4546766' },
                 // { ID: 40, first_name: 'Jeno', last_name: 'Lee', phone_number: '4546766' },
                 // { ID: 40, first_name: 'Haechan', last_name: 'Lee', phone_number: '4546766' },
                 // { ID: 40, first_name: 'Jaemin', last_name: 'Na', phone_number: '4546766' },
                 // { ID: 40, first_name: 'Chenle', last_name: 'Zhong', phone_number: '4546766' },
                 // { ID: 40, first_name: 'Jisung', last_name: 'Park', phone_number: '4546766' },
-
-            ]
-        }
-    }
-}
+            ],
+        };
+    },
+    methods: {
+        onSubmit(event) {
+            event.preventDefault();
+        },
+        onReset(event) {
+            event.preventDefault();
+            // Reset our form values
+            this.form.firstname = "";
+            this.form.lastname = "";
+            this.form.contact = "";
+        },
+    },
+};
 </script>
 
 <style scoped>
