@@ -70,6 +70,7 @@
                     <table class="table table-hover" style="width: 100%">
                       <thead>
                         <tr>
+                          <th>ID</th>
                           <th>First Name</th>
                           <th>Last Name</th>
                           <th>Phone Number</th>
@@ -77,7 +78,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="mechanic in mechanicState" :key="mechanic.name">
+                        <tr v-for="(mechanic, index) in mechanicState" :key="index">
+                          <td>{{index++}}</td>
                           <td>{{ mechanic.firstname }}</td>
                           <td>{{ mechanic.lastname }}</td>
                           <td>{{ mechanic.contact }}</td>
@@ -93,8 +95,8 @@
                                   <div class="form-group mb-3">
                                     <b-form-group label="First Name" class="ml-2">
                                     </b-form-group>
-                                    <b-form-input id="firstname" placeholder="Enter First Name" v-model="firstname" autocomplete="off"
-                                      required>
+                                    <b-form-input id="firstname" placeholder="Enter First Name" v-model="firstname"
+                                      autocomplete="off" required>
                                       {{ mechanic.firstname }}
                                     </b-form-input>
                                   </div>
@@ -117,6 +119,10 @@
                                 </div>
                               </b-modal>
                             </div>
+                            <b-button v-b-modal.modal-center>
+                              <b-icon @click="showModal(index)" class="delete-btn" icon="trash-fill"></b-icon>
+                            </b-button>
+
                             <DeleteModalComponent />
                           </td>
                         </tr>
@@ -159,9 +165,13 @@ export default {
   },
   data() {
     return {
+      index: 0,
       firstname: "",
       lastname: "",
-      contact: ""
+      contact: "",
+      fields: [
+        { key: "firstname", label: "First Name" },
+      ],
       // value: '',
       // modalShow: false,
       // currentPage: 1,
@@ -184,6 +194,10 @@ export default {
     }
   },
   methods: {
+
+    showModal(id) {
+      this.index = id
+    },
     addMechanic() {
       this.$store.dispatch("addMechanic", {
         data: {
@@ -193,14 +207,19 @@ export default {
         }
       });
     },
-
-
-
     onSubmit(event) {
       event.preventDefault();
       alert(JSON.stringify(this.form))
-    }
-  }
+    },
+  },
+  // validations: {
+  //   form: {
+  //     firstname: { required },
+  //     lastname: { required },
+  //     contact: { required }
+  //   }
+  // }
+
 }
 </script>
 
