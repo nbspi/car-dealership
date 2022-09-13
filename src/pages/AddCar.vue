@@ -16,14 +16,14 @@
                                         <b-col cols="6" class="mt-3">
                                             <b-form>
                                                 <FormInput label="Serial Number" />
-                                                <SelectComponent label="Model" />
+                                                <FormInput label="Model" />
                                                 <FormInput label="Year" />
                                                 <RadioComponent class="mt-4" />
                                             </b-form>
                                         </b-col>
                                         <b-col cols="6" class="mt-3">
                                             <b-form>
-                                                <FormInput label="Brand" />
+                                                <SelectComponent label="Brand" />
                                                 <FormInput label="Color" />
                                                 <FormInput label="Price" />
                                             </b-form>

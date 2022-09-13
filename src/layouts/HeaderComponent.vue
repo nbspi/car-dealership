@@ -6,7 +6,7 @@
                     <h2>{{ title }}</h2>
                 </div>
             </b-col>
-            <b-col sm="12" xl="10" class="search-container d-flex justify-content-sm-center justify-content-xl-end">
+            <b-col sm="12" xl="10" id="search-container" class="d-flex justify-content-sm-center justify-content-xl-end">
                 <b-nav-form class="mr-3">
                     <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
                     <b-button variant="outline-light" class="my-sm-0 btn d-flex " type="submit"><b-icon icon="search"></b-icon></b-button>
@@ -22,7 +22,7 @@
         </b-container>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                <li class="breadcrumb-item"><a class="home" href="/dashboard">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
             </ol>
         </nav>
@@ -69,8 +69,10 @@ h2 {
 }
 
 
-.search-container {
+#search-container {
     padding-right: 5px !important;
+    border: none !important;
+
 }
 
 </style>

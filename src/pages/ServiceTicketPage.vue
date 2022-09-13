@@ -84,15 +84,7 @@ export default {
         return {
             value: '',
             fields: ['ID', 'car_ID', 'customer_ID', 'received', 'returned', 'comments', 'actions'],
-            items: [
-                { ID: 1, car_ID: '54543', customer_ID: 'August 24, 2020', received: '4546766', returned: '35345', comments: '123' }
-                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-                // { ID: 1, invoice_number: '54543', date: 'August 24, 2020', salesperson_ID: '4546766', customer_ID: '35345', car_ID: '123' },
-            ]
+            items: [{ ID: 1, car_ID: '54543', customer_ID: 'August 24, 2020', received: '4546766', returned: '35345', comments: '123' }]
         }
     }
 }

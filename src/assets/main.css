@@ -135,3 +135,15 @@ td {
 .badge-secondary {
     background-color: #4A5376 !important;
 }
+
+#search-container {
+   border: none !important;
+}
+
+.home:hover {
+    color: #33323D !important;
+}
+
+label {
+    font-weight: 500 !important;
+}
