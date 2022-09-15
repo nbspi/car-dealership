@@ -32,7 +32,7 @@
                             <b-col class="table-container ">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
-                                    <b-table hover :items="listCustomers" :fields="fields">
+                                    <b-table hover :items="items" :fields="fields">
                                         <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import FormInput from "../components/FormInput.vue"
@@ -74,18 +74,18 @@ export default {
         FormInput,
         DeleteModalComponent,
     },
-    computed: {
-        ...mapGetters({ listCustomers: "customersList" }),
-        // ...mapState({
-        //     firstname: state => state.firstname,
-        //     lastname: state => state.lastname,
-        //     contact: state => state.contact,
-        //     address: state => state.address
-        // })
-    },
-    async mounted() {
-        return await this.$store.dispatch("fetchCustomersList");
-    },
+    // computed: {
+    //     ...mapGetters({ listCustomers: "customersList" }),
+    //     // ...mapState({
+    //     //     firstname: state => state.firstname,
+    //     //     lastname: state => state.lastname,
+    //     //     contact: state => state.contact,
+    //     //     address: state => state.address
+    //     // })
+    // },
+    // async mounted() {
+    //     return await this.$store.dispatch("fetchCustomersList");
+    // },
     // methods: {
     //     ...mapMutations(["ADD_CUSTOMER"]),
     //     addcustomer: function () {

@@ -1,10 +1,10 @@
 <template>
     <div>
-        <!-- <b-button v-b-modal.modal-center>
+        <b-button v-b-modal.modal-center>
             <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-        </b-button> -->
+        </b-button>
 
-        <b-modal id="modal-center" title="Delete Confirmation" @ok="actionDelete(mechanic_id)">
+        <b-modal id="modal-center" title="Delete Confirmation" @ok="onDelete(mechanic_id)">
             <b-row class="d-flex justify-content-center">
                 <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
 
@@ -16,12 +16,15 @@
 
 <script>
 // import mechanic from '@/store/modules/mechanic';
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
     name: "DeleteModalComponent",
     computed: {
-        ...mapState(['mechanicState'])
+        ...mapState(['mechanicState']),
+        ...mapGetters({
+            mechanicList: "fetchMechanic"
+        }),
     },
     data() {
         return {
@@ -29,9 +32,13 @@ export default {
         }
     },
     methods: {
-        actionDelete(mechanic_id) {
-            alert("Delete " + mechanic_id)
+        // actionDelete(mechanic_id) {
+        //     alert("Delete " + mechanic_id)
 
+        // },   
+
+        onDelete(mechanic_id) {
+            this.$emit('delete-mechanic', mechanic_id)
         }
     },
 

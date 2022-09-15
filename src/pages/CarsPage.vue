@@ -14,7 +14,7 @@
                             <b-col class="table-container">
                                 <b-container fluid class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Car Records</h5>
-                                    <b-table hover :items="listCars" :fields="fields">
+                                    <b-table hover :items="items" :fields="fields">
                                         <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
@@ -38,11 +38,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import ModalComponent from "@/components/DeleteModalComponent.vue"
 // import PaginationComponent from "../components/PaginationComponent.vue"
+// import { mapGetters } from 'vuex'
 
 export default {
     name: "CarsPage",
@@ -52,13 +52,13 @@ export default {
         ModalComponent,
         // PaginationComponent
     },
-    computed: {
-        ...mapGetters({ listCars: "carsList" }),
+    // computed: {
+    //     ...mapGetters({ listCars: "carsList" }),
 
-    },
-    async mounted() {
-        return await this.$store.dispatch("fetchCarsList");
-    },
+    // },
+    // async mounted() {
+    //     return await this.$store.dispatch("fetchCarsList");
+    // },
     data() {
         return {
             value: '',
@@ -72,9 +72,9 @@ export default {
                 { key: "price", label: "Price", sortable: true },
                 { key: "actions", label: "Actions" },
             ],
-            // items: [
-            //     { ID: 1, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' }
-            // ]
+            items: [
+                { car_id: 1, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' }
+            ]
         }
     }
 }

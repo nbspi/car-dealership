@@ -3,7 +3,7 @@
   <body>
     <b-container fluid>
       <b-row id="header" class="d-flex justify-content-center">
-        <b-container class="">
+        <b-container>
           <div class="d-flex justify-content-lg-end justify-content-md-center">
             <nav id="navbar" class="navbar">
               <ul>
@@ -22,23 +22,11 @@
         <b-col cols="12" md="12" lg="5" class="left d-flex justify-content-center">
           <b-col cols="8" class="d-flex flex-column align-items-center">
             <img src="../assets/img/lougeh.png" alt="" class="lou-geh" />
-            <h1>LOGIN</h1>
+            <h1>LOG IN</h1>
             <h2>Log In your account here</h2>
             <br />
-            <div class="mt-3 d-flex justify-content-center">
-              <b-form class="d-flex flex-column">
-                <!-- <b-form class="d-flex flex-column" action="" @submit="login()">
-                          <LoginInputComponent v-model="id_number" label="ID Number" type="text" placeholder="Enter ID Number" />
-                          <LoginInputComponent v-model="password" label="Password" type="password" placeholder="Enter Password" />         
-                </b-form> -->
-                <LoginInputComponent label="ID Number" type="text" placeholder="Enter ID Number" />
-                <LoginInputComponent label="Password" type="password" placeholder="Enter Password" />
-                <br />
-                <div class="d-flex justify-content-center">
-                  <a href="./dashboard" class="col-6 btn btn-block">LOG IN</a>
-                </div>
-              </b-form>
-            </div>
+
+            <LoginInputComponent />
           </b-col>
         </b-col>
         <b-col cols="12" md="12" lg="7" class="right d-flex justify-content-center align-items-center">
@@ -50,17 +38,33 @@
 </template>
 
 <script>
-import LoginInputComponent from "../components/LoginInputComponent.vue";
+import LoginInputComponent from '@/components/LoginInputComponent.vue';
 
 export default {
   name: "LogIn",
   components: {
-    LoginInputComponent,
+    LoginInputComponent
   },
   data() {
     return {
-      id_number: "",
+      email: "",
       password: ""
+    }
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+
+  methods: {
+    handleLogin() {
+      const user = { email: this.email, password: this.password };
+      this.$store.dispatch("login", user);
+    },
+
+    logout() {
+      this.$store.dispatch("logout")
     }
   }
 };
@@ -181,17 +185,4 @@ body {
   }
 }
 
-.btn {
-  background-color: var(--secondary-color);
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 10px;
-  padding: 8px;
-}
-
-.btn:hover {
-  background-color: var(--primary-color);
-  color: #fff;
-}
 </style>

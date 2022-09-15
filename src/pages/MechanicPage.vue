@@ -13,11 +13,12 @@
                 <b-container class="container-card rounded p-3">
                   <h4 class="px-3">Add Mechanic</h4>
                   <b-col class="mt-3">
-                    <b-form @submit="onSubmit" v-if="show">
+                    <b-form>
                       <div class="form-group mb-3">
                         <b-form-group label="First Name" class="ml-2">
                         </b-form-group>
-                        <b-form-input id="firstname" placeholder="Enter First Name" v-model="mechanic.firstname" required>
+                        <b-form-input id="firstname" placeholder="Enter First Name" v-model="mechanic.firstname"
+                          required>
                         </b-form-input>
                       </div>
                       <div class="form-group mb-3">
@@ -60,21 +61,65 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="mechanic in mechanicList" :key="mechanic.mechanic_id">
+                        <tr v-for="mechanic in mechanicState" :key="mechanic.mechanic_id">
                           <td>{{mechanic.mechanic_id}}</td>
                           <td>{{ mechanic.firstname }}</td>
                           <td>{{ mechanic.lastname }}</td>
                           <td>{{ mechanic.contact }}</td>
                           <td class="d-flex justify-content-center">
+                            <!-- Edit Modal -->
                             <div>
                               <b-button v-b-modal.modal-form>
                                 <b-icon class="delete-btn" icon="pencil-square">
                                 </b-icon>
                               </b-button>
+
+                              <b-modal id="modal-form" title="Edit Mechanic">
+                                <div>
+                                  <div class="modal-form__form-group mb-3">
+                                    <b-form-group label="First Name" class="ml-2">
+                                    </b-form-group>
+                                    <b-form-input id="firstname" placeholder="Enter First Name"
+                                      v-model="mechanic.firstname" autocomplete="off" required>
+                                      {{ mechanic.firstname }}
+                                    </b-form-input>
+                                  </div>
+                                  <div class="modal-form__form-group mb-3">
+                                    <b-form-group label="Last Name" class="ml-2">
+                                    </b-form-group>
+                                    <b-form-input id="lastname" placeholder="Enter Last Name"
+                                      v-model="mechanic.lastname" required>
+                                      {{ mechanic.lastname }}
+                                    </b-form-input>
+                                  </div>
+                                  <div class="form-group mb-3">
+                                    <b-form-group label="Phone Number" class="ml-2">
+                                    </b-form-group>
+                                    <b-form-input id="contact" placeholder="Enter Phone Number"
+                                      v-model="mechanic.contact" required>
+                                      {{ mechanic.contact }}
+                                    </b-form-input>
+                                  </div>
+                                </div>
+                              </b-modal>
                             </div>
-                            <b-button @click="deleteMechanic(mechanic.mechanic_id)">
-                              <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                            </b-button>
+
+                            <!-- Delete Modal -->
+                            <div>
+                              <b-button v-b-modal.delete-modal>
+                                <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                              </b-button>
+
+                              <b-modal id="delete-modal" title="Delete Confirmation"
+                                @ok="deleteItem(mechanic.mechanic_id)">
+                                <b-row class="d-flex justify-content-center">
+                                  <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
+
+                                </b-row>
+                                <p class="my-4">Are you sure you want to proceed?</p>
+
+                              </b-modal>
+                            </div>
                           </td>
                         </tr>
 
@@ -97,8 +142,7 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import { mapState, mapGetters } from 'vuex'
-import { required } from "vuelidate/lib/validators";
-
+// import { required } from "vuelidate/lib/validators";
 // import DeleteModalComponent from "@/components/DeleteModalComponent.vue"
 // import EditModal from "@/components/EditModal.vue"
 // import PaginationComponent from "@/components/PaginationComponent.vue"
@@ -112,18 +156,17 @@ export default {
   components: {
     SideBar,
     HeaderComponent,
-    // DeleteModalComponent,
-    // EditModal
   },
-  validations() {
-    return {
-      mechanic: {
-        firstname: { required },
-        lastname: { required },
-        contact: { required }
-      }
-    }
-  },
+  // validations() {
+  //   return {
+  //     mechanic: {
+  //       firstname: { required },
+  //       lastname: { required },
+  //       contact: { required }
+  //     }
+  //   }
+  // },
+  emits: ['delete-mechanic'],
   computed: {
     // rows() {
     //   return this.mechanicState.length;
@@ -134,6 +177,12 @@ export default {
     }),
 
   },
+
+  //
+  beforeCreate() {
+    this.$store.dispatch("fetchMechanic")
+  },
+
   data() {
     return {
       // perPage: 5,
@@ -159,28 +208,44 @@ export default {
 
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.mechanic))
+      // alert(JSON.stringify(this.mechanic))
     },
 
-    deleteMechanic(index) {
-      if (confirm('are you sure?')) {
-        console.log(index);
-      }
-    },
+    // deleteMechanic(index) {
+    //   if (confirm('are you sure?')) {
+    //     console.log(index);
+    //   }
+    // },
 
     saveMechanic() {
       this.$store.dispatch("addMechanic", this.mechanic);
       alert("Added Mechanic Successfully!")
       location.reload();
     },
-    // deleteEvent(index) {
-    //   this.mechanics.splice(index, 1);
-    // },
-  },
 
-  async mounted() {
-    await this.$store.dispatch("fetchMechanic")
-  }
+    async deleteItem(mechanic_id) {
+      try {
+        console.log(mechanic_id);
+        await this.$store.dispatch("deleteMechanic", mechanic_id);
+        location.reload()
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // deleteEvent(mechanic_id) {
+    //   this.mechanics.splice(mechanic_id, 1);
+    // },
+
+    // validation() {
+    //   if (this.mechanic.firstname == null) {
+    //     document.getElementById("firstname").style.borderColor = "red";
+    //     this.state.name = false;
+    //   } else {
+    //     document.getElementById("firstname").style.borderColor = "";
+    //     this.state.name = true;
+    //   }
+    // }
+  },
   // validations: {
   //   form: {
   //     firstname: { required },

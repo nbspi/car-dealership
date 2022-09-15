@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = "http://172.16.4.182:4000";
+import { LOCAL_URL } from "../../../config/dev.env";
+// const API_URL = "http://172.16.4.182:4000"
 
 export default {
   state: {
@@ -11,46 +12,38 @@ export default {
 
   actions: {
     async fetchCustomersList({ commit }) {
-      const response = await axios.get(`${API_URL}/customers`);
-      console.log(response.data);
-      commit("SET_CUSTOMERSLIST", response.data);
+      await axios
+        .get(`${LOCAL_URL}/customers`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
+        .then((response) => {
+          this.customers = response.data;
+          commit("SET_CUSTOMERSLIST", response.data);
+        });
     },
-    // async addCustomer({ commit }, { fullname, contact, address, SecretKey }) {
-    //   console.log("look", contact);
-    //   return await axios({
-    //     method: "POST",
-    //     url: `${this.$axios.defaults.baseURL}customers/add/`,
-    //     headers: {
-    //       Authorization: `Bearer ${SecretKey}`,
-    //     },
 
-    //     data: {
-    //       fullname,
-    //       contact,
-    //       address,
-    //     },
-    //   }).then((res) => {
-    //     console.log("actionnew", res);
-
-    //     commit("ADD_CUSTOMER", res.data.posted);
-
-    //     return res;
-    //   });
-    //   // .catch(err => err);
-    // },
+    async deleteCustomer({ commit }, customer_id) {
+      const response = await axios.patch(
+        `${LOCAL_URL}/customers/delete/${customer_id}`
+      );
+      console.log(localStorage.getItem("token"));
+      commit("DELETE_CUSTOMER", response.data);
+      console.log(response.data);
+    },
   },
 
   mutations: {
     SET_CUSTOMERSLIST(state, customers) {
       state.customers = customers;
     },
-    // ADD_CUSTOMER(state, customer) {
-    //   state.customers.push(customer);
-    // }
-    // mutations: {
-    //   ADD_USER_DATA: (state, data) => {
-    //     state.userData.push(data)
-    //   }
-    // }
+    DELETE_CUSTOMER(state, customer_id) {
+      let index = state.customers.findIndex(
+        (customer) => customer.customer_id == customer_id
+      );
+      console.log(index);
+      state.customers.splice(index, 0);
+    },
   },
 };

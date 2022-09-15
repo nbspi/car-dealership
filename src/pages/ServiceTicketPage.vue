@@ -47,7 +47,7 @@
                                             </span>
                                         </template>
                                     </b-table>
-                                    <PaginationComponent />
+                                    <!-- <PaginationComponent /> -->
                                 </b-container>
 
                             </b-col>
@@ -67,7 +67,7 @@ import FormInput from "../components/FormInput.vue"
 import FormTextArea from "../components/FormTextArea.vue"
 import DatePicker from "../components/DatePicker.vue"
 import ModalComponent from "@/components/DeleteModalComponent.vue"
-import PaginationComponent from "@/components/PaginationComponent.vue"
+// import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {
     name: "ServiceTicketPage",
@@ -78,7 +78,7 @@ export default {
         FormTextArea,
         DatePicker,
         ModalComponent,
-        PaginationComponent
+        // PaginationComponent
     },
     data() {
         return {

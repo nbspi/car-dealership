@@ -117,7 +117,7 @@ td {
     justify-content: center !important;
 }
 
-#modal-center,
+#delete-modal,
 #modal-form {
     display: flex !important;
     align-items: center !important;
@@ -146,4 +146,11 @@ td {
 
 label {
     font-weight: 500 !important;
+}
+
+.delete-btn:focus,
+.delete-btn:active  {
+    outline: none !important;
+    -webkit-appearance: none !important;
+    box-shadow: none !important;
 }
