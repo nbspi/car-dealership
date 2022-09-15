@@ -137,20 +137,30 @@ td {
 }
 
 #search-container {
-   border: none !important;
+    border: none !important;
 }
 
 .home:hover {
     color: #33323D !important;
 }
 
-label {
-    font-weight: 500 !important;
-}
-
 .delete-btn:focus,
-.delete-btn:active  {
+.delete-btn:active {
     outline: none !important;
     -webkit-appearance: none !important;
     box-shadow: none !important;
+}
+
+legend {
+    font-weight: 500 !important;
+}
+
+input:focus {
+    border: solid 1px var(--primary-color) !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
 }

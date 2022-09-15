@@ -6,7 +6,7 @@
                     <label for="email" class="form-label ml-2 ">Email Address</label>
                 </div>
                 <input type="text" v-model="email" placeholder="email@example.com" class="form-control form-control-lg"
-                    autocomplete="off">
+                    autocomplete="off" required>
             </div>
 
             <div class="mb-3">
@@ -14,7 +14,7 @@
                     <label for="email" class="form-label ml-2 ">Password</label>
                 </div>
                 <input type="password" v-model="password" placeholder="At least 6 characters"
-                    class="form-control form-control-lg" autocomplete="off">
+                    class="form-control form-control-lg" autocomplete="off" required>
             </div>
             <br>
             <div class="button-container d-flex justify-content-center">
@@ -22,12 +22,15 @@
                     LOG IN
                 </button>
             </div>
-            <!-- <b-alert class="alert" :show="alert.showAlert" dismissible :variant="alert.variant"
-                @dismissed="alert.showAlert = null">
-                <font-awesome-icon :icon="alert.variant == 'success' ? 'check-circle' : 'exclamation'"
-                    class="mr-1 alert__icon" />
-                {{ alert.message }}
-            </b-alert> -->
+
+            <!-- <div>
+                <b-alert class="alerticon" v-model="alert.showAlert" variant="light">
+                    <div class="alertborder" style="borderWidth:40px solid; borderColor:'brown'">
+                        <unicon :name="alert.color == 'green' ? 'check' : 'multiply' " :fill="alert.color"> </unicon>
+                        {{ alert.message }}
+                    </div>
+                </b-alert>
+            </div> -->
         </b-form>
     </div>
 
@@ -43,21 +46,20 @@ export default {
             password: "",
             alert: {
                 showAlert: 0,
-                dismissSecs: 0,
-                variant: "sucess",
+                color: "",
                 message: ""
             }
         }
     },
     methods: {
-        showAlert(message, variant) {
-            this.alert = {
-                showAlert: 3,
-                dismissSecs: 2,
-                variant,
-                message
-            }
-        },
+        // showAlert(message, variant) {
+        //     this.alert = {
+        //         showAlert: 3,
+        //         dismissSecs: 2,
+        //         variant,
+        //         message
+        //     }
+        // },
         async handleLogin() {
             const user = { email: this.email, password: this.password };
             this.$store.dispatch("login", user).then(

@@ -6,14 +6,18 @@
                     <h2>{{ title }}</h2>
                 </div>
             </b-col>
-            <b-col sm="12" xl="10" id="search-container" class="d-flex justify-content-sm-center justify-content-xl-end">
+            <b-col sm="12" xl="10" id="search-container"
+                class="d-flex justify-content-sm-center justify-content-xl-end">
                 <b-nav-form class="mr-3">
                     <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
-                    <b-button variant="outline-light" class="my-sm-0 btn d-flex " type="submit"><b-icon icon="search"></b-icon></b-button>
+                    <b-button variant="outline-light" class="my-sm-0 btn d-flex " type="submit">
+                        <b-icon icon="search"></b-icon>
+                    </b-button>
                 </b-nav-form>
                 <div>
                     <b-avatar variant="secondary"></b-avatar>
-                    <b-dropdown text="UserName" variant="secondary" class="user-dropdown m-2">
+                    <b-dropdown :text="currentUser.firstname + ` ` + currentUser.lastname" variant="secondary"
+                        class="user-dropdown m-2">
                         <b-dropdown-item href="#">Profile</b-dropdown-item>
                         <b-dropdown-item href="/">Sign Out</b-dropdown-item>
                     </b-dropdown>
@@ -36,10 +40,19 @@ export default {
         title: {
             type: String
         }
+    },
+    data() {
+        return {
+            currentUser: JSON.parse(localStorage.getItem("user"))
+        }
+    },
+    methods: {
+        async logout() {
+            this.$store.dispatch("logout");
+            this.$router.push("/");
+        },
     }
-    // setup(props) {
-    //     console.log(props.title)
-    // }
+
 }
 </script>
 
@@ -74,5 +87,4 @@ h2 {
     border: none !important;
 
 }
-
 </style>

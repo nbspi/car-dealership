@@ -15,22 +15,25 @@
                   <b-col class="mt-3">
                     <b-form>
                       <div class="form-group mb-3">
-                        <b-form-group label="First Name" class="ml-2">
+                        <b-form-group label="First Name" class="ml-2" :state="mechanic.firstname"
+                          invalid-feedback="first name is required">
                         </b-form-group>
-                        <b-form-input id="firstname" placeholder="Enter First Name" v-model="mechanic.firstname"
+                        <b-form-input id="firstname" type="text" placeholder="Enter First Name" v-model="mechanic.firstname"
                           required>
                         </b-form-input>
                       </div>
                       <div class="form-group mb-3">
-                        <b-form-group label="Last Name" class="ml-2">
+                        <b-form-group label="Last Name" class="ml-2" :state="mechanic.lastname"
+                          invalid-feedback="last name is required">
                         </b-form-group>
-                        <b-form-input id="lastname" placeholder="Enter Last Name" v-model="mechanic.lastname" required>
+                        <b-form-input id="lastname" type="text" placeholder="Enter Last Name" v-model="mechanic.lastname" required>
                         </b-form-input>
                       </div>
                       <div class="form-group mb-3">
-                        <b-form-group label="Phone Number" class="ml-2">
+                        <b-form-group label="Phone Number" class="ml-2" :state="mechanic.contact"
+                          invalid-feedback="contact number is required">
                         </b-form-group>
-                        <b-form-input id="contact" placeholder="Enter Phone Number" v-model="mechanic.contact" required>
+                        <b-form-input id="contact" type="number" placeholder="Enter Phone Number" v-model="mechanic.contact" required>
                         </b-form-input>
                       </div>
                       <b-container class="button-container d-flex justify-content-end">
@@ -39,10 +42,19 @@
                           Submit</b-button>
                       </b-container>
                     </b-form>
-
-
                   </b-col>
                 </b-container>
+
+                <!-- alert container -->
+                <div class="alert-container mt-3">
+                  <b-alert dismissible class="alert" v-model="alert.showAlert" @dismissed="alert.showAlert = null"
+                    :variant="alert.variant">
+                    <div class="alertborder">
+                      <b-icon :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' " fill="black"></b-icon>
+                      {{ alert.message }}
+                    </div>
+                  </b-alert>
+                </div>
               </b-col>
             </b-col>
             <b-col md="12" lg="12" xl="8" class="py-2">
@@ -189,16 +201,34 @@ export default {
       // currentPage: 1,
       // currentPagePending: 1,
       // item: [],
-      show: true,
+      // show: true,
       mechanic: {
         firstname: "",
         lastname: "",
         contact: "",
+      },
+      state: {
+        firstname: null,
+        lastname: null,
+        contact: null
+      },
+      alert: {
+        dismissSecs: 0,
+        showAlert: 0,
+        variant: "",
+        message: ""
       }
     }
   },
   methods: {
-
+    showAlert(message, variant) {
+      this.alert = {
+        dismissSecs: 10,
+        showAlert: 5,
+        message,
+        variant
+      }
+    },
     showModal(id) {
       this.index = id
     },
@@ -206,21 +236,40 @@ export default {
       this.$store.dispatch("addMechanic", this.mechanic);
     },
 
-    onSubmit(event) {
-      event.preventDefault();
-      // alert(JSON.stringify(this.mechanic))
-    },
+    // onSubmit(event) {
+    //   event.preventDefault();
+    //   // alert(JSON.stringify(this.mechanic))
+    // },
 
+    // saveMechanic() {
+    //   if (!this.validation()) {
+    //     this.showAlert("Creation Unsuccessful", "danger")
+    //   } else {
+    //     this.$store.dispatch("addMechanic", this.mechanic);
+    //     this.showAlert("Successfully Created", "success")
+    //   }
+    // },
     // deleteMechanic(index) {
     //   if (confirm('are you sure?')) {
     //     console.log(index);
     //   }
     // },
 
-    saveMechanic() {
-      this.$store.dispatch("addMechanic", this.mechanic);
-      alert("Added Mechanic Successfully!")
-      location.reload();
+    // }
+    // alert("Added Mechanic Successfully!")
+    // location.reload();
+
+    async saveMechanic() {
+      console.log(this.mechanic)
+      if (!this.validation()) {
+        this.showAlert("Warning: Please fill out the fields", "warning");
+
+      } else {
+        this.$store.dispatch("addMechanic", this.mechanic);
+        this.showAlert("Successfully Created", "success");
+      }
+
+
     },
 
     async deleteItem(mechanic_id) {
@@ -232,6 +281,31 @@ export default {
         console.log(error);
       }
     },
+    validation() {
+      if (this.mechanic.firstname == null || this.mechanic.firstname.length < 1) {
+        this.state.firstname = false;
+      } else {
+        this.state.firstname = true;
+      }
+      if (this.mechanic.lastname == null || this.mechanic.lastname.length < 1) {
+        this.state.lastname = false;
+      } else {
+        this.state.lastname = true;
+      }
+      if (this.mechanic.contact == null || this.mechanic.contact.length < 1) {
+        this.state.contact = false;
+      } else {
+        this.state.contact = true;
+      }
+
+      if (this.mechanic.firstname != null && this.mechanic.lastname != null && this.mechanic.contact) {
+        return true;
+      } else {
+        return false;
+
+      }
+
+    }
     // deleteEvent(mechanic_id) {
     //   this.mechanics.splice(mechanic_id, 1);
     // },
@@ -247,7 +321,7 @@ export default {
     // }
   },
   // validations: {
-  //   form: {
+  //   mechanic: {
   //     firstname: { required },
   //     lastname: { required },
   //     contact: { required }
@@ -264,9 +338,5 @@ nav {
 
 div.py-2 {
   padding: 0 !important;
-}
-
-input:focus {
-  border: solid 1px var(--primary-color);
 }
 </style>

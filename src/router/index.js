@@ -11,7 +11,6 @@ import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
 import AddCar from "../pages/AddCar.vue";
 import AddServiceTicket from "../pages/AddServiceTicket.vue";
 
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -48,35 +47,47 @@ const routes = [
   {
     path: "/salesperson",
     name: "SalespersonPage",
-    component: SalespersonPage
+    component: SalespersonPage,
   },
   {
     path: "/mechanic",
     name: "MechanicPage",
-    component: MechanicPage
+    component: MechanicPage,
   },
   {
     path: "/service-ticket",
     name: "ServiceTicketPage",
-    component: ServiceTicketPage
+    component: ServiceTicketPage,
   },
   {
     path: "/cars/add-car",
     name: "AddCar",
-    component: AddCar
+    component: AddCar,
   },
   {
     path: "/add-service-ticket",
     name: "AddServiceTicket",
-    component: AddServiceTicket
-  }
-
+    component: AddServiceTicket,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  // If the user is not logged in, redirect to /login
+  const publicPages = ["/"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem("user");
+
+  if (authRequired && !loggedIn) {
+    return next("/");
+  }
+
+  next();
 });
 
 export default router;

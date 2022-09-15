@@ -1,5 +1,5 @@
 <template>
-    <b-col xl="2" lg="3" sm="3" class="sidebar-container vh-100">
+    <b-col xl="2" lg="3" sm="3" class="sidebar-container vh-80">
         <div class="sidebar-div p-3">
             <div class="d-flex flex-column align-items-center justify-content-center">
                 <img src="../assets/img/lougeh.png" alt="" class="lou-geh">
