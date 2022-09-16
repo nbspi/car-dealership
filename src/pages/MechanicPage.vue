@@ -50,7 +50,7 @@
                   <b-alert dismissible class="alert" v-model="alert.showAlert" @dismissed="alert.showAlert = null"
                     :variant="alert.variant">
                     <div class="alertborder">
-                      <b-icon :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' " fill="black"></b-icon>
+                      <b-icon class="mr-2" :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' " fill="black"></b-icon>
                       {{ alert.message }}
                     </div>
                   </b-alert>
@@ -154,14 +154,6 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import { mapState, mapGetters } from 'vuex'
-// import { required } from "vuelidate/lib/validators";
-// import DeleteModalComponent from "@/components/DeleteModalComponent.vue"
-// import EditModal from "@/components/EditModal.vue"
-// import PaginationComponent from "@/components/PaginationComponent.vue"
-// import DeleteModalComponent from "@/components/DeleteModalComponent.vue"
-// import EditModal from "@/components/EditModal.vue"
-// import FormInput from "../components/FormInput.vue"
-
 
 export default {
   name: "MechanicPage",
@@ -235,29 +227,6 @@ export default {
     addMechanic() {
       this.$store.dispatch("addMechanic", this.mechanic);
     },
-
-    // onSubmit(event) {
-    //   event.preventDefault();
-    //   // alert(JSON.stringify(this.mechanic))
-    // },
-
-    // saveMechanic() {
-    //   if (!this.validation()) {
-    //     this.showAlert("Creation Unsuccessful", "danger")
-    //   } else {
-    //     this.$store.dispatch("addMechanic", this.mechanic);
-    //     this.showAlert("Successfully Created", "success")
-    //   }
-    // },
-    // deleteMechanic(index) {
-    //   if (confirm('are you sure?')) {
-    //     console.log(index);
-    //   }
-    // },
-
-    // }
-    // alert("Added Mechanic Successfully!")
-    // location.reload();
 
     async saveMechanic() {
       console.log(this.mechanic)

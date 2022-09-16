@@ -13,37 +13,59 @@
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Salesperson</h4>
                                     <b-col class="mt-3">
-                                        <b-form @submit="onSubmit" v-if="show">
-                                            <div class="mb-3">
-                                                <b-form-group label="First Name" label-for="firstname" description="kjtejterlgkl">
-                                                    <b-form-input id="firstname" v-model="salesperson.firstname"
-                                                        placeholder="Enter First Name" required></b-form-input>
+                                        <b-form>
+                                            <div class="form-group mb-3">
+                                                <b-form-group label="First Name" class="ml-2"
+                                                    :state="salesperson.firstname"
+                                                    invalid-feedback="first name is required">
                                                 </b-form-group>
+                                                <b-form-input id="firstname" type="text" placeholder="Enter First Name"
+                                                    v-model="salesperson.firstname" required>
+                                                </b-form-input>
                                             </div>
-                                            <div class="mb-3">
-                                                <b-form-group label="Last Name" label-for="input-1">
-                                                    <b-form-input id="lastname" v-model="salesperson.lastname"
-                                                        placeholder="Enter Last Name" required></b-form-input>
+                                            <div class="form-group mb-3">
+                                                <b-form-group label="Last Name" class="ml-2"
+                                                    :state="salesperson.lastname"
+                                                    invalid-feedback="last name is required">
                                                 </b-form-group>
+                                                <b-form-input id="lastname" type="text" placeholder="Enter Last Name"
+                                                    v-model="salesperson.lastname" required>
+                                                </b-form-input>
                                             </div>
-                                            <div class="mb-3">
-                                                <b-form-group label="Phone Number" label-for="contact">
-                                                    <b-form-input id="contact" v-model="salesperson.contact"
-                                                        placeholder="Enter Phone Number" required></b-form-input>
+                                            <div class="form-group mb-3">
+                                                <b-form-group label="Phone Number" class="ml-2"
+                                                    :state="salesperson.contact"
+                                                    invalid-feedback="contact number is required">
                                                 </b-form-group>
+                                                <b-form-input id="contact" type="number"
+                                                    placeholder="Enter Phone Number" v-model="salesperson.contact"
+                                                    required>
+                                                </b-form-input>
                                             </div>
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2" type="reset">Reset</b-button>
-                                                <b-button variant="success" type="submit" @click="saveSalesperson">Save
-                                                </b-button>
+                                                <b-button variant="success" type="submit" class="btn btn-success send"
+                                                    @click="saveSalesperson">
+                                                    Submit</b-button>
                                             </b-container>
                                         </b-form>
                                     </b-col>
                                 </b-container>
+                                <div class="alert-container mt-3">
+                                    <b-alert dismissible class="alert" v-model="alert.showAlert"
+                                        @dismissed="alert.showAlert = null" :variant="alert.variant">
+                                        <div class="alertborder">
+                                            <b-icon class="mr-2"
+                                                :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' "
+                                                fill="black"></b-icon>
+                                            {{ alert.message }}
+                                        </div>
+                                    </b-alert>
+                                </div>
                             </b-col>
                         </b-col>
                         <b-col md="12" lg="12" xl="8" class="py-2">
-                            <!-- left container-->
+                            <!-- right container-->
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Salespersons Records</h5>
@@ -67,16 +89,33 @@
                                                     <td>{{ salesperson.lastname }}</td>
                                                     <td>{{ salesperson.contact }}</td>
                                                     <td class="d-flex justify-content-center">
-                                                        <!-- <div>
-                                                            <b-button @click="editSalesperson(index)">
-                                                                <b-icon class="delete-btn" icon="pencil-square">
+                                                        <div class="edit-container">
+                                                            <b-button class="edit-container__button">
+                                                                <b-icon icon="pencil-square">
                                                                 </b-icon>
                                                             </b-button>
-                                                        </div> -->
 
-                                                        <b-button>
-                                                            <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                        </b-button>
+                                                            <!-- <b-modal>
+
+                                                            </b-modal> -->
+                                                        </div>
+
+                                                        <div class="delete-container">
+                                                            <b-button class="delete-container__button" v-b-modal.delete-modal>
+                                                                <b-icon icon="trash-fill"></b-icon>
+                                                            </b-button>
+
+                                                            <b-modal id="delete-modal" title="Delete Confirmation"
+                                                                @ok="deleteItem(salesperson.salesperson_id)">
+                                                                <b-row class="d-flex justify-content-center">
+                                                                    <img src="../assets/img/delete.svg" alt="delete-svg"
+                                                                        style="height:200px; width:200px">
+
+                                                                </b-row>
+                                                                <p class="my-4">Are you sure you want to proceed?</p>
+
+                                                            </b-modal>
+                                                        </div>
                                                     </td>
                                                 </tr>
 
@@ -136,10 +175,29 @@ export default {
                 contact: "",
             },
             value: "",
-            show: true
+            show: true,
+            state: {
+                firstname: null,
+                lastname: null,
+                contact: null
+            },
+            alert: {
+                dismissSecs: 0,
+                showAlert: 0,
+                variant: "",
+                message: ""
+            }
         };
     },
     methods: {
+        showAlert(message, variant) {
+            this.alert = {
+                dismissSecs: 10,
+                showAlert: 5,
+                message,
+                variant
+            }
+        },
         showModal(id) {
             this.index = id
         },
@@ -152,9 +210,13 @@ export default {
         },
 
         saveSalesperson() {
-            this.$store.dispatch("addSalesperson", this.salesperson);
-            alert("Added Salesperson Successfully!")
-            location.reload();
+            console.log(this.salesperson)
+            if (!this.validation()) {
+                this.showAlert("Warning: Please fill out the fields", "warning");
+            } else {
+                this.$store.dispatch("addSalesperson", this.salesperson);
+                this.showAlert("Successfully Created", "success");
+            }
         },
 
         async deleteItem(salesperson_id) {
@@ -164,6 +226,30 @@ export default {
                 location.reload()
             } catch (error) {
                 console.log(error)
+            }
+        },
+        validation() {
+            if (this.salesperson.firstname === null || this.salesperson.firstname.length < 1) {
+                this.state.firstname = false;
+            } else {
+                this.state.firstname = true;
+            }
+            if (this.salesperson.lastname === null || this.salesperson.lastname.length < 1) {
+                this.state.lastname = false;
+            } else {
+                this.state.lastname = true;
+            }
+            if (this.salesperson.contact === null || this.salesperson.contact.length < 1) {
+                this.state.contact = false;
+            } else {
+                this.state.contact = true;
+            }
+
+            if (this.salesperson.firstname != null && this.salesperson.lastname != null && this.salesperson.contact) {
+                return true;
+            } else {
+                return false;
+
             }
         }
     },

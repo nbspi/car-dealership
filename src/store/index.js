@@ -20,6 +20,9 @@ const store = new Vuex.Store({
     fetchSalesperson: (state) => {
       return state.salespersonState;
     },
+    fetchUser: (state) => {
+      return state.user;
+    }
   },
 
   actions: {

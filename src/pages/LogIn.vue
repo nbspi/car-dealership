@@ -3,8 +3,8 @@
   <body>
     <b-container fluid>
       <b-row id="header" class="d-flex justify-content-center">
-        <b-container>
-          <div class="d-flex justify-content-lg-end justify-content-md-center">
+        <b-container class="navbar-container">
+          <div class="d-flex justify-content-xl-end justify-content-md-center">
             <nav id="navbar" class="navbar">
               <ul>
                 <li><a class="nav-link active" href="#hero">Home</a></li>
@@ -26,29 +26,71 @@
             <h2>Log In your account here</h2>
             <br />
 
-            <LoginInputComponent />
+            <div class="form-container mt-3">
+              <b-form>
+                <div class="form-container mb-3">
+                  <div class="d-flex">
+                    <label for="email" class="form-label ml-2 " :state="email">Email Address</label>
+                  </div>
+                  <input type="text" v-model="email" placeholder="email@example.com"
+                    class="form-control form-control-lg" autocomplete="off" required>
+                </div>
+
+                <div class="mb-3">
+                  <div class="d-flex">
+                    <label for="email" class="form-label ml-2 " :state="password">Password</label>
+                  </div>
+                  <input type="password" v-model="password" placeholder="At least 6 characters"
+                    class="form-control form-control-lg" autocomplete="off" required>
+                </div>
+                <br>
+                <div class="button-container d-flex justify-content-center">
+                  <button type="button" @click="handleLogin" class="col-6 btn btn-block">
+                    LOG IN
+                  </button>
+                </div>
+              </b-form>
+            </div>
           </b-col>
+
         </b-col>
         <b-col cols="12" md="12" lg="7" class="right d-flex justify-content-center align-items-center">
           <img src="../assets/img/car.svg" alt="" class="car" />
         </b-col>
       </b-row>
+      <div class="d-flex justify-content-end">
+        <b-alert class="alert" v-model="alert.showAlert" @dismissed="alert.showAlert = null" :variant="alert.variant">
+          <div>
+            <b-icon class="mr-2" :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' "
+              fill="black">
+            </b-icon>
+            {{ alert.message }}
+          </div>
+        </b-alert>
+      </div>
+
     </b-container>
   </body>
 </template>
 
 <script>
-import LoginInputComponent from '@/components/LoginInputComponent.vue';
 
 export default {
   name: "LogIn",
-  components: {
-    LoginInputComponent
-  },
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      alert: {
+        dismissSecs: 0,
+        showAlert: 0,
+        variant: "",
+        message: ""
+      },
+      state: {
+        email: null,
+        password: null
+      }
     }
   },
   computed: {
@@ -58,14 +100,61 @@ export default {
   },
 
   methods: {
-    handleLogin() {
-      const user = { email: this.email, password: this.password };
-      this.$store.dispatch("login", user);
+    // handleLogin() {
+    //   const user = { email: this.email, password: this.password };
+    //   this.$store.dispatch("login", user);
+    // },
+    showAlert(message, variant) {
+      this.alert = {
+        dismissSecs: 10,
+        showAlert: 5,
+        message,
+        variant
+      }
     },
-
     logout() {
       this.$store.dispatch("logout")
-    }
+    },
+    validation() {
+      if (this.email == null || this.email < 1) {
+        this.state.email = false;
+      } else {
+        this.state.email = true;
+      }
+      if (this.password == null || this.password < 1) {
+        this.state.password = false;
+      } else {
+        this.state.password = true;
+      }
+
+      if (this.email != null && this.password) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    async handleLogin() {
+      if (!this.validation()) {
+        this.showAlert("Invalid Credentials", "danger");
+      } else {
+        const user = { email: this.email, password: this.password };
+        this.$store.dispatch("login", user).then(
+          () => {
+            if (user.email && user.password) {
+              console.log(user.email, user.password);
+              //TODO: REDIRECT TO CUSTOMERS PAGE WHEN LOGIN
+              // this.$router.push("/dashboard");
+              // this.showAlert("Successfully Logged In", "success");
+            } else {
+              this.showAlert("dfsjkdfksef", "info")
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    },
   }
 };
 </script>
@@ -73,8 +162,14 @@ export default {
 <style scoped>
 body {
   height: 100vh;
-  background-image: url(../assets/img/background.svg);
   overflow: hidden;
+}
+
+@media (min-width: 992px) {
+  body {
+    background-image: url(../assets/img/background.svg);
+
+  }
 }
 
 #header {
@@ -89,6 +184,13 @@ body {
   }
 }
 
+@media(min-width: 1080px) {
+  .navbar-container {
+    margin-left: 250px !important;
+  }
+
+}
+  
 .navbar {
   padding: 0;
 }
@@ -158,7 +260,7 @@ body {
   width: 250px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .lou-geh {
     height: 200px;
     width: 200px;
@@ -169,9 +271,9 @@ body {
   height: 75%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .car {
-    width: 70%;
+    width: 60%;
   }
 }
 
@@ -179,10 +281,51 @@ body {
   padding-top: 20px;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 992px) {
   .right {
     padding-left: 100px;
   }
 }
 
+input:focus {
+  border: none !important;
+}
+
+.form-control,
+.form-control:focus {
+  background-color: #829BB8;
+  color: white;
+  border-radius: 7px;
+  font-size: 17px;
+  outline: none !important;
+  width: 350px;
+}
+
+.form-control::placeholder {
+  color: rgb(238, 238, 238, 0.6);
+}
+
+.form-label {
+  font-size: 18px;
+  font-weight: 600;
+  align-items: center;
+}
+
+.btn {
+  background-color: var(--secondary-color);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+.btn:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.alert {
+  width: 350px !important;
+}
 </style>
