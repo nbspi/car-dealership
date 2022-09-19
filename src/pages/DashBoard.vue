@@ -1,5 +1,6 @@
 <template>
   <b-container fluid>
+    <SpinnerLoad />
     <b-row>
       <SideBar />
       <b-col xl="10" lg="9" sm="9">
@@ -8,16 +9,15 @@
           <b-row class="my-3">
             <b-col cols="8">
               <b-row class="d-flex justify-content-between">
-                <DashboardCard title="Sales" icon="cart4" description="Total Sales" value="423" />
-                <DashboardCard title="Revenue" icon="currency-dollar" description="Total Profit" value="$5435" />
-                <DashboardCard title="Customers" icon="people" description="Customers" value="453" />
-
+                <DashboardCard title="Sales" icon="cart4" description="Total Sales" :value="salesPerMonth" />
+                <DashboardCard title="Revenue" icon="currency-dollar" description="Total Profit"
+                  :value="monthlyRevenuelist" />
+                <DashboardCard title="Customers" icon="people" description="Customers" :value="listCustomersPerMonth" />
               </b-row>
               <b-row class="mt-5 d-flex flex-column justify-content-between">
                 <h4 class="pl-2">Top Selling | <span>This Month</span></h4>
                 <b-col class="mt-3">
-                  <b-table hover :items="items">
-                  </b-table>
+                  <b-table hover :items="listTopSellers"> </b-table>
                 </b-col>
               </b-row>
             </b-col>
@@ -36,11 +36,9 @@
                     <li>Voluptates corrupti molestias voluptatem</li>
                   </ul>
                 </div>
-
               </b-container>
             </b-col>
           </b-row>
-
         </b-container>
       </b-col>
     </b-row>
@@ -48,27 +46,44 @@
 </template>
 
 <script>
-import SideBar from "../layouts/SideBar.vue"
-import HeaderComponent from "../layouts/HeaderComponent.vue"
+import SideBar from "../layouts/SideBar.vue";
+import HeaderComponent from "../layouts/HeaderComponent.vue";
 import DashboardCard from "@/components/DashboardCard.vue";
+import { mapGetters } from "vuex";
+import SpinnerLoad from "@/components/SpinnerLoad.vue";
 
 export default {
   name: "DashBoard",
   components: {
     HeaderComponent,
     SideBar,
-    DashboardCard
+    DashboardCard,
+    SpinnerLoad
+},
+
+  computed: {
+    ...mapGetters({ listTopSellers: "topSellersList" }),
+    ...mapGetters({ salesPerMonth: "monthlySalesRecord" }),
+    ...mapGetters({ monthlyRevenuelist: "monthlyRevenueRecord" }),
+    ...mapGetters({ listCustomersPerMonth: "monthlyCustomersRecord" }),
   },
+  mounted() {
+    this.$store.dispatch("fetchTopSellersList");
+    this.$store.dispatch("fetchMonthlySales");
+    this.$store.dispatch("fetchMonthlyRevenue");
+    this.$store.dispatch("fetchMonthlyCustomer");
+  },
+
   data() {
     return {
-      items: [
-        { product: 40, price: '$23434', sold: '134' },
-        { product: 40, price: '$23434', sold: '134' },
-        { product: 40, price: '$23434', sold: '134' },
-        { product: 40, price: '$23434', sold: '134' },
-      ]
-    }
-  }
+      // items: [
+      //   { product: 40, price: '$23434', sold: '134' },
+      //   { product: 40, price: '$23434', sold: '134' },
+      //   { product: 40, price: '$23434', sold: '134' },
+      //   { product: 40, price: '$23434', sold: '134' },
+      // ]
+    };
+  },
 };
 </script>
 

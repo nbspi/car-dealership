@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import { LOCAL_URL } from "../config/dev.env";
 import router from "../router/index";
+import { API_URL } from "../config/dev.env";
 
 Vue.use(Vuex);
 
@@ -11,6 +12,10 @@ const store = new Vuex.Store({
     mechanicState: [],
     salespersonState: [],
     user: {},
+    topSellers: [],
+    monthlySales: {},
+    monthlyRevenue: {},
+    monthlyCustomers: {},
     loggedIn: false,
   },
   getters: {
@@ -22,7 +27,19 @@ const store = new Vuex.Store({
     },
     fetchUser: (state) => {
       return state.user;
-    }
+    },
+    topSellersList: (state) => {
+      return state.topSellers;
+    },
+    monthlySalesRecord: (state) => {
+      return state.monthlySales;
+    },
+    monthlyRevenueRecord: (state) => {
+      return state.monthlyRevenue;
+    },
+    monthlyCustomersRecord: (state) => {
+      return state.monthlyCustomers;
+    },
   },
 
   actions: {
@@ -50,6 +67,20 @@ const store = new Vuex.Store({
 
       commit("DELETE_MECHANIC", response.data);
       console.log(response.data);
+    },
+
+    async editMechanic({ commit }, mechanic) {
+      await axios
+        .put(`${LOCAL_URL}/mechanic/edit/${mechanic.mechanic_id}`, {
+          firstname: mechanic.firstname,
+          lastname: mechanic.lastname,
+          contact: mechanic.contact,
+        })
+        .then((response) => {
+          commit("UPDATE_MECHANIC", response.data);
+          console.log(response.data);
+          return response;
+        });
     },
 
     //salesperson actions
@@ -106,13 +137,32 @@ const store = new Vuex.Store({
       localStorage.removeItem("token");
       commit("logout");
     },
+
+    //dashboard actions
+    async fetchTopSellersList({ commit }) {
+      const response = await axios.get(`${API_URL}/top-sellers`);
+      console.log(response.data);
+      commit("SET_TOPSELLERS_LIST", response.data);
+    },
+
+    async fetchMonthlySales({ commit }) {
+      const response = await axios.get(`${API_URL}/sales-number`);
+      console.log(response.data[0].count);
+      commit("SET_MONTHLY_SALES_LIST", response.data[0].count);
+    },
+    async fetchMonthlyRevenue({ commit }) {
+      const response = await axios.get(`${API_URL}/monthly-revenue`);
+      console.log(response.data);
+      commit("SET_MONTHLY_REVENUE_LIST", response.data[0].month_revenue);
+    },
+    async fetchMonthlyCustomer({ commit }) {
+      const response = await axios.get(`${API_URL}/customers-count`);
+      console.log(response.data);
+      commit("SET_MONTHLY_CUSTOMERS_LIST", response.data[0].count);
+    },
   },
 
   mutations: {
-    // SET_CARSLIST(state, mechanics) {
-    //   state.mechanics = mechanics;
-    // },
-
     //* mechanic mutation with axios
     ADD_MECHANIC(state, data) {
       state.mechanicState.push(data);
@@ -128,6 +178,16 @@ const store = new Vuex.Store({
       );
       console.log(index);
       state.mechanicState.splice(index, 0);
+    },
+
+    UPDATE_MECHANIC(state, data) {
+      let index = state.mechanicState.map((val, ind) => {
+        if (val.id == data.id) {
+          return ind;
+        }
+      });
+      let ind = index.filter((mechanic) => mechanic != undefined);
+      state.mechanicState[ind] = data;
     },
 
     // salesperson mutation with axios
@@ -167,28 +227,23 @@ const store = new Vuex.Store({
       state.status.loggedIn = false;
     },
 
-    // addSalesperson(state, payload) {
-    //   state.salespersonState = state.salespersonState.concat(payload.data);
-    // },
+    //dashboard mutations
+    SET_TOPSELLERS_LIST(state, topSellers) {
+      state.topSellers = topSellers;
+    },
 
-    // deleteMechanic(state, mechanic) {
-    //   state.mechanic.splice(index, 1);
-    // },
-
-    // ADD_SUPPLIER(state, supplier) {
-    //   state.suppliersState.push(supplier);
-    // },
-
-    // addMechanic(state, payload) {
-    //   state.mechanicState = state.mechanicState.concat(payload.data);
-    // },
+    SET_MONTHLY_SALES_LIST(state, monthlySales) {
+      state.monthlySales = monthlySales;
+    },
+    SET_MONTHLY_REVENUE_LIST(state, monthlyRevenue) {
+      state.monthlyRevenue = monthlyRevenue;
+    },
+    SET_MONTHLY_CUSTOMERS_LIST(state, monthlyCustomers) {
+      state.monthlyCustomers = monthlyCustomers;
+    },
   },
-  modules: {
-    // cars,
-    // customers,
-    // mechanic,
-    // users
-  },
+
+  modules: {},
 });
 
 export default store;

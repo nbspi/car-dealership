@@ -15,25 +15,24 @@
                   <b-col class="mt-3">
                     <b-form>
                       <div class="form-group mb-3">
-                        <b-form-group label="First Name" class="ml-2" :state="mechanic.firstname"
-                          invalid-feedback="first name is required">
+                        <b-form-group label="First Name" class="ml-2" :state="mechanic.firstname">
                         </b-form-group>
-                        <b-form-input id="firstname" type="text" placeholder="Enter First Name" v-model="mechanic.firstname"
-                          required>
+                        <b-form-input id="firstname" type="text" placeholder="Enter First Name"
+                          v-model="mechanic.firstname" required>
                         </b-form-input>
                       </div>
                       <div class="form-group mb-3">
-                        <b-form-group label="Last Name" class="ml-2" :state="mechanic.lastname"
-                          invalid-feedback="last name is required">
+                        <b-form-group label="Last Name" class="ml-2" :state="mechanic.lastname">
                         </b-form-group>
-                        <b-form-input id="lastname" type="text" placeholder="Enter Last Name" v-model="mechanic.lastname" required>
+                        <b-form-input id="lastname" type="text" placeholder="Enter Last Name"
+                          v-model="mechanic.lastname" required>
                         </b-form-input>
                       </div>
                       <div class="form-group mb-3">
-                        <b-form-group label="Phone Number" class="ml-2" :state="mechanic.contact"
-                          invalid-feedback="contact number is required">
+                        <b-form-group label="Phone Number" class="ml-2" :state="mechanic.contact">
                         </b-form-group>
-                        <b-form-input id="contact" type="number" placeholder="Enter Phone Number" v-model="mechanic.contact" required>
+                        <b-form-input id="contact" type="number" placeholder="Enter Phone Number"
+                          v-model="mechanic.contact" required>
                         </b-form-input>
                       </div>
                       <b-container class="button-container d-flex justify-content-end">
@@ -50,7 +49,9 @@
                   <b-alert dismissible class="alert" v-model="alert.showAlert" @dismissed="alert.showAlert = null"
                     :variant="alert.variant">
                     <div class="alertborder">
-                      <b-icon class="mr-2" :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' " fill="black"></b-icon>
+                      <b-icon class="mr-2"
+                        :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' " fill="black">
+                      </b-icon>
                       {{ alert.message }}
                     </div>
                   </b-alert>
@@ -81,12 +82,12 @@
                           <td class="d-flex justify-content-center">
                             <!-- Edit Modal -->
                             <div>
-                              <b-button v-b-modal.modal-form>
+                              <b-button v-b-modal @click="showUpdateModal(mechanic.mechanic_id)">
                                 <b-icon class="delete-btn" icon="pencil-square">
                                 </b-icon>
                               </b-button>
 
-                              <b-modal id="modal-form" title="Edit Mechanic">
+                              <b-modal id="modal-form" title="Edit Mechanic" @ok="editItem">
                                 <div>
                                   <div class="modal-form__form-group mb-3">
                                     <b-form-group label="First Name" class="ml-2">
@@ -161,20 +162,7 @@ export default {
     SideBar,
     HeaderComponent,
   },
-  // validations() {
-  //   return {
-  //     mechanic: {
-  //       firstname: { required },
-  //       lastname: { required },
-  //       contact: { required }
-  //     }
-  //   }
-  // },
-  emits: ['delete-mechanic'],
   computed: {
-    // rows() {
-    //   return this.mechanicState.length;
-    // },
     ...mapState(['mechanicState']),
     ...mapGetters({
       mechanicList: "fetchMechanic"
@@ -182,18 +170,19 @@ export default {
 
   },
 
-  //
   beforeCreate() {
     this.$store.dispatch("fetchMechanic")
   },
 
+  // props: ["value"],
+  // model: {
+  //   prop: "value",
+  //   event: "update"
+  // },
+
   data() {
     return {
-      // perPage: 5,
-      // currentPage: 1,
-      // currentPagePending: 1,
-      // item: [],
-      // show: true,
+      modalShow: false,
       mechanic: {
         firstname: "",
         lastname: "",
@@ -213,6 +202,15 @@ export default {
     }
   },
   methods: {
+    showUpdateModal(mechanic) {
+      this.mechanic = {
+        mechanic_id: mechanic.mechanic_id,
+        firstname: mechanic.firstname,
+        lastname: mechanic.lastname,
+        contact: mechanic.contact
+      };
+      this.$bvModal.show("modal-form")
+    },
     showAlert(message, variant) {
       this.alert = {
         dismissSecs: 10,
@@ -237,10 +235,7 @@ export default {
         this.$store.dispatch("addMechanic", this.mechanic);
         this.showAlert("Successfully Created", "success");
       }
-
-
     },
-
     async deleteItem(mechanic_id) {
       try {
         console.log(mechanic_id);
@@ -250,6 +245,17 @@ export default {
         console.log(error);
       }
     },
+    async editItem(mechanic_id) {
+      try {
+        console.log();
+        await this.$store.dispatch("editMechanic", mechanic_id);
+        this.$bvModal.hide("modal-form");
+        location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     validation() {
       if (this.mechanic.firstname == null || this.mechanic.firstname.length < 1) {
         this.state.firstname = false;
@@ -273,29 +279,8 @@ export default {
         return false;
 
       }
-
     }
-    // deleteEvent(mechanic_id) {
-    //   this.mechanics.splice(mechanic_id, 1);
-    // },
-
-    // validation() {
-    //   if (this.mechanic.firstname == null) {
-    //     document.getElementById("firstname").style.borderColor = "red";
-    //     this.state.name = false;
-    //   } else {
-    //     document.getElementById("firstname").style.borderColor = "";
-    //     this.state.name = true;
-    //   }
-    // }
   },
-  // validations: {
-  //   mechanic: {
-  //     firstname: { required },
-  //     lastname: { required },
-  //     contact: { required }
-  //   }
-  // }
 
 }
 </script>
