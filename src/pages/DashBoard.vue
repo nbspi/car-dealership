@@ -110,4 +110,5 @@ span {
   background-color: var(--background-color);
   border-radius: 10px;
 }
+
 </style>

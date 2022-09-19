@@ -14,11 +14,12 @@
                             <b-col class="table-container">
                                 <b-container fluid class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Car Records</h5>
-                                    <b-table hover :items="items" :fields="fields">
+                                    <b-table id="my-table" hover :items="items" :fields="fields" :per-page="perPage"
+                                        :current-page="currentPage">
                                         <template v-slot:cell(actions)>
                                             <span>
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-btn class="mr-2" >
+                                                    <b-btn class="mr-2">
                                                         <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                     </b-btn>
                                                     <ModalComponent />
@@ -27,6 +28,10 @@
                                         </template>
                                     </b-table>
                                     <!-- <PaginationComponent /> -->
+                                    <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
+                                        aria-controls="my-table"></b-pagination>
+
+                                    <p class="mt-3">Current Page: {{ currentPage }}</p>
                                 </b-container>
                             </b-col>
                         </b-col>
@@ -59,11 +64,18 @@ export default {
     // async mounted() {
     //     return await this.$store.dispatch("fetchCarsList");
     // },
+    computed: {
+        rows() {
+            return this.items.length
+        }
+    },
     data() {
         return {
+            perPage: 3,
+            currentPage: 1,
             value: '',
             fields: [
-                { key: "car_id", label: "ID", sortable: true},
+                { key: "car_id", label: "ID", sortable: true },
                 { key: "serial_number", label: "Serial Number", sortable: true },
                 { key: "brand", label: "Brand", sortable: true },
                 { key: "model", label: "Model", sortable: true },
@@ -73,7 +85,12 @@ export default {
                 { key: "actions", label: "Actions" },
             ],
             items: [
-                { car_id: 1, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' }
+                { car_id: 1, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                { car_id: 2, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                { car_id: 3, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                { car_id: 4, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                { car_id: 5, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+
             ]
         }
     }

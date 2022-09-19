@@ -138,23 +138,12 @@
 import SideBar from "../layouts/SideBar.vue";
 import HeaderComponent from "../layouts/HeaderComponent.vue";
 import { mapState, mapGetters } from 'vuex'
-// import FormInput from "../components/FormInput.vue"
-// import ModalComponent from "@/components/DeleteModalComponent.vue";
-// // import PaginationComponent from "@/components/PaginationComponent.vue"
-// import EditModal from "../components/EditModal.vue";
 
 export default {
     name: "SalespersonPage",
-    // methods: {
-    //     editItem(item) { console.log(item); }
-    // },
     components: {
         SideBar,
         HeaderComponent,
-        // FormInput,
-        // ModalComponent,
-        // // PaginationComponent,
-        // EditModal,
     },
     computed: {
         ...mapState(['salespersonState']),
@@ -169,6 +158,7 @@ export default {
 
     data() {
         return {
+            modalShow: false,
             salesperson: {
                 firstname: "",
                 lastname: "",
@@ -204,11 +194,6 @@ export default {
         addSalesperson() {
             this.$store.dispatch("addSalesperson", this.salesperson)
         },
-        onSubmit(event) {
-            event.preventDefault();
-            // alert(JSON.stringify(this.form))
-        },
-
         saveSalesperson() {
             console.log(this.salesperson)
             if (!this.validation()) {
@@ -245,12 +230,6 @@ export default {
                 this.state.contact = true;
             }
 
-            if (this.salesperson.firstname != null && this.salesperson.lastname != null && this.salesperson.contact) {
-                return true;
-            } else {
-                return false;
-
-            }
         }
     },
 

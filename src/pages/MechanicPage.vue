@@ -63,7 +63,8 @@
                 <b-container class="container-card rounded p-3">
                   <h5 class="px-3 mb-3">Mechanic Records</h5>
                   <div class="">
-                    <table id="mechanic-table" class="table table-hover" :items="mechanicState" style="width: 100%">
+                    <table id="mechanic-table" class="table table-hover" :items="mechanicState" style="width: 100%"
+                      :per-page="perPage" :current-page="currentPage">
                       <thead>
                         <tr>
                           <th>ID</th>
@@ -139,6 +140,11 @@
 
                       </tbody>
                     </table>
+<!-- 
+                    <b-pagination pills v-model="currentPagePending" :total-rows="rows" :per-page="perPage"
+                      aria-controls="mechanic-table"></b-pagination>
+
+                    <p class="mt-3">Current Page: {{ currentPage }}</p> -->
                   </div>
 
                 </b-container>
@@ -167,6 +173,9 @@ export default {
     ...mapGetters({
       mechanicList: "fetchMechanic"
     }),
+    rows() {
+      return this.mechanicState.length
+    }
 
   },
 
@@ -182,6 +191,11 @@ export default {
 
   data() {
     return {
+      perPage: 2,
+      currentPage: 1,
+      perPagePending: 2,
+      currentPagePending: 1,
+      value: '',
       modalShow: false,
       mechanic: {
         firstname: "",
