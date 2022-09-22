@@ -120,9 +120,18 @@
                                     <b-table hover :items="invoiceState" :fields="fields" :per-page="perPage"
                                         :current-page="currentPage">
                                         <template v-slot:cell(actions)="data">
-                                            <b-button @click="deleteInvoice(data.item.invoice_number)">
-                                                <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                            </b-button>
+                                            <div class="d-flex justify-content-center">
+                                                <div>
+                                                    <b-button v-b-modal>
+                                                        <b-icon class="delete-btn" icon="pencil-square"></b-icon>
+                                                    </b-button>
+                                                </div>
+                                                <div>
+                                                    <b-button v-b-modal @click="showDeleteModal(data.item)">
+                                                        <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                                                    </b-button>
+                                                </div>
+                                            </div>
                                         </template>
                                     </b-table>
                                     <b-row fluid class="mt-4 d-flex justify-content-end">

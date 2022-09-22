@@ -10,6 +10,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     customerState: [],
+    carState: [],
     mechanicState: [],
     salespersonState: [],
     invoiceState: [],
@@ -21,6 +22,9 @@ const store = new Vuex.Store({
     loggedIn: false,
   },
   getters: {
+    fetchCars: (state) => {
+      return state.carState;
+    },
     fetchCustomer: (state) => {
       return state.customerState;
     },
@@ -51,6 +55,13 @@ const store = new Vuex.Store({
   },
 
   actions: {
+    //car actions
+    async fetchCars({ commit }) {
+      const response = await axios.get(`${LOCAL_URL}/car`);
+      console.log(response.data);
+      commit("SET_CARS_LIST", response.data);
+    },
+
     //customer actions with axios
     async addCustomer({ commit }, data) {
       const response = await axios.post(`${LOCAL_URL}/customer/add`, {
@@ -214,6 +225,10 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+    SET_CARS_LIST(state, carState) {
+      state.carState = carState;
+    },
+
     //customer mutation with axios
     FETCH_ALL_CUSTOMER(state, customerState) {
       state.customerState = customerState;
@@ -306,6 +321,8 @@ const store = new Vuex.Store({
     SET_MONTHLY_CUSTOMERS_LIST(state, monthlyCustomers) {
       state.monthlyCustomers = monthlyCustomers;
     },
+
+
   },
 
   modules: {},

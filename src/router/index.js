@@ -7,6 +7,7 @@ import CarsPage from "../pages/CarsPage.vue";
 import InvoicePage from "../pages/InvoicePage.vue";
 import SalespersonPage from "../pages/SalespersonPage.vue";
 import MechanicPage from "../pages/MechanicPage.vue";
+import ServicesPage from "../pages/ServicesPage.vue";
 import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
 import AddCar from "../pages/AddCar.vue";
 import AddServiceTicket from "../pages/AddServiceTicket.vue";
@@ -53,6 +54,11 @@ const routes = [
     path: "/mechanic",
     name: "MechanicPage",
     component: MechanicPage,
+  },
+  {
+    path: "/services",
+    name: "ServicesPage",
+    component: ServicesPage,
   },
   {
     path: "/service-ticket",

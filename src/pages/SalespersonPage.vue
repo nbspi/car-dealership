@@ -72,22 +72,20 @@
                                     <div class="">
                                         <b-table id="salesperson-table" hover :items="salespersonState" :fields="fields"
                                             :per-page="perPage" :current-page="currentPage">
-                                            <template v-slot:cell(actions)="data">
-                                                <div>
-                                                    <b-button v-b-modal.delete-modal>
-                                                        <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                    </b-button>
+                                            <template v-slot:cell(actions)="{ item }">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <b-button>
+                                                            <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                        </b-button>
+                                                    </div>
+                                                    <div>
+                                                        <b-button v-b-modal @click="showDeleteModal(item)">
+                                                            <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                                                        </b-button>
 
-                                                    <b-modal id="delete-modal" title="Delete Confirmation"
-                                                        @ok="deleteItem(data.item.salesperson_id)">
-                                                        <b-row class="d-flex justify-content-center">
-                                                            <img src="../assets/img/delete.svg" alt=""
-                                                                style="height:200px; width:200px">
 
-                                                        </b-row>
-                                                        <p class="my-4">Are you sure you want to proceed?</p>
-
-                                                    </b-modal>
+                                                    </div>
                                                 </div>
                                             </template>
                                         </b-table>
@@ -104,6 +102,14 @@
                 </b-container>
             </b-col>
         </b-row>
+        <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
+            <b-row class="d-flex justify-content-center">
+                <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
+
+            </b-row>
+            <p class="my-4">Are you sure you want to proceed?</p>
+
+        </b-modal>
     </b-container>
 </template>
 
@@ -136,14 +142,20 @@ export default {
         return {
             perPage: 5,
             currentPage: 1,
+            value: "",
             modalShow: false,
             salesperson: {
-                firstname: "",
-                lastname: "",
-                contact: "",
+                salesperson_id: null,
+                firstname: null,
+                lastname: null,
+                contact: null,
             },
-            value: "",
-            show: true,
+            item: {
+                salesperson_id: null,
+                firstname: null,
+                lastname: null,
+                contact: null,
+            },
             state: {
                 firstname: null,
                 lastname: null,
@@ -165,6 +177,16 @@ export default {
         };
     },
     methods: {
+        showDeleteModal(item) {
+            this.item = {
+                salesperson_id: item.salesperson_id,
+                firstname: item.firstname,
+                lastname: item.lastname,
+                contact: item.contact
+            };
+            this.$bvModal.show("delete-modal");
+            console.log(item);
+        },
         showAlert(message, variant) {
             this.alert = {
                 dismissSecs: 10,
@@ -189,10 +211,11 @@ export default {
             }
         },
 
-        async deleteItem(salesperson_id) {
+        async deleteItem() {
             try {
-                console.log(salesperson_id);
-                await this.$store.dispatch("deleteSalesperson", salesperson_id);
+                await this.$store.dispatch("deleteSalesperson", this.item.salesperson_id);
+                console.log(this.item.salesperson_id);
+                this.$bvModal.hide("delete-modal")
                 location.reload()
             } catch (error) {
                 console.log(error)

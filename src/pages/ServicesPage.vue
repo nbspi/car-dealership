@@ -3,23 +3,31 @@
         <b-row>
             <SideBar />
             <b-col xl="10" lg="9" sm="9">
-                <HeaderComponent title="Service Ticket" />
+                <HeaderComponent title="Services" />
                 <b-container fluid class="pt-2">
                     <b-row class=" my-3">
                         <!-- whole container-->
-                        <b-col xl="3" class="py-2">
+                        <b-col xl="4" class="py-2">
                             <!-- left container-->
                             <b-col class="">
                                 <b-container class="container-card rounded p-3">
-                                    <h4 class="px-3">Add Service Ticket</h4>
+                                    <h4 class="px-3">Add Service</h4>
                                     <b-col class="mt-3">
                                         <b-form>
-                                            <FormInput label="Service Ticket Number" />
-                                            <FormInput label="Car ID" />
-                                            <FormInput label="Customer ID" />
-                                            <DatePicker label="Date Received" />
-                                            <DatePicker label="Date Returned" />
-                                            <FormTextArea label="Comments" />
+                                            <div class="form-group mb-3">
+                                                <b-form-group label="Service Name" class="ml-2">
+                                                </b-form-group>
+                                                <b-form-input id="lastname" type="text" placeholder="Enter Service Name"
+                                                    required>
+                                                </b-form-input>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <b-form-group label="Hourly Rate" class="ml-2">
+                                                </b-form-group>
+                                                <b-form-input id="lastname" type="number" placeholder="Enter Rate"
+                                                    required>
+                                                </b-form-input>
+                                            </div>
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2" type="reset">Reset</b-button>
                                                 <b-button variant="success" type="submit">Save</b-button>
@@ -30,26 +38,25 @@
 
                             </b-col>
                         </b-col>
-                        <b-col cmd="12" lg="12" xl="9" class="table-container py-2">
+                        <b-col cmd="12" lg="12" xl="8" class="table-container py-2">
                             <!-- left container-->
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
-                                    <h5 class="px-3 mb-3">Service Ticket Records</h5>
+                                    <h5 class="px-3 mb-3">Service List</h5>
                                     <b-table hover :items="items" :fields="fields" :per-page="perPage"
-                                        :current-page="currentPage">
+                      :current-page="currentPage">
                                         <template v-slot:cell(actions)>
                                             <div class="d-flex justify-content-center">
                                                 <div>
-                                                    <b-button>
-                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                    <b-button v-b-modal @click="showDeleteModal(item)">
+                                                        <b-icon class="delete-btn" icon="pencil-square"></b-icon>
                                                     </b-button>
                                                 </div>
                                                 <div>
-                                                    <b-button>
+                                                    <b-button v-b-modal @click="showDeleteModal(item)">
                                                         <b-icon class="delete-btn" icon="trash-fill"></b-icon>
                                                     </b-button>
                                                 </div>
-
                                             </div>
                                         </template>
                                     </b-table>
@@ -72,31 +79,37 @@
 <script>
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
-import FormInput from "../components/FormInput.vue"
-import FormTextArea from "../components/FormTextArea.vue"
-import DatePicker from "../components/DatePicker.vue"
 
 export default {
-    name: "ServiceTicketPage",
+    name: "ServicesPage",
     components: {
         SideBar,
         HeaderComponent,
-        FormInput,
-        FormTextArea,
-        DatePicker,
+    },
+    computed: {
+        // rows() {
+        //     return this.mechanicState.length
+        // }
     },
     data() {
         return {
             perPage: 5,
             currentPage: 1,
             value: '',
-            serviceTicket: {
-                service_number: null,
-                car_id: null,
-                customer_id: null,
+            services: {
+                service_id: null,
+                service_name: null,
+                hourly_rate: null
             },
-            fields: ['ID', 'car_ID', 'customer_ID', 'received', 'returned', 'comments', 'actions'],
-            items: [{ ID: 1, car_ID: '54543', customer_ID: 'August 24, 2020', received: '4546766', returned: '35345', comments: '123' }]
+            fields: [
+                { key: "service_id", label: "Service ID", sortable: true },
+                { key: "service_name", label: "Service Name", sortable: true },
+                { key: "hourly_rate", label: "Hourly Rate", sortable: true },
+                { key: "actions", label: "Actions" }
+            ],
+            items: [
+                { service_id: 1, service_name: 'ksksksk', hourly_rate: 5 }
+            ]
         }
     }
 }

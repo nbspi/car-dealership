@@ -123,22 +123,19 @@
                                         </table> -->
                                         <b-table id="customer-table" hover :items="customerState" :fields="fields"
                                             :per-page="perPage" :current-page="currentPage" class="text-left">
-                                            <template v-slot:cell(actions)="data">
-                                                <div>
-                                                    <b-button v-b-modal.delete-modal>
-                                                        <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                    </b-button>
+                                            <template v-slot:cell(actions)="{ item }">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <b-button>
+                                                            <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                        </b-button>
+                                                    </div>
+                                                    <div>
+                                                        <b-button v-b-modal @click="showDeleteModal(item)">
+                                                            <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                                                        </b-button>
 
-                                                    <b-modal id="delete-modal" title="Delete Confirmation"
-                                                        @ok="deleteItem(data.item.customer_id)">
-                                                        <b-row class="d-flex justify-content-center">
-                                                            <img src="../assets/img/delete.svg" alt=""
-                                                                style="height:200px; width:200px">
-
-                                                        </b-row>
-                                                        <p class="my-4">Are you sure you want to proceed?</p>
-
-                                                    </b-modal>
+                                                    </div>
                                                 </div>
                                             </template>
                                         </b-table>
@@ -157,6 +154,14 @@
                 </b-container>
             </b-col>
         </b-row>
+        <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
+            <b-row class="d-flex justify-content-center">
+                <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
+
+            </b-row>
+            <p class="my-4">Are you sure you want to proceed?</p>
+
+        </b-modal>
     </b-container>
 </template>
 
@@ -184,21 +189,25 @@ export default {
     beforeCreate() {
         this.$store.dispatch("fetchCustomer")
     },
-    props: ["value"],
-    model: {
-        prop: "value",
-        event: "update"
-    },
     data() {
         return {
-            perPage: 3,
+            perPage: 5,
             currentPage: 1,
+            value: '',
             modalShow: false,
             customer: {
-                firstname: "",
-                lastname: "",
-                contact: "",
-                address: ""
+                customer_id: null,
+                firstname: null,
+                lastname: null,
+                contact: null,
+                address: null
+            },
+            item: {
+                customer_id: null,
+                firstname: null,
+                lastname: null,
+                contact: null,
+                address: null
             },
             state: {
                 firstname: null,
@@ -224,6 +233,17 @@ export default {
         }
     },
     methods: {
+        showDeleteModal(item) {
+            this.item = {
+                customer_id: item.customer_id,
+                firstname: item.firstname,
+                lastname: item.lastname,
+                contact: item.contact,
+                address: item.address
+            };
+            this.$bvModal.show("delete-modal");
+            console.log(item);
+        },
         showAlert(message, variant) {
             this.alert = {
                 dismissSecs: 10,
@@ -248,10 +268,11 @@ export default {
                 this.showAlert("Successfully Created", "success");
             }
         },
-        async deleteItem(customer_id) {
+        async deleteItem() {
             try {
-                console.log(customer_id);
-                await this.$store.dispatch("deleteCustomer", customer_id)
+                await this.$store.dispatch("deleteCustomer", this.item.customer_id);
+                console.log(this.item.customer_id)
+                this.$bvModal.hide("delete-modal")
                 location.reload()
             } catch (error) {
                 console.log(error);
