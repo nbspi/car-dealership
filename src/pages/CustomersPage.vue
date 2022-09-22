@@ -121,16 +121,16 @@
 
 
                                         </table> -->
-                                        <b-table id="my-table" hover :items="customerState" :fields="fields"
-                                            :per-page="perPage" :current-page="currentPage">
-                                            <template v-slot:cell(actions)>
+                                        <b-table id="customer-table" hover :items="customerState" :fields="fields"
+                                            :per-page="perPage" :current-page="currentPage" class="text-left">
+                                            <template v-slot:cell(actions)="data">
                                                 <div>
                                                     <b-button v-b-modal.delete-modal>
                                                         <b-icon class="delete-btn" icon="trash-fill"></b-icon>
                                                     </b-button>
 
                                                     <b-modal id="delete-modal" title="Delete Confirmation"
-                                                        @ok="deleteItem(mechanic.mechanic_id)">
+                                                        @ok="deleteItem(data.item.customer_id)">
                                                         <b-row class="d-flex justify-content-center">
                                                             <img src="../assets/img/delete.svg" alt=""
                                                                 style="height:200px; width:200px">
@@ -144,7 +144,7 @@
                                         </b-table>
                                         <b-row fluid class="mt-4 d-flex justify-content-end">
                                             <b-pagination pills v-model="currentPage" :total-rows="rows"
-                                                :per-page="perPage" aria-controls="my-table"></b-pagination>
+                                                :per-page="perPage" aria-controls="customer-table"></b-pagination>
                                         </b-row>
 
 
@@ -248,15 +248,15 @@ export default {
                 this.showAlert("Successfully Created", "success");
             }
         },
-        // async deleteItem(customer_id) {
-        //     try {
-        //         console.log(customer_id);
-        //         await this.$store.dispatch("deleteCustomer", customer_id)
-        //         location.reload()
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
-        // },
+        async deleteItem(customer_id) {
+            try {
+                console.log(customer_id);
+                await this.$store.dispatch("deleteCustomer", customer_id)
+                location.reload()
+            } catch (error) {
+                console.log(error);
+            }
+        },
         validation() {
             if (this.customer.firstname == null || this.customer.firstname.length < 1) {
                 this.state.firstname = false;

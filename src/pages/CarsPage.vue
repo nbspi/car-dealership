@@ -27,11 +27,10 @@
                                             </span>
                                         </template>
                                     </b-table>
-                                    <!-- <PaginationComponent /> -->
-                                    <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
-                                        aria-controls="my-table"></b-pagination>
-
-                                    <p class="mt-3">Current Page: {{ currentPage }}</p>
+                                    <b-row fluid class="mt-4 d-flex justify-content-end">
+                                        <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
+                                            aria-controls="mechanic-table"></b-pagination>
+                                    </b-row>
                                 </b-container>
                             </b-col>
                         </b-col>
@@ -85,11 +84,11 @@ export default {
                 { key: "actions", label: "Actions" },
             ],
             items: [
-                { car_id: 1, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
-                { car_id: 2, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
-                { car_id: 3, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
-                { car_id: 4, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
-                { car_id: 5, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022' },
+                { car_id: 1, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022', price: '38' },
+                { car_id: 2, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022', price: '38' },
+                { car_id: 3, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022', price: '38' },
+                { car_id: 4, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022', price: '38' },
+                { car_id: 5, serial_number: 'DJDHW34', brand: 'XXXX', model: 'FG-4587', color: 'Black', year: '2022', price: '38' },
 
             ]
         }

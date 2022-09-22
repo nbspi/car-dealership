@@ -63,25 +63,7 @@
                 <b-container class="container-card rounded p-3">
                   <h5 class="px-3 mb-3">Mechanic Records</h5>
                   <div class="">
-                    <table id="mechanic-table" class="table table-hover" :items="mechanicState" style="width: 100%"
-                      :per-page="perPage" :current-page="currentPage">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Phone Number</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="mechanic in mechanicState" :key="mechanic.mechanic_id">
-                          <td>{{mechanic.mechanic_id}}</td>
-                          <td>{{ mechanic.firstname }}</td>
-                          <td>{{ mechanic.lastname }}</td>
-                          <td>{{ mechanic.contact }}</td>
-                          <td class="d-flex justify-content-center">
-                            <!-- Edit Modal -->
+                    <!-- <td class="d-flex justify-content-center">
                             <div>
                               <b-button v-b-modal @click="showUpdateModal(mechanic.mechanic_id)">
                                 <b-icon class="delete-btn" icon="pencil-square">
@@ -116,35 +98,40 @@
                                   </div>
                                 </div>
                               </b-modal>
-                            </div>
+                            </div> -->
 
-                            <!-- Delete Modal -->
-                            <div>
-                              <b-button v-b-modal.delete-modal>
-                                <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                              </b-button>
+                    <b-table id="mechanic-table" hover :items="mechanicState" :fields="fields" :per-page="perPage"
+                      :current-page="currentPage">
+                      <template v-slot:cell(actions)="data">
+                        <div class="d-flex justify-content-center">
+                          <div>
+                            <b-button @click="editModal(data.item.mechanic_id)">
+                              <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                            </b-button>
+                          </div>
+                          <div>
+                            <b-button v-b-modal.delete-modal>
+                              <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                            </b-button>
 
-                              <b-modal id="delete-modal" title="Delete Confirmation"
-                                @ok="deleteItem(mechanic.mechanic_id)">
-                                <b-row class="d-flex justify-content-center">
-                                  <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
+                            <b-modal id="delete-modal" title="Delete Confirmation"
+                              @ok="deleteItem(data.item.mechanic_id)">
+                              <b-row class="d-flex justify-content-center">
+                                <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
 
-                                </b-row>
-                                <p class="my-4">Are you sure you want to proceed?</p>
+                              </b-row>
+                              <p class="my-4">Are you sure you want to proceed?</p>
 
-                              </b-modal>
-                            </div>
-                          </td>
-                        </tr>
+                            </b-modal>
+                          </div>
+                        </div>
 
-
-                      </tbody>
-                    </table>
-<!-- 
-                    <b-pagination pills v-model="currentPagePending" :total-rows="rows" :per-page="perPage"
-                      aria-controls="mechanic-table"></b-pagination>
-
-                    <p class="mt-3">Current Page: {{ currentPage }}</p> -->
+                      </template>
+                    </b-table>
+                    <b-row fluid class="mt-4 d-flex justify-content-end">
+                      <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
+                        aria-controls="mechanic-table"></b-pagination>
+                    </b-row>
                   </div>
 
                 </b-container>
@@ -191,10 +178,8 @@ export default {
 
   data() {
     return {
-      perPage: 2,
+      perPage: 5,
       currentPage: 1,
-      perPagePending: 2,
-      currentPagePending: 1,
       value: '',
       modalShow: false,
       mechanic: {
@@ -212,7 +197,14 @@ export default {
         showAlert: 0,
         variant: "",
         message: ""
-      }
+      },
+      fields: [
+        { key: "mechanic_id", label: "ID", sortable: true },
+        { key: "firstname", label: "First Name", sortable: true },
+        { key: "lastname", label: "Last Name", sortable: true },
+        { key: "contact", label: "Contact", sortable: true },
+        { key: "actions", label: "Actions" },
+      ],
     }
   },
   methods: {
@@ -249,6 +241,10 @@ export default {
         this.$store.dispatch("addMechanic", this.mechanic);
         this.showAlert("Successfully Created", "success");
       }
+    },
+
+    editModal(mechanic_id) {
+      console.log(mechanic_id)
     },
     async deleteItem(mechanic_id) {
       try {

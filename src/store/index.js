@@ -12,6 +12,7 @@ const store = new Vuex.Store({
     customerState: [],
     mechanicState: [],
     salespersonState: [],
+    invoiceState: [],
     user: {},
     topSellers: [],
     monthlySales: {},
@@ -22,6 +23,9 @@ const store = new Vuex.Store({
   getters: {
     fetchCustomer: (state) => {
       return state.customerState;
+    },
+    fetchInvoice: (state) => {
+      return state.invoiceState;
     },
     fetchMechanic: (state) => {
       return state.mechanicState;
@@ -113,6 +117,23 @@ const store = new Vuex.Store({
         });
     },
 
+    //invoie actions
+    async fetchInvoice({ commit }) {
+      const response = await axios.get(`${LOCAL_URL}/invoice`);
+      console.log(response.data);
+      commit("FETCH_ALL_INVOICE", response.data);
+    },
+
+    async createInvoice({ commit }, data) {
+      const response = await axios.post(`${LOCAL_URL}/invoice/create`, {
+        salesperson_id: data.salesperson_id,
+        customer_id: data.customer_id,
+        car_id: data.car_id,
+      });
+      console.log(response);
+      commit("ADD_INVOICE", response.data);
+    },
+
     //salesperson actions
     async addSalesperson({ commit }, data) {
       const response = await axios.post(`${LOCAL_URL}/salesperson/add`, {
@@ -198,6 +219,9 @@ const store = new Vuex.Store({
       state.customerState = customerState;
     },
 
+    ADD_INVOICE(state, data) {
+      state.invoiceState.push(data);
+    },
 
     //* mechanic mutation with axios
     ADD_MECHANIC(state, data) {
@@ -224,6 +248,11 @@ const store = new Vuex.Store({
       });
       let ind = index.filter((mechanic) => mechanic != undefined);
       state.mechanicState[ind] = data;
+    },
+
+    //invoice mutation
+    FETCH_ALL_INVOICE(state, invoiceState) {
+      state.invoiceState = invoiceState;
     },
 
     // salesperson mutation with axios

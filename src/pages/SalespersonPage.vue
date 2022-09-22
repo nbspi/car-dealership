@@ -70,58 +70,31 @@
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Salespersons Records</h5>
                                     <div class="">
-                                        <table id="salesperson-table" class="table table-hover"
-                                            :items="salespersonState" style="width: 100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="salesperson in salespersonState"
-                                                    :key="salesperson.salesperson_id">
-                                                    <td>{{ salesperson.salesperson_id }}</td>
-                                                    <td>{{ salesperson.firstname }}</td>
-                                                    <td>{{ salesperson.lastname }}</td>
-                                                    <td>{{ salesperson.contact }}</td>
-                                                    <td class="d-flex justify-content-center">
-                                                        <div class="edit-container">
-                                                            <b-button class="edit-container__button">
-                                                                <b-icon icon="pencil-square">
-                                                                </b-icon>
-                                                            </b-button>
+                                        <b-table id="salesperson-table" hover :items="salespersonState" :fields="fields"
+                                            :per-page="perPage" :current-page="currentPage">
+                                            <template v-slot:cell(actions)="data">
+                                                <div>
+                                                    <b-button v-b-modal.delete-modal>
+                                                        <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                                                    </b-button>
 
-                                                            <!-- <b-modal>
+                                                    <b-modal id="delete-modal" title="Delete Confirmation"
+                                                        @ok="deleteItem(data.item.salesperson_id)">
+                                                        <b-row class="d-flex justify-content-center">
+                                                            <img src="../assets/img/delete.svg" alt=""
+                                                                style="height:200px; width:200px">
 
-                                                            </b-modal> -->
-                                                        </div>
+                                                        </b-row>
+                                                        <p class="my-4">Are you sure you want to proceed?</p>
 
-                                                        <div class="delete-container">
-                                                            <b-button class="delete-container__button" v-b-modal.delete-modal>
-                                                                <b-icon icon="trash-fill"></b-icon>
-                                                            </b-button>
-
-                                                            <b-modal id="delete-modal" title="Delete Confirmation"
-                                                                @ok="deleteItem(salesperson.salesperson_id)">
-                                                                <b-row class="d-flex justify-content-center">
-                                                                    <img src="../assets/img/delete.svg" alt="delete-svg"
-                                                                        style="height:200px; width:200px">
-
-                                                                </b-row>
-                                                                <p class="my-4">Are you sure you want to proceed?</p>
-
-                                                            </b-modal>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-
-                                            </tbody>
-                                        </table>
+                                                    </b-modal>
+                                                </div>
+                                            </template>
+                                        </b-table>
+                                        <b-row fluid class="mt-4 d-flex justify-content-end">
+                                            <b-pagination pills v-model="currentPage" :total-rows="rows"
+                                                :per-page="perPage" aria-controls="salesperson-table"></b-pagination>
+                                        </b-row>
                                     </div>
 
                                 </b-container>
@@ -149,7 +122,10 @@ export default {
         ...mapState(['salespersonState']),
         ...mapGetters({
             salespersonList: "fetchSalesperson"
-        })
+        }),
+        rows() {
+            return this.salespersonState.length
+        }
     },
 
     beforeCreate() {
@@ -158,6 +134,8 @@ export default {
 
     data() {
         return {
+            perPage: 5,
+            currentPage: 1,
             modalShow: false,
             salesperson: {
                 firstname: "",
@@ -176,7 +154,14 @@ export default {
                 showAlert: 0,
                 variant: "",
                 message: ""
-            }
+            },
+            fields: [
+                { key: "salesperson_id", label: "ID", sortable: true },
+                { key: "firstname", label: "First Name", sortable: true },
+                { key: "lastname", label: "Last Name", sortable: true },
+                { key: "contact", label: "Contact", sortable: true },
+                { key: "actions", label: "Actions" },
+            ],
         };
     },
     methods: {
@@ -228,6 +213,13 @@ export default {
                 this.state.contact = false;
             } else {
                 this.state.contact = true;
+            }
+
+            if (this.salesperson.firstname != null && this.salesperson.lastname != null && this.salesperson.contact) {
+                return true;
+            } else {
+                return false;
+
             }
 
         }
