@@ -11,6 +11,7 @@ import ServicesPage from "../pages/ServicesPage.vue";
 import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
 import AddCar from "../pages/AddCar.vue";
 import AddServiceTicket from "../pages/AddServiceTicket.vue";
+import UserProfile from "../pages/UserProfile.vue";
 
 Vue.use(VueRouter);
 
@@ -74,6 +75,11 @@ const routes = [
     path: "/add-service-ticket",
     name: "AddServiceTicket",
     component: AddServiceTicket,
+  },
+  {
+    path: "/profile",
+    name: "UserProfile",
+    component: UserProfile,
   },
 ];
 

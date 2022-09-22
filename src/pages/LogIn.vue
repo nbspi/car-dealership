@@ -23,7 +23,7 @@
           <b-col cols="8" class="d-flex flex-column align-items-center">
             <img src="../assets/img/lougeh.png" alt="" class="lou-geh" />
             <h1>LOG IN</h1>
-            <h2>Log In your account here</h2>
+            <h2>Log in your account here</h2>
             <br />
 
             <div class="form-container mt-3">
@@ -327,5 +327,14 @@ input:focus {
 
 .alert {
   width: 350px !important;
+}
+
+h1 {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+h2 {
+  color: var(--primary-color);
 }
 </style>
