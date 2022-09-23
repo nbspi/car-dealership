@@ -6,7 +6,8 @@ import auth from "./modules/auth/index";
 import dashboard from "./modules/dashboard/index";
 import salesperson from "./modules/salesperson/index";
 import invoice from "./modules/invoice/index";
-import cars from "./modules/cars/index"
+import cars from "./modules/cars/index";
+import service from "./modules/service/index"
 
 Vue.use(Vuex);
 
@@ -18,7 +19,8 @@ const store = new Vuex.Store({
     dashboard,
     salesperson,
     invoice,
-    cars
+    cars,
+    service
   },
 });
 

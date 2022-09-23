@@ -101,8 +101,8 @@
         <div class="modal-form__form-group mb-3">
           <b-form-group label="First Name" class="ml-2">
           </b-form-group>
-          <b-form-input id="firstname" placeholder="Enter First Name" type="text" v-model="item.firstname" autocomplete="off"
-            required>
+          <b-form-input id="firstname" placeholder="Enter First Name" type="text" v-model="item.firstname"
+            autocomplete="off" required>
           </b-form-input>
         </div>
         <div class="modal-form__form-group mb-3">

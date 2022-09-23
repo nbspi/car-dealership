@@ -65,9 +65,11 @@ export default {
 
 <style scoped>
 .sidebar a.router-link-active {
-    background-color: var(--primary-color);
     color: white;
     border-radius: 7px !important;
+    background: rgb(104, 118, 172);
+    background: linear-gradient(145deg, rgba(104, 118, 172, 1) 0%, rgba(130, 155, 184, 1) 100%);
+
 }
 
 .sidebar a:hover:not(.active) {

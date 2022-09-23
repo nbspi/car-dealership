@@ -113,16 +113,12 @@
 <script>
 import SideBar from "../layouts/SideBar.vue";
 import HeaderComponent from "../layouts/HeaderComponent.vue";
-// import FormInput from "../components/FormInput.vue";
-// import RadioComponent from "../components/RadioComponent.vue";
 
 export default {
     name: "AddCar",
     components: {
         SideBar,
         HeaderComponent,
-        // FormInput,
-        // RadioComponent,
     },
     data() {
         return {

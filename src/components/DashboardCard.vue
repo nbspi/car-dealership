@@ -1,7 +1,7 @@
 <template>
     <b-col cols="3" class="sales-card p-2">
         <b-row class="d-flex pl-3">
-            <div>{{ title }} | <span>Today</span> </div>
+            <div>{{ title }} | <span>This Month</span> </div>
         </b-row>
         <b-row class="px-1">
             <b-col cols="5" class="d-flex justify-content-center p-2">
@@ -42,9 +42,11 @@ export default {
 
 <style scoped>
 .sales-card {
-    background-color: #829BB8 !important;
     border-radius: 10px;
     color: white;
+    background: rgb(104, 118, 172);
+    background: linear-gradient(23deg, rgba(104, 118, 172, 1) 0%, rgba(130, 155, 184, 1) 100%);
+
 }
 
 .circle {
@@ -66,5 +68,4 @@ export default {
 svg {
     color: #4A5376;
 }
-
 </style>

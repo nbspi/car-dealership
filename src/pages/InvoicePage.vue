@@ -15,7 +15,8 @@
                                     <b-col class="mt-3">
                                         <b-form>
                                             <div class="mb-3">
-                                                <label for="datepicker" class="ml-2 mb-2">Invoice Date</label>
+                                                <b-form-group label="Invoice Date" id="invoice-date" class="ml-2">
+                                                </b-form-group>
                                                 <b-form-datepicker id="datepicker" v-model="newDate"
                                                     :date-format-options="{
                                                       year: 'numeric',
@@ -26,7 +27,7 @@
                                             </div>
 
                                             <!-- @select dropdown for salesperson -->
-                                            <div class="mb-3">
+                                            <!-- <div class="mb-3">
                                                 <b-form-group label="Salesperson" id="salesperson" class="ml-2">
                                                 </b-form-group>
                                                 <b-form-select v-model="invoice.salesperson_id">
@@ -40,12 +41,12 @@
                                                         {{ salesperson.lastname }}
                                                     </option>
                                                 </b-form-select>
-                                            </div>
+                                            </div> -->
 
                                             <div class="mb-3">
                                                 <b-form-group label="Salesperson" id="salesperson" class="ml-2">
-                                                    <b-button v-b-modal.sales-modal>Select</b-button>
                                                 </b-form-group>
+                                                <b-button block v-b-modal.sales-modal>Select</b-button>
                                             </div>
 
                                             <b-modal id="sales-modal" title="Salesperson" centered>
@@ -53,12 +54,6 @@
                                                     <b-table hover :items="listSalesperson" :fields="salespersonFields"
                                                         ref="selectableTable" selectable @row-selected="onRowSelected">
                                                         <template v-slot:cell(actions)="invoice">
-                                                            <!-- <b-form-group>
-                              <input
-                                type="radio"
-                                v-model="invoice.salesperson_id"
-                              />
-                            </b-form-group> -->
                                                             <template v-if="invoice">
                                                                 <span aria-hidden="true">&check;</span>
                                                                 <span class="sr-only">Selected</span>
@@ -198,7 +193,7 @@ export default {
                     key: "transaction_date",
                     label: "Invoice Date",
                     formatter: (value) => {
-                        return moment(value).format("MMM DD, YYYY, h:mm A");
+                        return moment(value).format("MMM DD, YYYY");
                     },
                     sortable: true
                 },
@@ -214,12 +209,12 @@ export default {
                     key: "created_at",
                     label: "Invoice Date",
                     formatter: (value) => {
-                        return moment(value).format("MMM DD, YYYY, h:mm A");
+                        return moment(value).format("MMM DD, YYYY");
                     },
                 },
                 { key: "firstname", label: "Salesperson Name" },
                 { key: "lastname", label: "Customer Name" },
-                { key: "actions", label: "Actions" },
+                // { key: "actions", label: "Actions" },
             ],
 
         }

@@ -10,14 +10,19 @@
             <b-col cols="8">
               <b-row class="d-flex justify-content-between">
                 <DashboardCard title="Sales" icon="cart4" description="Total Sales" :value="salesPerMonth" />
-                <DashboardCard title="Revenue" icon="currency-dollar" description="Total Profit"
+                <DashboardCard title="Revenue" icon="cash-stack" description="Total Profit"
                   :value="monthlyRevenuelist" />
                 <DashboardCard title="Customers" icon="people" description="Customers" :value="listCustomersPerMonth" />
               </b-row>
               <b-row class="mt-5 d-flex flex-column justify-content-between">
                 <h4 class="pl-2">Top Selling | <span>This Month</span></h4>
                 <b-col class="mt-3">
-                  <b-table hover :items="listTopSellers"> </b-table>
+                  <b-table hover :items="listTopSellers">
+                  </b-table>
+                  <b-row fluid class="mt-4 d-flex justify-content-end">
+                    <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
+                      aria-controls="my-table"></b-pagination>
+                  </b-row>
                 </b-col>
               </b-row>
             </b-col>
@@ -28,12 +33,12 @@
                 </h5>
                 <div class="mt-2 pb-2">
                   <ul>
-                    <li>Quia quae rerum explicabo officiis beatae</li>
-                    <li>oluptatem blanditiis blanditiis eveniet</li>
-                    <li>Voluptates corrupti molestias voluptatem</li>
-                    <li>Quia quae rerum explicabo officiis beatae</li>
-                    <li>oluptatem blanditiis blanditiis eveniet</li>
-                    <li>Voluptates corrupti molestias voluptatem</li>
+                    <li>Added Customer</li>
+                    <li>Edit Service</li>
+                    <li>Created Invoice</li>
+                    <li>User Jaemin Na Logged In</li>
+                    <li>Added Salesperson</li>
+                    <li>User Yuta Logged Out</li>
                   </ul>
                 </div>
               </b-container>
@@ -59,13 +64,16 @@ export default {
     SideBar,
     DashboardCard,
     SpinnerLoad
-},
+  },
 
   computed: {
     ...mapGetters({ listTopSellers: "topSellersList" }),
     ...mapGetters({ salesPerMonth: "monthlySalesRecord" }),
     ...mapGetters({ monthlyRevenuelist: "monthlyRevenueRecord" }),
     ...mapGetters({ listCustomersPerMonth: "monthlyCustomersRecord" }),
+    rows() {
+      return this.listTopSellers.length
+    }
   },
   mounted() {
     this.$store.dispatch("fetchTopSellersList");
@@ -76,6 +84,8 @@ export default {
 
   data() {
     return {
+      perPage: 5,
+      currentPage: 1
       // items: [
       //   { product: 40, price: '$23434', sold: '134' },
       //   { product: 40, price: '$23434', sold: '134' },
@@ -110,5 +120,4 @@ span {
   background-color: var(--background-color);
   border-radius: 10px;
 }
-
 </style>

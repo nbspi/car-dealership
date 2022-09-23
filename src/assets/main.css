@@ -118,7 +118,8 @@ td {
 }
 
 #delete-modal,
-#modal-form {
+#modal-form,
+#sales-modal {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -127,6 +128,7 @@ td {
 .modal-content {
     width: 350px;
 }
+
 
 .modal-header .close {
     padding: 0px !important;
@@ -163,4 +165,8 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
   margin: 0;
+}
+
+#sales-modal .modal-content {
+    width: 1000px !important;
 }

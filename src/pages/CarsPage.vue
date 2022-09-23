@@ -93,8 +93,17 @@ export default {
         }
     },
     method: {
-        deleteCar(serial_number) {
-            console.log(serial_number)
+        showDeleteModal(item) {
+            this.item = {
+                serial_number: item.serial_number,
+                brand: item.brand,
+                model: item.model,
+                color: item.color,
+                year: item.year,
+                price: item.price
+            };
+            this.$bvModal.show("delete-modal");
+            console.log(item)
         }
     }
 }
