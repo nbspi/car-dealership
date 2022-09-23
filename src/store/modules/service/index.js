@@ -25,10 +25,27 @@ export default {
       console.log(response);
       commit("ADD_SERVICE", response.data);
     },
+
+    async deleteService({ commit }, service_id) {
+      const response = await axios.patch(
+        `${API_URL}/service/delete/${service_id}`
+      );
+
+      commit("DELETE_SERVICE", response.data);
+      console.log(response.data);
+    },
   },
   mutations: {
     FETCH_ALL_SERVICE(state, serviceState) {
       state.serviceState = serviceState;
     },
+
+    DELETE_SERVICE(state, service_id) {
+        let index = state.serviceState.findIndex(
+          (service) => service.service_id == service_id
+        );
+        console.log(index);
+        state.serviceState.splice(index, 0);
+      },
   },
 };

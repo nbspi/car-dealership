@@ -18,7 +18,8 @@
                                                 <b-form-group label="Service Name" class="ml-2"
                                                     :state="service.service_name">
                                                 </b-form-group>
-                                                <b-form-input id="lastname" type="text" placeholder="Enter Service Name"
+                                                <b-form-input id="service_name" type="text"
+                                                    placeholder="Enter Service Name" v-model="service.service_name"
                                                     required>
                                                 </b-form-input>
                                             </div>
@@ -27,8 +28,9 @@
                                                     :state="service.hourly_rate">
                                                 </b-form-group>
                                                 <b-input-group prepend="₱" class="mb-2 mr-sm-2 mb-sm-0">
-                                                    <b-form-input id="hourly-rate" type="number"
-                                                        placeholder="Enter Hourly Rate"></b-form-input>
+                                                    <b-form-input id="hourly_rate" type="number"
+                                                        placeholder="Enter Hourly Rate" v-model="service.hourly_rate">
+                                                    </b-form-input>
                                                 </b-input-group>
                                             </div>
                                             <b-container class="button-container d-flex justify-content-end">
@@ -66,11 +68,11 @@
                                         <template v-slot:cell(actions)="{ item }">
                                             <div class="d-flex justify-content-center">
                                                 <div class="d-flex justify-content-center">
-                                                    <div>
+                                                    <!-- <div>
                                                         <b-button v-b-modal @click="showUpdateModal(item)">
                                                             <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                         </b-button>
-                                                    </div>
+                                                    </div> -->
                                                     <div>
                                                         <b-button v-b-modal @click="showDeleteModal(item)">
                                                             <b-icon class="delete-btn" icon="trash-fill"></b-icon>
@@ -113,9 +115,9 @@ export default {
         ...mapGetters({
             serviceList: "fetchService"
         }),
-        // rows() {
-        //     return this.serviceState.length
-        // }
+        rows() {
+            return this.serviceList.length
+        }
     },
     beforeCreate() {
         this.$store.dispatch("fetchService")
@@ -142,7 +144,6 @@ export default {
                 hourly_rate: null
             },
             state: {
-                service_id: null,
                 service_name: null,
                 hourly_rate: null
             },
@@ -199,6 +200,18 @@ export default {
                 this.showAlert("Successfully Created", "success");
             }
         },
+
+        async deleteItem() {
+            try {
+                await this.$store.dispatch("deleteService", this.item.service_id);
+                console.log(this.item.service_id)
+                this.$bvModal.hide("delete-modal")
+                location.reload()
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         validation() {
             if (this.service.service_name == null || this.service.service_name < 1) {
                 this.state.service_name = false;

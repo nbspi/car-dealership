@@ -12,6 +12,7 @@ import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
 import AddCar from "../pages/AddCar.vue";
 import AddServiceTicket from "../pages/AddServiceTicket.vue";
 import UserProfile from "../pages/UserProfile.vue";
+import AboutPage from "../pages/AboutPage.vue"
 
 Vue.use(VueRouter);
 
@@ -81,6 +82,11 @@ const routes = [
     name: "UserProfile",
     component: UserProfile,
   },
+  {
+    path: "/about",
+    name: "AboutPage",
+    component: AboutPage
+  }
 ];
 
 const router = new VueRouter({
@@ -91,7 +97,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // If the user is not logged in, redirect to /login
-  const publicPages = ["/"];
+  const publicPages = ["/", "/about"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("user");
 
