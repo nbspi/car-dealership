@@ -117,7 +117,7 @@
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Invoice Records</h5>
-                                    <b-table hover :items="invoiceState" :fields="fields" :per-page="perPage"
+                                    <b-table hover :items="invoiceList" :fields="fields" :per-page="perPage"
                                         :current-page="currentPage">
                                         <template v-slot:cell(actions)="data">
                                             <div class="d-flex justify-content-center">
@@ -171,7 +171,7 @@ export default {
             listSalesperson: "fetchSalesperson",
         }),
         rows() {
-            return this.invoiceState.length
+            return this.invoiceList.length
         }
     },
     async mounted() {

@@ -63,60 +63,23 @@
                 <b-container class="container-card rounded p-3">
                   <h5 class="px-3 mb-3">Mechanic Records</h5>
                   <div class="">
-                    <!-- <td class="d-flex justify-content-center">
-                            <div>
-                              <b-button v-b-modal @click="showUpdateModal(mechanic.mechanic_id)">
-                                <b-icon class="delete-btn" icon="pencil-square">
-                                </b-icon>
-                              </b-button>
-
-                              <b-modal id="modal-form" title="Edit Mechanic" @ok="editItem">
-                                <div>
-                                  <div class="modal-form__form-group mb-3">
-                                    <b-form-group label="First Name" class="ml-2">
-                                    </b-form-group>
-                                    <b-form-input id="firstname" placeholder="Enter First Name"
-                                      v-model="mechanic.firstname" autocomplete="off" required>
-                                      {{ mechanic.firstname }}
-                                    </b-form-input>
-                                  </div>
-                                  <div class="modal-form__form-group mb-3">
-                                    <b-form-group label="Last Name" class="ml-2">
-                                    </b-form-group>
-                                    <b-form-input id="lastname" placeholder="Enter Last Name"
-                                      v-model="mechanic.lastname" required>
-                                      {{ mechanic.lastname }}
-                                    </b-form-input>
-                                  </div>
-                                  <div class="form-group mb-3">
-                                    <b-form-group label="Phone Number" class="ml-2">
-                                    </b-form-group>
-                                    <b-form-input id="contact" placeholder="Enter Phone Number"
-                                      v-model="mechanic.contact" required>
-                                      {{ mechanic.contact }}
-                                    </b-form-input>
-                                  </div>
-                                </div>
-                              </b-modal>
-                            </div> -->
-
-                    <b-table id="mechanic-table" hover :items="mechanicState" :fields="fields" :per-page="perPage"
+                    <b-table id="mechanic-table" hover :items="mechanicList" :fields="fields" :per-page="perPage"
                       :current-page="currentPage">
                       <template v-slot:cell(actions)="{ item }">
                         <span>
-                        <div class="d-flex justify-content-center">
-                          <div>
-                            <b-button>
-                              <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                            </b-button>
+                          <div class="d-flex justify-content-center">
+                            <div>
+                              <b-button v-b-modal @click="showUpdateModal(item)">
+                                <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                              </b-button>
+                            </div>
+                            <div>
+                              <b-button v-b-modal @click="showDeleteModal(item)">
+                                <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                              </b-button>
+                            </div>
                           </div>
-                          <div>
-                            <b-button v-b-modal @click="showDeleteModal(item)">
-                              <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                            </b-button>
-                          </div>
-                        </div>
-                      </span>
+                        </span>
                       </template>
                     </b-table>
                     <b-row fluid class="mt-4 d-flex justify-content-end">
@@ -132,6 +95,32 @@
         </b-container>
       </b-col>
     </b-row>
+    <!--update modal -->
+    <b-modal id="modal-form" title="Edit Mechanic" @ok="editItem">
+      <div>
+        <div class="modal-form__form-group mb-3">
+          <b-form-group label="First Name" class="ml-2">
+          </b-form-group>
+          <b-form-input id="firstname" placeholder="Enter First Name" type="text" v-model="item.firstname" autocomplete="off"
+            required>
+          </b-form-input>
+        </div>
+        <div class="modal-form__form-group mb-3">
+          <b-form-group label="Last Name" class="ml-2">
+          </b-form-group>
+          <b-form-input id="lastname" placeholder="Enter Last Name" type="text" v-model="item.lastname" required>
+          </b-form-input>
+        </div>
+        <div class="form-group mb-3">
+          <b-form-group label="Phone Number" class="ml-2">
+          </b-form-group>
+          <b-form-input id="contact" placeholder="Enter Phone Number" type="number" v-model="item.contact" required>
+          </b-form-input>
+        </div>
+      </div>
+    </b-modal>
+
+    <!-- delete-modal -->
     <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
       <b-row class="d-flex justify-content-center">
         <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
@@ -160,11 +149,10 @@ export default {
       mechanicList: "fetchMechanic"
     }),
     rows() {
-      return this.mechanicState.length
+      return this.mechanicList.length
     }
 
   },
-
   beforeCreate() {
     this.$store.dispatch("fetchMechanic")
   },
@@ -174,6 +162,11 @@ export default {
       perPage: 5,
       currentPage: 1,
       value: '',
+      props: ["value"],
+      model: {
+        prop: "value",
+        event: "update",
+      },
       modalShow: false,
       mechanic: {
         mechanic_id: null,
@@ -208,15 +201,16 @@ export default {
     }
   },
   methods: {
-    showUpdateModal(mechanic) {
-      this.mechanic = {
-        mechanic_id: mechanic.mechanic_id,
-        firstname: mechanic.firstname,
-        lastname: mechanic.lastname,
-        contact: mechanic.contact
+    showUpdateModal(item) {
+      this.item = {
+        mechanic_id: item.mechanic_id,
+        firstname: item.firstname,
+        lastname: item.lastname,
+        contact: item.contact
       };
       this.$bvModal.show("modal-form")
     },
+
     showDeleteModal(item) {
       this.item = {
         mechanic_id: item.mechanic_id,
@@ -253,10 +247,6 @@ export default {
       }
     },
 
-    editModal(mechanic_id) {
-      console.log(mechanic_id)
-    },
-
     async deleteItem() {
       try {
         await this.$store.dispatch("deleteMechanic", this.item.mechanic_id);
@@ -267,10 +257,10 @@ export default {
         console.log(error);
       }
     },
-    async editItem(mechanic_id) {
+    async editItem() {
       try {
         console.log();
-        await this.$store.dispatch("editMechanic", mechanic_id);
+        await this.$store.dispatch("editMechanic", this.item);
         this.$bvModal.hide("modal-form");
         location.reload();
       } catch (error) {
@@ -295,7 +285,7 @@ export default {
         this.state.contact = true;
       }
 
-      if (this.mechanic.firstname != null && this.mechanic.lastname != null && this.mechanic.contact) {
+      if (this.mechanic.firstname != null && this.mechanic.lastname != null && this.mechanic.contact != null) {
         return true;
       } else {
         return false;

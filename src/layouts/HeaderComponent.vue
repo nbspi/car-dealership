@@ -19,7 +19,7 @@
                     <b-dropdown :text="currentUser.firstname + ` ` + currentUser.lastname" variant="secondary"
                         class="user-dropdown m-2">
                         <b-dropdown-item href="/profile">Profile</b-dropdown-item>
-                        <b-dropdown-item href="/">Sign Out</b-dropdown-item>
+                        <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
                     </b-dropdown>
                 </div>
             </b-col>

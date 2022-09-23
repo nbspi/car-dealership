@@ -86,9 +86,9 @@ export default {
         HeaderComponent,
     },
     computed: {
-        // rows() {
-        //     return this.mechanicState.length
-        // }
+        rows() {
+            return this.items.length
+        }
     },
     data() {
         return {

@@ -14,7 +14,7 @@
                             <b-col class="table-container">
                                 <b-container fluid class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Car Records</h5>
-                                    <b-table id="cars-table" hover :items="carState" :fields="fields"
+                                    <b-table id="cars-table" hover :items="listCars" :fields="fields"
                                         :per-page="perPage" :current-page="currentPage">
                                         <template v-slot:cell(actions)>
                                             <div class="d-flex justify-content-center">
@@ -60,7 +60,7 @@ export default {
         ...mapState(['carState']),
         ...mapGetters({ listCars: "fetchCars" }),
         rows() {
-            return this.carState.length
+            return this.listCars.length
         }
 
     },

@@ -70,12 +70,12 @@
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Salespersons Records</h5>
                                     <div class="">
-                                        <b-table id="salesperson-table" hover :items="salespersonState" :fields="fields"
+                                        <b-table id="salesperson-table" hover :items="salespersonList" :fields="fields"
                                             :per-page="perPage" :current-page="currentPage">
                                             <template v-slot:cell(actions)="{ item }">
                                                 <div class="d-flex justify-content-center">
                                                     <div>
-                                                        <b-button>
+                                                        <b-button v-b-modal @click="showUpdateModal(item)">
                                                             <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                         </b-button>
                                                     </div>
@@ -83,8 +83,6 @@
                                                         <b-button v-b-modal @click="showDeleteModal(item)">
                                                             <b-icon class="delete-btn" icon="trash-fill"></b-icon>
                                                         </b-button>
-
-
                                                     </div>
                                                 </div>
                                             </template>
@@ -102,6 +100,32 @@
                 </b-container>
             </b-col>
         </b-row>
+        <!--UPDATE MODAL -->
+        <b-modal id="modal-form" title="Edit Salesperson" @ok="editItem">
+            <div>
+                <div class="modal-form__form-group mb-3">
+                    <b-form-group label="First Name" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="firstname" placeholder="Enter First Name" type="text" v-model="item.firstname"
+                        autocomplete="off" required>
+                    </b-form-input>
+                </div>
+                <div class="modal-form__form-group mb-3">
+                    <b-form-group label="Last Name" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="lastname" placeholder="Enter Last Name" type="text" v-model="item.lastname" required>
+                    </b-form-input>
+                </div>
+                <div class="form-group mb-3">
+                    <b-form-group label="Phone Number" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="contact" placeholder="Enter Phone Number" type="number" v-model="item.contact" required>
+                    </b-form-input>
+                </div>
+            </div>
+        </b-modal>
+
+        <!--DELETE MODAL -->
         <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
             <b-row class="d-flex justify-content-center">
                 <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
@@ -130,19 +154,22 @@ export default {
             salespersonList: "fetchSalesperson"
         }),
         rows() {
-            return this.salespersonState.length
+            return this.salespersonList.length
         }
     },
-
     beforeCreate() {
         this.$store.dispatch("fetchSalesperson")
     },
-
     data() {
         return {
             perPage: 5,
             currentPage: 1,
             value: "",
+            props: ["value"],
+            model: {
+                prop: "value",
+                event: "update",
+            },
             modalShow: false,
             salesperson: {
                 salesperson_id: null,
@@ -177,6 +204,15 @@ export default {
         };
     },
     methods: {
+        showUpdateModal(item) {
+            this.item = {
+                salesperson_id: item.salesperson_id,
+                firstname: item.firstname,
+                lastname: item.lastname,
+                contact: item.contact
+            };
+            this.$bvModal.show("modal-form")
+        },
         showDeleteModal(item) {
             this.item = {
                 salesperson_id: item.salesperson_id,
@@ -210,7 +246,16 @@ export default {
                 this.showAlert("Successfully Created", "success");
             }
         },
-
+        async editItem() {
+            try {
+                console.log();
+                await this.$store.dispatch("editSalesperson", this.item);
+                this.$bvModal.hide("modal-form");
+                location.reload();
+            } catch (error) {
+                console.log(error);
+            }
+        },
         async deleteItem() {
             try {
                 await this.$store.dispatch("deleteSalesperson", this.item.salesperson_id);
@@ -238,7 +283,7 @@ export default {
                 this.state.contact = true;
             }
 
-            if (this.salesperson.firstname != null && this.salesperson.lastname != null && this.salesperson.contact) {
+            if (this.salesperson.firstname != null && this.salesperson.lastname != null && this.salesperson.contact != null) {
                 return true;
             } else {
                 return false;

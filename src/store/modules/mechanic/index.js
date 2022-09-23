@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOCAL_URL } from "../../../config/dev.env";
+import { API_URL } from "../../../config/dev.env";
 
 export default {
   state: {
@@ -12,7 +12,7 @@ export default {
   },
   actions: {
     async addMechanic({ commit }, data) {
-      const response = await axios.post(`${LOCAL_URL}/mechanic/add`, {
+      const response = await axios.post(`${API_URL}/mechanic/add`, {
         firstname: data.firstname,
         lastname: data.lastname,
         contact: data.contact,
@@ -22,14 +22,14 @@ export default {
     },
 
     async fetchMechanic({ commit }) {
-      const response = await axios.get(`${LOCAL_URL}/mechanic`);
+      const response = await axios.get(`${API_URL}/mechanic`);
       console.log(response);
       commit("FETCH_ALL_MECHANIC", response.data);
     },
 
     async deleteMechanic({ commit }, mechanic_id) {
       const response = await axios.patch(
-        `${LOCAL_URL}/mechanic/delete/${mechanic_id}`
+        `${API_URL}/mechanic/delete/${mechanic_id}`
       );
 
       commit("DELETE_MECHANIC", response.data);
@@ -38,7 +38,7 @@ export default {
 
     async editMechanic({ commit }, mechanic) {
       await axios
-        .put(`${LOCAL_URL}/mechanic/edit/${mechanic.mechanic_id}`, {
+        .put(`${API_URL}/mechanic/edit/${mechanic.mechanic_id}`, {
           firstname: mechanic.firstname,
           lastname: mechanic.lastname,
           contact: mechanic.contact,
@@ -51,10 +51,6 @@ export default {
     },
   },
   mutations: {
-    ADD_MECHANIC(state, data) {
-      state.mechanicState.push(data);
-    },
-
     FETCH_ALL_MECHANIC(state, mechanicState) {
       state.mechanicState = mechanicState;
     },

@@ -74,59 +74,12 @@
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
                                     <div>
-                                        <!-- <table id="customer-table" class="table table-hover" :items="customerState"
-                                            style="width: 100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Address</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="customer in customerState" :key="customer.customer_id">
-                                                    <td>{{customer.customer_id}}</td>
-                                                    <td>{{ customer.firstname }}</td>
-                                                    <td>{{ customer.lastname }}</td>
-                                                    <td>{{ customer.contact }}</td>
-                                                    <td>{{ customer.address }}</td>
-                                                    <td class="d-flex justify-content-center">
-                                                        <div>
-                                                            <b-button v-b-modal>
-                                                                <b-icon class="edit-btn" icon="pencil-square">
-                                                                </b-icon>
-                                                            </b-button>
-                                                        </div>
-                                                        <div>
-                                                            <b-button v-b-modal.delete-modal>
-                                                                <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                            </b-button>
-
-                                                            <b-modal id="delete-modal" title="Delete Confirmation">
-                                                                <b-row class="d-flex justify-content-center">
-                                                                    <img src="../assets/img/delete.svg" alt=""
-                                                                        style="height:200px; width:200px">
-
-                                                                </b-row>
-                                                                <p class="my-4">Are you sure you want to proceed?</p>
-
-                                                            </b-modal>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-
-
-                                        </table> -->
-                                        <b-table id="customer-table" hover :items="customerState" :fields="fields"
+                                        <b-table id="customer-table" hover :items="customerList" :fields="fields"
                                             :per-page="perPage" :current-page="currentPage" class="text-left">
                                             <template v-slot:cell(actions)="{ item }">
                                                 <div class="d-flex justify-content-center">
                                                     <div>
-                                                        <b-button>
+                                                        <b-button v-b-modal @click="showUpdateModal(item)">
                                                             <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                         </b-button>
                                                     </div>
@@ -154,6 +107,40 @@
                 </b-container>
             </b-col>
         </b-row>
+        <!--UPDATE MODAL-->
+        <b-modal id="modal-form" title="Edit Customer" @ok="editItem">
+            <div>
+                <div class="modal-form__form-group mb-3">
+                    <b-form-group label="First Name" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="firstname" placeholder="Enter First Name" type="text" v-model="item.firstname"
+                        autocomplete="off" required>
+                    </b-form-input>
+                </div>
+                <div class="modal-form__form-group mb-3">
+                    <b-form-group label="Last Name" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="lastname" placeholder="Enter Last Name" type="text" v-model="item.lastname"
+                        required>
+                    </b-form-input>
+                </div>
+                <div class="form-group mb-3">
+                    <b-form-group label="Phone Number" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="contact" placeholder="Enter Phone Number" type="number" v-model="item.contact"
+                        required>
+                    </b-form-input>
+                </div>
+                <div class="form-group mb-3">
+                    <b-form-group label="Address" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="address" placeholder="Enter Address" type="text" v-model="item.address" required>
+                    </b-form-input>
+                </div>
+            </div>
+        </b-modal>
+
+        <!--DELETE MODAL-->
         <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
             <b-row class="d-flex justify-content-center">
                 <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
@@ -168,7 +155,7 @@
 <script>
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
     name: "CarsPage",
@@ -177,14 +164,12 @@ export default {
         HeaderComponent,
     },
     computed: {
-        ...mapState(['customerState']),
         ...mapGetters({
             customerList: "fetchCustomer"
         }),
         rows() {
-            return this.customerState.length
+            return this.customerList.length
         }
-
     },
     beforeCreate() {
         this.$store.dispatch("fetchCustomer")
@@ -194,6 +179,11 @@ export default {
             perPage: 5,
             currentPage: 1,
             value: '',
+            props: ["value"],
+            model: {
+                prop: "value",
+                event: "update",
+            },
             modalShow: false,
             customer: {
                 customer_id: null,
@@ -233,6 +223,16 @@ export default {
         }
     },
     methods: {
+        showUpdateModal(item) {
+            this.item = {
+                customer_id: item.customer_id,
+                firstname: item.firstname,
+                lastname: item.lastname,
+                contact: item.contact,
+                address: item.address
+            };
+            this.$bvModal.show("modal-form")
+        },
         showDeleteModal(item) {
             this.item = {
                 customer_id: item.customer_id,
@@ -268,6 +268,16 @@ export default {
                 this.showAlert("Successfully Created", "success");
             }
         },
+        async editItem() {
+            try {
+                console.log();
+                await this.$store.dispatch("editCustomer", this.item);
+                this.$bvModal.hide("modal-form");
+                location.reload();
+            } catch (error) {
+                console.log(error);
+            }
+        },
         async deleteItem() {
             try {
                 await this.$store.dispatch("deleteCustomer", this.item.customer_id);
@@ -295,7 +305,7 @@ export default {
                 this.state.contact = true;
             }
 
-            if (this.customer.firstname != null && this.customer.lastname != null && this.customer.contact) {
+            if (this.customer.firstname != null && this.customer.lastname != null && this.customer.contact != null && this.customer.address != null ) {
                 return true;
             } else {
                 return false;
