@@ -34,6 +34,19 @@ export default {
       commit("DELETE_SERVICE", response.data);
       console.log(response.data);
     },
+
+    async editService({ commit }, service) {
+      await axios
+        .put(`${API_URL}/service/edit/${service.service_id}`, {
+          service_name: service.service_name,
+          hourly_rate: service.hourly_rate,
+        })
+        .then((response) => {
+          commit("UPDATE_SERVICE", response.data);
+          console.log(response.data);
+          return response;
+        });
+    },
   },
   mutations: {
     FETCH_ALL_SERVICE(state, serviceState) {
@@ -41,11 +54,21 @@ export default {
     },
 
     DELETE_SERVICE(state, service_id) {
-        let index = state.serviceState.findIndex(
-          (service) => service.service_id == service_id
-        );
-        console.log(index);
-        state.serviceState.splice(index, 0);
-      },
+      let index = state.serviceState.findIndex(
+        (service) => service.service_id == service_id
+      );
+      console.log(index);
+      state.serviceState.splice(index, 0);
+    },
+
+    UPDATE_SERVICE(state, data) {
+      let index = state.serviceState.map((val, ind) => {
+        if (val.id == data.id) {
+          return ind;
+        }
+      });
+      let ind = index.filter((service) => service != undefined);
+      state.serviceState[ind] = data;
+    },
   },
 };

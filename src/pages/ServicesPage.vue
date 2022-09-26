@@ -68,11 +68,11 @@
                                         <template v-slot:cell(actions)="{ item }">
                                             <div class="d-flex justify-content-center">
                                                 <div class="d-flex justify-content-center">
-                                                    <!-- <div>
+                                                    <div>
                                                         <b-button v-b-modal @click="showUpdateModal(item)">
                                                             <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                         </b-button>
-                                                    </div> -->
+                                                    </div>
                                                     <div>
                                                         <b-button v-b-modal @click="showDeleteModal(item)">
                                                             <b-icon class="delete-btn" icon="trash-fill"></b-icon>
@@ -82,10 +82,6 @@
                                             </div>
                                         </template>
                                     </b-table>
-                                    <!-- <b-row fluid class="mt-4 d-flex justify-content-end">
-                                        <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
-                                            aria-controls="service-table"></b-pagination>
-                                    </b-row> -->
                                 </b-container>
 
                             </b-col>
@@ -94,6 +90,35 @@
                 </b-container>
             </b-col>
         </b-row>
+        <!--UPDATE MODAL-->
+        <b-modal id="modal-form" title="Edit Service" @ok="editItem">
+            <div>
+                <div class="modal-form__form-group mb-3">
+                    <b-form-group label="Service Name" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="service_name" placeholder="Enter First Name" type="text"
+                        v-model="item.service_name" autocomplete="off" required>
+                    </b-form-input>
+                </div>
+                <div class="modal-form__form-group mb-3">
+                    <b-form-group label="Hourly Rate" class="ml-2">
+                    </b-form-group>
+                    <b-form-input id="hourly_rate" placeholder="Enter Last Name" type="number" v-model="item.hourly_rate"
+                        required>
+                    </b-form-input>
+                </div>
+            </div>
+        </b-modal>
+
+        <!--DELETE MODAL-->
+        <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
+            <b-row class="d-flex justify-content-center">
+                <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
+
+            </b-row>
+            <p class="my-4">Are you sure you want to proceed?</p>
+
+        </b-modal>
     </b-container>
 </template>
 
@@ -207,6 +232,17 @@ export default {
                 console.log(this.item.service_id)
                 this.$bvModal.hide("delete-modal")
                 location.reload()
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        async editItem() {
+            try {
+                console.log();
+                await this.$store.dispatch("editService", this.item);
+                this.$bvModal.hide("modal-form");
+                location.reload();
             } catch (error) {
                 console.log(error);
             }
