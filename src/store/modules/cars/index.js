@@ -16,10 +16,25 @@ export default {
       console.log(response.data);
       commit("SET_CARS_LIST", response.data);
     },
+
+    async deleteCar({ commit }, car_id) {
+      const response = await axios.patch(
+        `${API_URL}/car/delete/${car_id}`
+      );
+
+      commit("DELETE_CAR", response.data);
+      console.log(response.data);
+    },
   },
   mutations: {
     SET_CARS_LIST(state, carState) {
       state.carState = carState;
+    },
+
+    DELETE_CAR(state, car_id) {
+      let index = state.carState.findIndex((car) => car.car_id == car_id);
+      console.log(index);
+      state.carState.splice(index, 0);
     },
   },
 };

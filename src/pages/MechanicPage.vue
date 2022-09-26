@@ -66,20 +66,18 @@
                     <b-table id="mechanic-table" hover :items="mechanicList" :fields="fields" :per-page="perPage"
                       :current-page="currentPage">
                       <template v-slot:cell(actions)="{ item }">
-                        <span>
-                          <div class="d-flex justify-content-center">
-                            <div>
-                              <b-button v-b-modal @click="showUpdateModal(item)">
-                                <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                              </b-button>
-                            </div>
-                            <div>
-                              <b-button v-b-modal @click="showDeleteModal(item)">
-                                <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                              </b-button>
-                            </div>
+                        <div class="d-flex justify-content-center">
+                          <div>
+                            <b-button v-b-modal @click="showUpdateModal(item)">
+                              <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                            </b-button>
                           </div>
-                        </span>
+                          <div>
+                            <b-button v-b-modal @click="showDeleteModal(item)">
+                              <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                            </b-button>
+                          </div>
+                        </div>
                       </template>
                     </b-table>
                     <b-row fluid class="mt-4 d-flex justify-content-end">

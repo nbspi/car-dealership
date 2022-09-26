@@ -18,7 +18,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "LogIn",
     component: LogIn,
   },
@@ -83,7 +83,7 @@ const routes = [
     component: UserProfile,
   },
   {
-    path: "/about",
+    path: "/",
     name: "AboutPage",
     component: AboutPage
   }
@@ -97,7 +97,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // If the user is not logged in, redirect to /login
-  const publicPages = ["/", "/about"];
+  const publicPages = ["/", "/login"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("user");
 

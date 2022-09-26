@@ -7,11 +7,11 @@
           <div class="d-flex justify-content-xl-end justify-content-md-center">
             <nav id="navbar" class="navbar">
               <ul>
-                <li><a class="nav-link active" href="#hero">Home</a></li>
+                <li><a class="nav-link" href="/">Home</a></li>
                 <li><a class="nav-link" href="/about">About</a></li>
-                <li><a class="nav-link" href="#services">Services</a></li>
-                <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                <li><a class="nav-link" href="#contact">Contact</a></li>
+                <li><a class="nav-link" href="#">Services</a></li>
+                <li><a class="nav-link" href="#">Portfolio</a></li>
+                <li><a class="nav-link" href="#">Contact</a></li>
               </ul>
             </nav>
           </div>

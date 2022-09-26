@@ -1,30 +1,44 @@
 <template>
     <b-container fluid class="body-container">
         <b-row id="header" class="d-flex justify-content-center">
-            <b-container class="navbar-container">
+            <div class="d-flex">
+                <img src="../assets/img/lougeh.png" alt="" style="width:70px">
+                <div class="d-flex align-items-center">
+                    <p>LG Car Dealership</p>
+                </div>
+            </div>
+            <b-container class="navbar-container d-flex justify-content-sm-center justify-content-xl-end">
                 <div class="d-flex justify-content-xl-end justify-content-md-center">
                     <nav id="navbar" class="navbar">
                         <ul>
-                            <li><a class="nav-link" href="/">Home</a></li>
-                            <li><a class="nav-link  active" href="/about">About</a></li>
-                            <li><a class="nav-link" href="#services">Services</a></li>
-                            <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                            <li><a class="nav-link" href="#contact">Contact</a></li>
+                            <li><a class="nav-link active">Home</a></li>
+                            <li><a class="nav-link" href="#">About</a></li>
+                            <li><a class="nav-link" href="#">Services</a></li>
+                            <li><a class="nav-link" href="#">Portfolio</a></li>
+                            <li><a class="nav-link" href="#">Contact</a></li>
+                            <li>
+                                <b-button variant="outline-primary" class="register-btn ml-4">Sign Up</b-button>
+                            </li>
                         </ul>
                     </nav>
                 </div>
             </b-container>
         </b-row>
         <b-row class="hero-container">
-            <b-col md="12" lg="6" class="d-flex justify-content-center align-items-center">
-                <b-col cols="8">
+            <b-col md="12" lg="6" class="py-5 d-flex justify-content-center align-items-center">
+                <b-col cols="8" class="text-container">
+                    <h6>The Best Car Facility in Town </h6>
                     <h1 text-justify>Lou Geh Car Dealership & Service Facility</h1>
                     <div class="text-justify mt-2">
-                        <h6>Lorem ipsum dolor sit amet. Et quia dolor sed vitae quia id voluptatem laboriosam ea libero modi et recusandae accusantium sit nihil! Est sapiente dolorum qui quia repellat cum laborum excepturi est dolores quis est dignissimos maiores ut voluptas nihil. Non veritatis cumque in culpa eligendi est modi unde. Ipsa minima ab excepturi dolores nam magnam laudantium.</h6>
+                        <h6>Lorem ipsum dolor sit amet. Et quia dolor sed vitae quia id voluptatem laboriosam ea libero
+                            modi et recusandae accusantium sit nihil! Est sapiente dolorum qui quia repellat laborum
+                            excepturi est dolores quis est dignissimos maiores ut voluptas nihil. Non veritatis cumque
+                            in culpa eligendi est modi unde. Ipsa minima ab excepturi dolores nam magnam laudantium.
+                        </h6>
 
                     </div>
                     <div class="button-container d-flex justify-content-center mt-4">
-                        <router-link to="/" class="btn px-3">Get Started</router-link>
+                        <router-link to="/login" class="start-btn px-3">Get Started</router-link>
                     </div>
                 </b-col>
             </b-col>
@@ -32,11 +46,12 @@
                 <div class="d-flex justify-content-center">
                     <img class="hero-img" src="../assets/img/4.svg" alt="">
                 </div>
+
             </b-col>
         </b-row>
-        <b-row class="bottom-container">
+        <b-row class="bottom-container pt-4">
             <b-col class="d-flex justify-content-center">
-                <div>
+                <div class="card">
                     <img src="../assets/img/1.png" alt="">
                     <div class="d-flex justify-content-center">
                         <p>Affordable Rates</p>
@@ -44,7 +59,7 @@
                 </div>
             </b-col>
             <b-col class="d-flex justify-content-center">
-                <div>
+                <div class="card">
                     <img src="../assets/img/2.png" alt="">
                     <div class="d-flex justify-content-center">
                         <p>Service Experts</p>
@@ -52,7 +67,7 @@
                 </div>
             </b-col>
             <b-col class="d-flex justify-content-center">
-                <div>
+                <div class="card">
                     <img src="../assets/img/3.png" alt="">
                     <div class="d-flex justify-content-center">
                         <p>Hassle-Free Transaction</p>
@@ -70,6 +85,10 @@ export default {
 </script>
 
 <style scoped>
+#header {
+    padding-top: 0px !important;
+}
+
 .body-container {
     padding: 0px !important;
     height: 100vh !important;
@@ -77,13 +96,32 @@ export default {
     background: linear-gradient(95deg, rgba(104, 118, 172, 1) 0%, rgba(130, 155, 184, 1) 100%);
 }
 
-/* 
-.bottom-container {
-    background-color: var(--secondary-color);
-} */
+@media (max-width: 1080px) {
+    .body-container {
+        height: 100% !important;
+        background: rgb(104, 118, 172);
+        background: linear-gradient(95deg, rgba(104, 118, 172, 1) 0%, rgba(130, 155, 184, 1) 100%);
+
+    }
+}
 
 .hero-container {
-    background-color: #fff;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2390accc' fill-opacity='0.07'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+@media (max-width: 984px) {
+    .card {
+        margin: 20px 0px 20px 0px !important;
+    }
+
+    .bottom-container {
+        padding-bottom: 10px;
+    }
+
+    #navbar {
+        margin-bottom: 10px !important;
+    }
 }
 
 #header {
@@ -160,11 +198,11 @@ export default {
 }
 
 img {
-    width: 500px;
+    width: 450px;
 }
 
 .hero-img {
-    width: 80%;
+    width: 78%;
 }
 
 p {
@@ -173,17 +211,42 @@ p {
     color: #fff;
 }
 
-.btn {
+.start-btn {
+    text-decoration: none !important;
     background-color: var(--secondary-color);
     color: #fff;
     font-size: 18px;
     font-weight: 500;
     border-radius: 10px;
-    padding: 5px;
+    padding: 7px;
 }
 
-.btn:hover {
+.start-btn:hover {
     background-color: var(--primary-color);
     color: #fff;
+}
+
+h1 {
+    font-size: 38px;
+}
+
+.card {
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(35px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.register-btn {
+    border-color: #fff !important;
+    color: #fff;
+}
+
+.register-btn:hover,
+.register-btn:active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
 }
 </style>

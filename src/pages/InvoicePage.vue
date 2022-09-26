@@ -26,76 +26,79 @@
                                                 </b-form-datepicker>
                                             </div>
 
-                                            <!-- @select dropdown for salesperson -->
-                                            <!-- <div class="mb-3">
-                                                <b-form-group label="Salesperson" id="salesperson" class="ml-2">
-                                                </b-form-group>
-                                                <b-form-select v-model="invoice.salesperson_id">
-                                                    <option :value="null" disabled>
-                                                        -- Please select an option --
-                                                    </option>
-                                                    <option v-for="salesperson in listSalesperson"
-                                                        :key="salesperson.salesperson_id"
-                                                        :value="salesperson.salesperson_id">
-                                                        {{ salesperson.firstname }}
-                                                        {{ salesperson.lastname }}
-                                                    </option>
-                                                </b-form-select>
-                                            </div> -->
-
                                             <div class="mb-3">
                                                 <b-form-group label="Salesperson" id="salesperson" class="ml-2">
                                                 </b-form-group>
                                                 <b-button block v-b-modal.sales-modal>Select</b-button>
                                             </div>
 
-                                            <b-modal id="sales-modal" title="Salesperson" centered>
+                                            <b-modal id="sales-modal" title="Salesperson Records" centered size="xl">
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-table hover :items="listSalesperson" :fields="salespersonFields"
-                                                        ref="selectableTable" selectable @row-selected="onRowSelected">
-                                                        <template v-slot:cell(actions)="invoice">
-                                                            <template v-if="invoice">
-                                                                <span aria-hidden="true">&check;</span>
-                                                                <span class="sr-only">Selected</span>
-                                                            </template>
-                                                            <template v-else>
-                                                                <span aria-hidden="true">&nbsp;</span>
-                                                                <span class="sr-only">Not selected</span>
-                                                            </template>
+                                                    <b-table hover :items="listSalesperson" :fields="salespersonFields">
+                                                        <template v-slot:cell(actions)="{item}">
+                                                            <div class="d-flex justify-content-center">
+                                                                <div>
+                                                                    <b-button v-b-modal
+                                                                        :style="item.salesperson_id == activeItem ? 'background: green !important;' : ''"
+                                                                        @click="selectSalesperson(item.salesperson_id)">
+                                                                        <b-icon
+                                                                            :icon="item.salesperson_id == activeItem ? 'check-circle': 'check'"
+                                                                            class="delete-btn"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                            </div>
                                                         </template>
                                                     </b-table>
                                                 </b-row>
                                             </b-modal>
 
-                                            <!-- @select dropdown for customer -->
                                             <div class="mb-3">
-                                                <b-form-group label="Customer" id="customer" class="ml-2">
+                                                <b-form-group label="Customer" id="customer-modal" class="ml-2">
                                                 </b-form-group>
-                                                <b-form-select v-model="invoice.customer_id">
-                                                    <option :value="null" disabled>
-                                                        -- Please select an option --
-                                                    </option>
-                                                    <option v-for="customer in listCustomers"
-                                                        :key="customer.customer_id" :value="customer.customer_id">
-                                                        {{ customer.firstname }} {{ customer.lastname }}
-                                                    </option>
-                                                </b-form-select>
+                                                <b-button block v-b-modal.customer-modal>Select</b-button>
                                             </div>
 
-                                            <!-- @select dropdown for cars -->
+                                            <b-modal id="customer-modal" title="Customer" centered size="xl">
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-table hover :items="listCustomers" :fields="customerFields">
+                                                        <template v-slot:cell(actions)="{item}">
+                                                            <div class="d-flex justify-content-center">
+                                                                <div>
+                                                                    <b-button v-b-modal v-model="invoice.customer_id"
+                                                                        @click="selectCustomer(item.customer_id)">
+                                                                        <b-icon class="delete-btn" icon="trash-fill">
+                                                                        </b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </b-table>
+                                                </b-row>
+                                            </b-modal>
+
                                             <div class="mb-3">
-                                                <b-form-group label="Car" id="car" class="ml-2">
+                                                <b-form-group label="Car" id="car-modal" class="ml-2">
                                                 </b-form-group>
-                                                <b-form-select v-model="invoice.car_id">
-                                                    <option :value="null" disabled>
-                                                        -- Please select an option --
-                                                    </option>
-                                                    <option v-for="car in listCars" :key="car.car_id"
-                                                        :value="car.car_id">
-                                                        {{ car.brand }}-{{ car.model }}
-                                                    </option>
-                                                </b-form-select>
+                                                <b-button block v-b-modal.car-modal>Select</b-button>
                                             </div>
+
+                                            <b-modal id="car-modal" title="Car" centered size="xl">
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-table id="car-table" hover :items="listCars" :fields="carsFields">
+                                                        <template v-slot:cell(actions)="{item}">
+                                                            <div class="d-flex justify-content-center">
+                                                                <div>
+                                                                    <b-button v-b-modal v-model="invoice.car_id"
+                                                                        @click="selectCar(item.car_id)">
+                                                                        <b-icon class="delete-btn" icon="trash-fill">
+                                                                        </b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </b-table>
+                                                </b-row>
+                                            </b-modal>
 
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2" type="reset">Reset</b-button>
@@ -114,20 +117,6 @@
                                     <h5 class="px-3 mb-3">Invoice Records</h5>
                                     <b-table hover :items="invoiceList" :fields="fields" :per-page="perPage"
                                         :current-page="currentPage">
-                                        <template v-slot:cell(actions)="data">
-                                            <div class="d-flex justify-content-center">
-                                                <div>
-                                                    <b-button v-b-modal>
-                                                        <b-icon class="delete-btn" icon="pencil-square"></b-icon>
-                                                    </b-button>
-                                                </div>
-                                                <div>
-                                                    <b-button v-b-modal @click="showDeleteModal(data.item)">
-                                                        <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                    </b-button>
-                                                </div>
-                                            </div>
-                                        </template>
                                     </b-table>
                                     <b-row fluid class="mt-4 d-flex justify-content-end">
                                         <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
@@ -200,7 +189,6 @@ export default {
                 { key: "salesperson_name", label: "Salesperson Name", sortable: true },
                 { key: "customer_name", label: "Customer Name", sortable: true },
                 { key: "serial_number", label: "Serial Number", sortable: true },
-                { key: "actions", label: "Actions" },
 
             ],
             salespersonFields: [
@@ -216,6 +204,24 @@ export default {
                 { key: "lastname", label: "Customer Name" },
                 // { key: "actions", label: "Actions" },
             ],
+            customerFields: [
+                { key: "customer_id", label: "ID", sortable: true },
+                { key: "firstname", label: "First Name", sortable: true },
+                { key: "lastname", label: "Last Name", sortable: true },
+                { key: "contact", label: "Contact", sortable: true },
+                { key: "address", label: "Address", sortable: true },
+                { key: "actions", label: "Actions" },
+            ],
+
+            carsFields: [
+                { key: "serial_number", label: "Serial Number", sortable: true },
+                { key: "brand", label: "Brand", sortable: true },
+                { key: "model", label: "Model", sortable: true },
+                { key: "color", label: "Color", sortable: true },
+                { key: "year", label: "Year", sortable: true },
+                { key: "price", label: "Price", sortable: true },
+                { key: "actions", label: "Actions" },
+            ],
 
         }
     },
@@ -227,6 +233,15 @@ export default {
 
         selectSalesperson(salesperson_id) {
             console.log(salesperson_id);
+        },
+
+        selectCustomer(customer_id) {
+            this.invoice.customer_id = customer_id
+            console.log(this.invoice.customer_id);
+        },
+
+        selectCar(car_id) {
+            this.invoice.car_id = car_id
         },
 
         onRowSelected(listSalesperson) {

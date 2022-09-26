@@ -16,7 +16,7 @@
                                     <h5 class="px-3 mb-3">Car Records</h5>
                                     <b-table id="cars-table" hover :items="listCars" :fields="fields"
                                         :per-page="perPage" :current-page="currentPage">
-                                        <template v-slot:cell(actions)>
+                                        <template v-slot:cell(actions)="{ item }">
                                             <div class="d-flex justify-content-center">
                                                 <div>
                                                     <b-button>
@@ -24,9 +24,9 @@
                                                     </b-button>
                                                 </div>
                                                 <div>
-                                                    <b-button>
-                                                <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                            </b-button>
+                                                    <b-button v-b-modal @click="showDeleteModal(item)">
+                                                        <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                                                    </b-button>
                                                 </div>
                                             </div>
                                         </template>
@@ -42,6 +42,16 @@
                 </b-container>
             </b-col>
         </b-row>
+
+        <!-- delete-modal -->
+        <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
+            <b-row class="d-flex justify-content-center">
+                <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
+
+            </b-row>
+            <p class="my-4">Are you sure you want to proceed?</p>
+
+        </b-modal>
     </b-container>
 </template>
 
@@ -64,15 +74,32 @@ export default {
         }
 
     },
-    async mounted() {
-        return await this.$store.dispatch("fetchCars");
+    beforeCreate() {
+        this.$store.dispatch("fetchCars")
     },
     data() {
         return {
             perPage: 7,
             currentPage: 1,
             value: '',
+            props: ["value"],
+            model: {
+                prop: "value",
+                event: "update",
+            },
+            modalShow: false,
             car: {
+                car_id: null,
+                serial_number: null,
+                brand: null,
+                model: null,
+                price: null,
+                year: null,
+                color: null,
+                car_for_sale: null,
+            },
+            item: {
+                car_id: null,
                 serial_number: null,
                 brand: null,
                 model: null,
@@ -92,9 +119,10 @@ export default {
             ],
         }
     },
-    method: {
+    methods: {
         showDeleteModal(item) {
             this.item = {
+                car_id: item.car_id,
                 serial_number: item.serial_number,
                 brand: item.brand,
                 model: item.model,
@@ -104,7 +132,22 @@ export default {
             };
             this.$bvModal.show("delete-modal");
             console.log(item)
-        }
+        },
+
+        showModal(id) {
+            this.index = id
+        },
+        
+        async deleteItem() {
+            try {
+                await this.$store.dispatch("deleteCar", this.item.car_id);
+                console.log(this.item.car_id)
+                this.$bvModal.hide("delete-modal")
+                location.reload()
+            } catch (error) {
+                console.log(error);
+            }
+        },
     }
 }
 </script>
