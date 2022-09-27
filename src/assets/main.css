@@ -43,15 +43,6 @@ h2 {
     }
 }
 
-.form-control {
-    outline: none !important;
-}
-
-.page-link {
-    color: #4A5376 !important;
-    font-family: 'Poppins', sans-serif;
-}
-
 .btn-success {
     background-color: #40916c !important;
     border: none;
@@ -104,6 +95,14 @@ td {
     padding-left: 0px !important;
 }
 
+.form-control {
+    outline: none !important;
+}
+
+.page-link {
+    color: #4A5376 !important;
+}
+
 .custom-control-input:checked~.custom-control-label::before {
     outline: none !important;
     border: none !important;
@@ -112,16 +111,6 @@ td {
 
 
 .modal-backdrop {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-#delete-modal,
-#modal-form,
-#sales-modal,
-#customer-modal,
-#car-modal {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -165,8 +154,8 @@ input:focus {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none !important;
-  margin: 0;
+    -webkit-appearance: none !important;
+    margin: 0;
 }
 
 #sales-modal .modal-content,
@@ -174,4 +163,14 @@ input::-webkit-inner-spin-button {
 #car-modal .modal-content {
     width: 900px !important;
     height: 800px !important;
+}
+
+#delete-modal,
+#modal-form,
+#sales-modal,
+#customer-modal,
+#car-modal {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }

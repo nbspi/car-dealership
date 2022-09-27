@@ -23,7 +23,7 @@ export default {
 
     async fetchSalesperson({ commit }) {
       const response = await axios.get(`${API_URL}/salesperson`);
-      console.log(response);
+      console.log("fetchSalesperson", response);
       commit("FETCH_ALL_SALESPERSON", response.data);
     },
 
@@ -66,7 +66,7 @@ export default {
       console.log(index);
       state.salespersonState.splice(index, 0);
     },
-    
+
     UPDATE_SALESPERSON(state, data) {
       let index = state.salespersonState.map((val, ind) => {
         if (val.id == data.id) {

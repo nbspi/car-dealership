@@ -11,23 +11,35 @@ export default {
     },
   },
   actions: {
+    async addCar({ commit }, data) {
+      const response = await axios.post(`${API_URL}/car/add`, {
+        serial_number: data.serial_number,
+        brand: data.brand,
+        model: data.model,
+        color: data.color,
+        year: data.year,
+        price: data.price,
+        car_for_sale: data.car_for_sale
+      });
+      console.log(response);
+      commit("ADD_CAR", response.data);
+    },
+
     async fetchCars({ commit }) {
       const response = await axios.get(`${API_URL}/car`);
       console.log(response.data);
-      commit("SET_CARS_LIST", response.data);
+      commit("FETCH_ALL_CAR", response.data);
     },
 
     async deleteCar({ commit }, car_id) {
-      const response = await axios.patch(
-        `${API_URL}/car/delete/${car_id}`
-      );
+      const response = await axios.patch(`${API_URL}/car/delete/${car_id}`);
 
       commit("DELETE_CAR", response.data);
       console.log(response.data);
     },
   },
   mutations: {
-    SET_CARS_LIST(state, carState) {
+    FETCH_ALL_CAR(state, carState) {
       state.carState = carState;
     },
 

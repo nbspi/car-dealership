@@ -13,7 +13,7 @@
                 <b-container class="container-card rounded p-3">
                   <h4 class="px-3">Add Mechanic</h4>
                   <b-col class="mt-3">
-                    <b-form>
+                    <b-form @submit.prevent>
                       <div class="form-group mb-3">
                         <b-form-group label="First Name" class="ml-2" :state="mechanic.firstname">
                         </b-form-group>

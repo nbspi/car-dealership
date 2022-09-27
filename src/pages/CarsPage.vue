@@ -19,7 +19,7 @@
                                         <template v-slot:cell(actions)="{ item }">
                                             <div class="d-flex justify-content-center">
                                                 <div>
-                                                    <b-button>
+                                                    <b-button @click="showUpdateModal(item)">
                                                         <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                     </b-button>
                                                 </div>
@@ -43,6 +43,69 @@
             </b-col>
         </b-row>
 
+        <!--UPDATE MODAL-->
+        <b-modal id="modal-form" title="Edit Customer" @ok="editItem">
+            <div>
+                <div class="mb-3">
+                    <b-form-group label="Serial Number" id="label" class="ml-2" :state="car.serial_number">
+                    </b-form-group>
+                    <b-form-input placeholder="Enter Serial Number" v-model="item.serial_number"></b-form-input>
+                </div>
+
+                <!-- @model -->
+                <div class="mb-3">
+                    <b-form-group label="Model" id="label" class="ml-2" :state="car.model">
+                    </b-form-group>
+                    <b-form-input placeholder="Enter Model" v-model="item.model">
+                    </b-form-input>
+                </div>
+
+                <!-- @year -->
+                <div class="mb-3">
+                    <b-form-group label="Year" id="label" class="ml-2" :state="car.year">
+                    </b-form-group>
+                    <b-form-input placeholder="Enter Year" v-model="item.year">
+                    </b-form-input>
+                </div>
+
+                <div class="mb-3">
+                    <b-form-group label="Price" id="label" class="ml-2" :state="car.price">
+                    </b-form-group>
+                    <b-form-input placeholder="Enter Price" v-model="item.price">
+                    </b-form-input>
+                </div>
+
+                <!-- @brand -->
+                <div class="mb-3">
+                    <b-form-group label="Brand" id="label" class="ml-2" :state="car.brand">
+                    </b-form-group>
+                    <b-form-input placeholder="Enter Brand" v-model="item.brand">
+                    </b-form-input>
+                </div>
+
+                <!-- @color -->
+                <div class="mb-3">
+                    <b-form-group label="Color" id="label" class="ml-2" :state="car.color">
+                    </b-form-group>
+                    <b-form-input placeholder="Enter Color" v-model="item.color">
+                    </b-form-input>
+                </div>
+
+                <!-- @car_for_sale -->
+                <div class="mb-3">
+                    <b-form-group label="For Sale?" class="ml-2" :state="car.car_for_sale" v-slot="{ ariaDescribedby }">
+                        <b-row class="d-flex">
+                            <b-form-radio v-model="item.car_for_sale" :aria-describedby="ariaDescribedby" value="true">
+                                Yes
+                            </b-form-radio>
+                            <b-form-radio class="ml-3" v-model="item.car_for_sale" :aria-describedby="ariaDescribedby"
+                                value="false">No
+                            </b-form-radio>
+                        </b-row>
+                    </b-form-group>
+                </div>
+            </div>
+        </b-modal>
         <!-- delete-modal -->
         <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
             <b-row class="d-flex justify-content-center">
@@ -50,8 +113,8 @@
 
             </b-row>
             <p class="my-4">Are you sure you want to proceed?</p>
-
         </b-modal>
+
     </b-container>
 </template>
 
@@ -120,6 +183,19 @@ export default {
         }
     },
     methods: {
+        showUpdateModal(item) {
+            this.item = {
+                car_id: item.car_id,
+                serial_number: item.serial_number,
+                brand: item.brand,
+                model: item.model,
+                color: item.color,
+                year: item.year,
+                price: item.price,
+                car_for_sale: item.car_for_sale
+            };
+            this.$bvModal.show("modal-form")
+        },
         showDeleteModal(item) {
             this.item = {
                 car_id: item.car_id,
@@ -128,7 +204,8 @@ export default {
                 model: item.model,
                 color: item.color,
                 year: item.year,
-                price: item.price
+                price: item.price,
+                car_for_sale: item.car_for_sale
             };
             this.$bvModal.show("delete-modal");
             console.log(item)
@@ -137,13 +214,24 @@ export default {
         showModal(id) {
             this.index = id
         },
-        
+
         async deleteItem() {
             try {
                 await this.$store.dispatch("deleteCar", this.item.car_id);
                 console.log(this.item.car_id)
                 this.$bvModal.hide("delete-modal")
                 location.reload()
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        async editItem() {
+            try {
+                console.log();
+                await this.$store.dispatch("editCar", this.item);
+                this.$bvModal.hide("modal-form");
+                location.reload();
             } catch (error) {
                 console.log(error);
             }

@@ -31,8 +31,13 @@
                         </router-link>
                     </div>
                     <div class="mb-2 inactive">
-                        <router-link to="/salesperson" class="nav-link d-flex align-items-center" exact>
-                            <b-icon class="mr-3" icon="person-lines-fill" aria-hidden="true"></b-icon>Salesperson
+                        <router-link to="/services" class="nav-link d-flex align-items-center" exact>
+                            <b-icon class="mr-3" icon="gear" aria-hidden="true"></b-icon>Services
+                        </router-link>
+                    </div>
+                    <div class="mb-2 inactive">
+                        <router-link to="/service-ticket" class="nav-link d-flex align-items-center" exact>
+                            <b-icon class="mr-3" icon="sliders" aria-hidden="true"></b-icon>Service Ticket
                         </router-link>
                     </div>
                     <div class="mb-2 inactive">
@@ -41,13 +46,8 @@
                         </router-link>
                     </div>
                     <div class="mb-2 inactive">
-                        <router-link to="/services" class="nav-link d-flex align-items-center" exact>
-                            <b-icon class="mr-3" icon="gear" aria-hidden="true"></b-icon>Services
-                        </router-link>
-                    </div>
-                    <div class="mb-2 inactive">
-                        <router-link to="/service-ticket" class="nav-link d-flex align-items-center" exact>
-                            <b-icon class="mr-3" icon="sliders" aria-hidden="true"></b-icon>Service Ticket
+                        <router-link to="/salesperson" class="nav-link d-flex align-items-center" exact>
+                            <b-icon class="mr-3" icon="person-lines-fill" aria-hidden="true"></b-icon>Salesperson
                         </router-link>
                     </div>
                 </b-nav>

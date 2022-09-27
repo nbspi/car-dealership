@@ -76,18 +76,19 @@
                                                     v-slot="{ ariaDescribedby }">
                                                     <b-row class="d-flex">
                                                         <b-form-radio v-model="car.car_for_sale"
-                                                            :aria-describedby="ariaDescribedby" value="Yes">Yes
+                                                            :aria-describedby="ariaDescribedby" value="true">Yes
                                                         </b-form-radio>
                                                         <b-form-radio class="ml-3" v-model="car.car_for_sale"
-                                                            :aria-describedby="ariaDescribedby" value="No">No
+                                                            :aria-describedby="ariaDescribedby" value="false">No
                                                         </b-form-radio>
                                                     </b-row>
                                                 </b-form-group>
                                             </div>
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2" type="reset">Reset</b-button>
-                                                <b-button variant="success" type="submit" @click="addCar">Save
-                                                </b-button>
+                                                <b-button variant="success" type="submit" class="btn btn-success send"
+                                                    @click="saveCar">
+                                                    Submit</b-button>
                                             </b-container>
                                         </b-col>
                                     </b-row>
@@ -146,6 +147,7 @@ export default {
                 car_for_sale: null,
             },
             state: {
+                car_id: null,
                 serial_number: null,
                 brand: null,
                 model: null,
@@ -173,15 +175,18 @@ export default {
             }
         },
         addCar() {
-            // this.$store.dispatch("addCar", this.car)
-            if (!this.validation()) {
-                this.showAlert("Warning: Please fill out the fields", "warning");
-
-            }
+            this.$store.dispatch("addCar", this.car)
         },
 
         async saveCar() {
             console.log(this.car)
+            if (!this.validation()) {
+                this.showAlert("Warning: Please fill out the fields", "warning");
+
+            } else {
+                this.$store.dispatch("addCar", this.car);
+                this.showAlert("Successfully Created", "success");
+            }
         },
 
         validation() {
@@ -189,6 +194,43 @@ export default {
                 this.state.serial_number = false;
             } else {
                 this.state.serial_number = true;
+
+            } if (this.car.brand == null || this.car.brand < 1) {
+                this.state.brand = false;
+            } else {
+                this.state.brand = true;
+
+            } if (this.car.model == null || this.car.model < 1) {
+                this.state.model = false;
+            } else {
+                this.state.model = true;
+
+            } if (this.car.color == true || this.car.model < 1) {
+                this.state.color = false;
+            } else {
+                this.state.color = true;
+
+            } if (this.car.year == null || this.car.color < 1) {
+                this.state.year = false;
+            } else {
+                this.state.year = true;
+
+            } if (this.car.price == null || this.car.price < 1) {
+                this.state.price = false;
+            } else {
+                this.state.year = true;
+
+            } if (this.car.car_for_sale == null) {
+                this.state.car_for_sale = false;
+            } else {
+                this.state.year = true;
+            }
+
+            if (this.car.serial_number != null && this.car.brand != null && this.car.model != null &&
+                this.car.color != null && this.car.year != null && this.car.price != null && this.car.car_for_sale != null) {
+                return true;
+            } else {
+                return false;
             }
         }
     },
