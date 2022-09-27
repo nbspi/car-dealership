@@ -86,13 +86,8 @@ export default {
   data() {
     return {
       perPage: 5,
-      currentPage: 1
-      // items: [
-      //   { product: 40, price: '$23434', sold: '134' },
-      //   { product: 40, price: '$23434', sold: '134' },
-      //   { product: 40, price: '$23434', sold: '134' },
-      //   { product: 40, price: '$23434', sold: '134' },
-      // ]
+      currentPage: 1,
+      value: null
     };
   },
 };

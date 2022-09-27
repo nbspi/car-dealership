@@ -7,7 +7,7 @@
                     <p>LG Car Dealership</p>
                 </div>
             </div>
-            <b-container class="navbar-container d-flex justify-content-sm-center justify-content-xl-end">
+            <b-container class="navbar-container d-flex justify-content-sm-center justify-content-xl-center">
                 <div class="d-flex justify-content-xl-end justify-content-md-center">
                     <nav id="navbar" class="navbar">
                         <ul>
@@ -30,10 +30,12 @@
                     <h6>The Best Car Facility in Town </h6>
                     <h1 text-justify>Lou Geh Car Dealership & Service Facility</h1>
                     <div class="text-justify mt-2">
-                        <h6>Lorem ipsum dolor sit amet. Et quia dolor sed vitae quia id voluptatem laboriosam ea libero
+                        <h6>The Lou Geh Car Dealership provides many of the best services to its customers which makes
+                            it efficient. XD
+                            <br>
+                            Lorem ipsum dolor sit amet. Et quia dolor sed vitae quia id voluptatem laboriosam ea libero
                             modi et recusandae accusantium sit nihil! Est sapiente dolorum qui quia repellat laborum
-                            excepturi est dolores quis est dignissimos maiores ut voluptas nihil. Non veritatis cumque
-                            in culpa eligendi est modi unde. Ipsa minima ab excepturi dolores nam magnam laudantium.
+                            excepturi est dolores quis est dignissimos maiores ut voluptas nihil. 
                         </h6>
 
                     </div>
@@ -138,9 +140,13 @@ export default {
     }
 }
 
-@media(min-width: 1080px) {
+@media(min-width: 1614px) {
     .navbar-container {
         margin-left: 250px !important;
+    }
+
+    .navbar-container {
+        justify-content: end !important;
     }
 
 }

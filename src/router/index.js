@@ -10,7 +10,6 @@ import MechanicPage from "../pages/MechanicPage.vue";
 import ServicesPage from "../pages/ServicesPage.vue";
 import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
 import AddCar from "../pages/AddCar.vue";
-import UserProfile from "../pages/UserProfile.vue";
 import AboutPage from "../pages/AboutPage.vue"
 
 Vue.use(VueRouter);
@@ -70,11 +69,6 @@ const routes = [
     path: "/cars/add-car",
     name: "AddCar",
     component: AddCar,
-  },
-  {
-    path: "/profile",
-    name: "UserProfile",
-    component: UserProfile,
   },
   {
     path: "/",

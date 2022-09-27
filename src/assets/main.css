@@ -162,7 +162,7 @@ input::-webkit-inner-spin-button {
 #customer-modal .modal-content,
 #car-modal .modal-content {
     width: 900px !important;
-    height: 800px !important;
+    height: auto !important;
 }
 
 #delete-modal,

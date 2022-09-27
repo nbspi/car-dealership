@@ -262,8 +262,8 @@ body {
 
 @media (max-width: 992px) {
   .lou-geh {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
   }
 }
 
@@ -273,7 +273,7 @@ body {
 
 @media (max-width: 992px) {
   .car {
-    width: 60%;
+    width: 65%;
   }
 }
 

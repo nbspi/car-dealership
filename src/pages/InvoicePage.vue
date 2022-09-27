@@ -27,9 +27,10 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <b-form-group label="Salesperson" id="salesperson" class="ml-2">
+                                                <b-form-group label="Salesperson" id="sales-modal" class="ml-2">
                                                 </b-form-group>
                                                 <b-button block v-b-modal.sales-modal>Select</b-button>
+
                                             </div>
 
                                             <b-modal id="sales-modal" title="Salesperson Records" centered size="xl">
@@ -42,8 +43,8 @@
                                                                         :style="item.salesperson_id == activeItem ? 'background: green !important;' : ''"
                                                                         @click="selectSalesperson(item.salesperson_id)">
                                                                         <b-icon
-                                                                            :icon="item.salesperson_id == activeItem ? 'check-circle': 'check'"
-                                                                            class="delete-btn"></b-icon>
+                                                                            :icon="item.salesperson_id == activeItem ? 'check-circle': 'check'">
+                                                                        </b-icon>
                                                                     </b-button>
                                                                 </div>
                                                             </div>
@@ -64,9 +65,16 @@
                                                         <template v-slot:cell(actions)="{item}">
                                                             <div class="d-flex justify-content-center">
                                                                 <div>
-                                                                    <b-button v-b-modal v-model="invoice.customer_id"
+                                                                    <!-- <b-button v-b-modal v-model="invoice.customer_id"
                                                                         @click="selectCustomer(item.customer_id)">
                                                                         <b-icon class="delete-btn" icon="trash-fill">
+                                                                        </b-icon>
+                                                                    </b-button> -->
+                                                                    <b-button v-b-modal
+                                                                        :style="item.salesperson_id == activeItem ? 'background: green !important;' : ''"
+                                                                        @click="selectCustomer(item.customer_id)">
+                                                                        <b-icon
+                                                                            :icon="item.customer_id == activeItem ? 'check-circle': 'check'">
                                                                         </b-icon>
                                                                     </b-button>
                                                                 </div>
@@ -89,9 +97,16 @@
                                                         <template v-slot:cell(actions)="{item}">
                                                             <div class="d-flex justify-content-center">
                                                                 <div>
-                                                                    <b-button v-b-modal v-model="invoice.car_id"
+                                                                    <!-- <b-button v-b-modal v-model="invoice.car_id"
                                                                         @click="selectCar(item.car_id)">
                                                                         <b-icon class="delete-btn" icon="trash-fill">
+                                                                        </b-icon>
+                                                                    </b-button> -->
+                                                                    <b-button v-b-modal
+                                                                        :style="item.car_id == activeItem ? 'background: green !important;' : ''"
+                                                                        @click="selectCar(item.car_id)">
+                                                                        <b-icon
+                                                                            :icon="item.car_id == activeItem ? 'check-circle': 'check'">
                                                                         </b-icon>
                                                                     </b-button>
                                                                 </div>
@@ -231,12 +246,11 @@ export default {
         async addInvoice() {
             await this.$store.dispatch("createInvoice", this.invoice);
             console.log(this.invoice)
-            location.reload();
+            // location.reload();
         },
 
         selectSalesperson(salesperson_id) {
             this.invoice.salesperson_id = salesperson_id
-
             console.log(salesperson_id);
             this.activeItem = salesperson_id;
 
@@ -244,11 +258,14 @@ export default {
 
         selectCustomer(customer_id) {
             this.invoice.customer_id = customer_id
-            console.log(this.invoice.customer_id);
+            console.log(customer_id);
+            this.activeItem = customer_id;
         },
 
         selectCar(car_id) {
             this.invoice.car_id = car_id
+            console.log(car_id);
+            this.activeItem = car_id;
         },
 
         onRowSelected(listSalesperson) {
