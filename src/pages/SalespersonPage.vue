@@ -239,18 +239,20 @@ export default {
         addSalesperson() {
             this.$store.dispatch("addSalesperson", this.salesperson)
         },
+
         async saveSalesperson() {
             console.log(this.salesperson)
             if (!this.validation()) {
                 this.showAlert("Warning: Please fill out the fields", "warning");
             } else {
                 await this.$store.dispatch("addSalesperson", this.salesperson);
-                await this.$store.dispatch("fetchSalesperson",);
+                await this.$store.dispatch("fetchSalesperson");
                 this.showAlert("Successfully Created", "success");
                 console.log("salespersonList", this.salespersonList);
-
+                this.clear();
             }
         },
+
         async editItem() {
             try {
                 console.log();
@@ -266,11 +268,21 @@ export default {
                 await this.$store.dispatch("deleteSalesperson", this.item.salesperson_id);
                 console.log(this.item.salesperson_id);
                 this.$bvModal.hide("delete-modal")
-                // location.reload()
+                location.reload()
             } catch (error) {
                 console.log(error)
             }
         },
+
+        clear() {
+            this.salesperson = {
+                salesperson_id: null,
+                firstname: null,
+                lastname: null,
+                contact: null,
+            }
+        },
+
         validation() {
             if (this.salesperson.firstname === null || this.salesperson.firstname.length < 1) {
                 this.state.firstname = false;

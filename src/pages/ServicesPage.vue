@@ -13,7 +13,7 @@
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Service</h4>
                                     <b-col class="mt-3">
-                                        <b-form>
+                                        <b-form @submit.prevent>
                                             <div class="form-group mb-3">
                                                 <b-form-group label="Service Name" class="ml-2"
                                                     :state="service.service_name">
@@ -82,6 +82,10 @@
                                             </div>
                                         </template>
                                     </b-table>
+                                    <b-row fluid class="mt-4 d-flex justify-content-end">
+                                        <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
+                                            aria-controls="mechanic-table"></b-pagination>
+                                    </b-row>
                                 </b-container>
 
                             </b-col>
@@ -103,8 +107,8 @@
                 <div class="modal-form__form-group mb-3">
                     <b-form-group label="Hourly Rate" class="ml-2">
                     </b-form-group>
-                    <b-form-input id="hourly_rate" placeholder="Enter Last Name" type="number" v-model="item.hourly_rate"
-                        required>
+                    <b-form-input id="hourly_rate" placeholder="Enter Last Name" type="number"
+                        v-model="item.hourly_rate" required>
                     </b-form-input>
                 </div>
             </div>
@@ -181,7 +185,17 @@ export default {
             fields: [
                 { key: "service_id", label: "Service ID", sortable: true },
                 { key: "service_name", label: "Service Name", sortable: true },
-                { key: "hourly_rate", label: "Hourly Rate", sortable: true },
+                {
+                    key: "hourly_rate", label: "Hourly Rate", sortable: true,
+                    formatter: (price) => {
+                        let formatter = new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "Php",
+                            minimumFractionDigits: 2
+                        });
+                        return formatter.format(price);
+                    }
+                },
                 { key: "actions", label: "Actions" }
             ],
         }
@@ -212,17 +226,22 @@ export default {
                 variant
             }
         },
+
         addService() {
             this.$store.dispatch("addService", this.service);
         },
+
         async saveService() {
             console.log(this.service)
             if (!this.validation()) {
                 this.showAlert("Warning: Please fill out the fields", "warning");
 
             } else {
-                this.$store.dispatch("addService", this.service);
+                await this.$store.dispatch("addService", this.service);
+                await this.$store.dispatch("fetchService");
                 this.showAlert("Successfully Created", "success");
+                console.log("serviceList", this.serviceList);
+                this.clear();
             }
         },
 
@@ -245,6 +264,14 @@ export default {
                 location.reload();
             } catch (error) {
                 console.log(error);
+            }
+        },
+
+        clear() {
+            this.service = {
+                service_id: null,
+                service_name: null,
+                hourly_rate: null
             }
         },
 

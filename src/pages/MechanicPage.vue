@@ -240,8 +240,10 @@ export default {
         this.showAlert("Warning: Please fill out the fields", "warning");
 
       } else {
-        this.$store.dispatch("addMechanic", this.mechanic);
+        await this.$store.dispatch("addMechanic", this.mechanic);
+        await this.$store.dispatch("fetchMechanic");
         this.showAlert("Successfully Created", "success");
+        console.log("mechanicList", this.mechanicList);
       }
     },
 

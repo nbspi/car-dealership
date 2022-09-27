@@ -84,7 +84,8 @@
 
                                             <b-modal id="car-modal" title="Car" centered size="xl">
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-table id="car-table" hover :items="listCars" :fields="carsFields">
+                                                    <b-table id="car-table" hover :items="listCars"
+                                                        :fields="carsFields">
                                                         <template v-slot:cell(actions)="{item}">
                                                             <div class="d-flex justify-content-center">
                                                                 <div>
@@ -171,6 +172,7 @@ export default {
             currentPage: 1,
             value: '',
             newDate: new Date(),
+            activeItem: null,
             invoice: {
                 salesperson_id: null,
                 customer_id: null,
@@ -202,7 +204,7 @@ export default {
                 },
                 { key: "firstname", label: "Salesperson Name" },
                 { key: "lastname", label: "Customer Name" },
-                // { key: "actions", label: "Actions" },
+                { key: "actions", label: "Actions" },
             ],
             customerFields: [
                 { key: "customer_id", label: "ID", sortable: true },
@@ -228,11 +230,16 @@ export default {
     methods: {
         async addInvoice() {
             await this.$store.dispatch("createInvoice", this.invoice);
+            console.log(this.invoice)
             location.reload();
         },
 
         selectSalesperson(salesperson_id) {
+            this.invoice.salesperson_id = salesperson_id
+
             console.log(salesperson_id);
+            this.activeItem = salesperson_id;
+
         },
 
         selectCustomer(customer_id) {

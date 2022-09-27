@@ -76,10 +76,10 @@
                                                     v-slot="{ ariaDescribedby }">
                                                     <b-row class="d-flex">
                                                         <b-form-radio v-model="car.car_for_sale"
-                                                            :aria-describedby="ariaDescribedby" value="true">Yes
+                                                            :aria-describedby="ariaDescribedby" value="yes">Yes
                                                         </b-form-radio>
                                                         <b-form-radio class="ml-3" v-model="car.car_for_sale"
-                                                            :aria-describedby="ariaDescribedby" value="false">No
+                                                            :aria-describedby="ariaDescribedby" value="no">No
                                                         </b-form-radio>
                                                     </b-row>
                                                 </b-form-group>
@@ -127,7 +127,7 @@ export default {
     data() {
         return {
             car: {
-                car_id: null,
+   
                 serial_number: null,
                 brand: null,
                 model: null,
