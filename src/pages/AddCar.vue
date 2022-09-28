@@ -6,7 +6,7 @@
                 <HeaderComponent title="Add Car" />
                 <b-container fluid class="pt-2">
                     <b-row class="my-2 d-flex px-3">
-                        <router-link pill="true" to="/cars" class=" btn btn-success" exact>
+                        <router-link pill="true" to="/cars" class=" btn btn-success" id="return-btn" exact>
                             <b-icon icon="arrow-left-circle" aria-hidden="true"></b-icon>
                         </router-link>
                     </b-row>
@@ -17,7 +17,7 @@
                             <b-col class="">
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Car</h4>
-                                    <b-row>
+                                    <b-form class="d-flex">
                                         <b-col cols="6" class="mt-3">
                                             <!-- @serial_number -->
                                             <div class="mb-3">
@@ -91,7 +91,7 @@
                                                     Submit</b-button>
                                             </b-container>
                                         </b-col>
-                                    </b-row>
+                                    </b-form>
                                 </b-container>
                                 <div class="alert-container mt-3">
                                     <b-alert dismissible class="alert" v-model="alert.showAlert"
@@ -127,7 +127,7 @@ export default {
     data() {
         return {
             car: {
-   
+                car_id: null,
                 serial_number: null,
                 brand: null,
                 model: null,
@@ -190,32 +190,32 @@ export default {
         },
 
         validation() {
-            if (this.car.serial_number == null || this.car.serial_number < 1) {
+            if (this.car.serial_number == null || this.car.serial_number.length < 1) {
                 this.state.serial_number = false;
             } else {
                 this.state.serial_number = true;
 
-            } if (this.car.brand == null || this.car.brand < 1) {
+            } if (this.car.brand == null || this.car.brandserial_number.length < 1) {
                 this.state.brand = false;
             } else {
                 this.state.brand = true;
 
-            } if (this.car.model == null || this.car.model < 1) {
+            } if (this.car.model == null || this.car.modelserial_number.length < 1) {
                 this.state.model = false;
             } else {
                 this.state.model = true;
 
-            } if (this.car.color == true || this.car.model < 1) {
+            } if (this.car.color == true || this.car.modelserial_number.length < 1) {
                 this.state.color = false;
             } else {
                 this.state.color = true;
 
-            } if (this.car.year == null || this.car.color < 1) {
+            } if (this.car.year == null || this.car.colorserial_number.length < 1) {
                 this.state.year = false;
             } else {
                 this.state.year = true;
 
-            } if (this.car.price == null || this.car.price < 1) {
+            } if (this.car.price == null || this.car.priceserial_number.length < 1) {
                 this.state.price = false;
             } else {
                 this.state.year = true;
@@ -246,11 +246,11 @@ div.py-2 {
     padding: 0 !important;
 }
 
-.btn {
+#return-btn {
     background-color: var(--primary-color) !important;
 }
 
-.btn:hover {
+#return-btn:hover {
     background-color: var(--secondary-color) !important;
 }
 </style>

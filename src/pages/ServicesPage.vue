@@ -58,7 +58,7 @@
                                 </div>
                             </b-col>
                         </b-col>
-                        <b-col cmd="12" lg="12" xl="8" class="table-container py-2">
+                        <b-col md="12" lg="12" xl="8" class="table-container py-2">
                             <!-- left container-->
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">

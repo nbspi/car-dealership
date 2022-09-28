@@ -10,7 +10,9 @@ import MechanicPage from "../pages/MechanicPage.vue";
 import ServicesPage from "../pages/ServicesPage.vue";
 import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
 import AddCar from "../pages/AddCar.vue";
-import AboutPage from "../pages/AboutPage.vue"
+import AboutPage from "../pages/AboutPage.vue";
+import AddServiceTicket from "../pages/AddServiceTicket.vue";
+import User from "../pages/UserPage.vue";
 
 Vue.use(VueRouter);
 
@@ -24,11 +26,6 @@ const routes = [
     path: "/dashboard",
     name: "DashBoard",
     component: DashBoard,
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () =>
-    //   import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
     path: "/customers",
@@ -73,8 +70,18 @@ const routes = [
   {
     path: "/",
     name: "AboutPage",
-    component: AboutPage
-  }
+    component: AboutPage,
+  },
+  {
+    path: "/add-service-ticket",
+    name: "AddServiceTicket",
+    component: AddServiceTicket,
+  },
+  {
+    path: "/user",
+    name: "User",
+    component: User,
+  },
 ];
 
 const router = new VueRouter({
