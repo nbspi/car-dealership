@@ -9,6 +9,7 @@ import invoice from "./modules/invoice/index";
 import cars from "./modules/cars/index";
 import service from "./modules/service/index";
 import ticket from "./modules/ticket/index";
+import user from "./modules/user/index"
 
 Vue.use(Vuex);
 
@@ -22,7 +23,8 @@ const store = new Vuex.Store({
     invoice,
     cars,
     service,
-    ticket
+    ticket,
+    user
   },
 });
 

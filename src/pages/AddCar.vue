@@ -127,7 +127,7 @@ export default {
     data() {
         return {
             car: {
-
+                car_id: null,
                 serial_number: null,
                 brand: null,
                 model: null,
@@ -190,32 +190,32 @@ export default {
         },
 
         validation() {
-            if (this.car.serial_number == null || this.car.serial_number < 1) {
+            if (this.car.serial_number == null || this.car.serial_number.length < 1) {
                 this.state.serial_number = false;
             } else {
                 this.state.serial_number = true;
 
-            } if (this.car.brand == null || this.car.brand < 1) {
+            } if (this.car.brand == null || this.car.brandserial_number.length < 1) {
                 this.state.brand = false;
             } else {
                 this.state.brand = true;
 
-            } if (this.car.model == null || this.car.model < 1) {
+            } if (this.car.model == null || this.car.modelserial_number.length < 1) {
                 this.state.model = false;
             } else {
                 this.state.model = true;
 
-            } if (this.car.color == true || this.car.model < 1) {
+            } if (this.car.color == true || this.car.modelserial_number.length < 1) {
                 this.state.color = false;
             } else {
                 this.state.color = true;
 
-            } if (this.car.year == null || this.car.color < 1) {
+            } if (this.car.year == null || this.car.colorserial_number.length < 1) {
                 this.state.year = false;
             } else {
                 this.state.year = true;
 
-            } if (this.car.price == null || this.car.price < 1) {
+            } if (this.car.price == null || this.car.priceserial_number.length < 1) {
                 this.state.price = false;
             } else {
                 this.state.year = true;
