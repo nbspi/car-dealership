@@ -13,7 +13,7 @@
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Salesperson</h4>
                                     <b-col class="mt-3">
-                                        <b-form>
+                                        <b-form @submit.prevent>
                                             <div class="form-group mb-3">
                                                 <b-form-group label="First Name" class="ml-2"
                                                     :state="salesperson.firstname"
@@ -113,13 +113,15 @@
                 <div class="modal-form__form-group mb-3">
                     <b-form-group label="Last Name" class="ml-2">
                     </b-form-group>
-                    <b-form-input id="lastname" placeholder="Enter Last Name" type="text" v-model="item.lastname" required>
+                    <b-form-input id="lastname" placeholder="Enter Last Name" type="text" v-model="item.lastname"
+                        required>
                     </b-form-input>
                 </div>
                 <div class="form-group mb-3">
                     <b-form-group label="Phone Number" class="ml-2">
                     </b-form-group>
-                    <b-form-input id="contact" placeholder="Enter Phone Number" type="number" v-model="item.contact" required>
+                    <b-form-input id="contact" placeholder="Enter Phone Number" type="number" v-model="item.contact"
+                        required>
                     </b-form-input>
                 </div>
             </div>
@@ -237,15 +239,20 @@ export default {
         addSalesperson() {
             this.$store.dispatch("addSalesperson", this.salesperson)
         },
-        saveSalesperson() {
+
+        async saveSalesperson() {
             console.log(this.salesperson)
             if (!this.validation()) {
                 this.showAlert("Warning: Please fill out the fields", "warning");
             } else {
-                this.$store.dispatch("addSalesperson", this.salesperson);
+                await this.$store.dispatch("addSalesperson", this.salesperson);
+                await this.$store.dispatch("fetchSalesperson");
                 this.showAlert("Successfully Created", "success");
+                console.log("salespersonList", this.salespersonList);
+                this.clear();
             }
         },
+
         async editItem() {
             try {
                 console.log();
@@ -266,6 +273,16 @@ export default {
                 console.log(error)
             }
         },
+
+        clear() {
+            this.salesperson = {
+                salesperson_id: null,
+                firstname: null,
+                lastname: null,
+                contact: null,
+            }
+        },
+
         validation() {
             if (this.salesperson.firstname === null || this.salesperson.firstname.length < 1) {
                 this.state.firstname = false;

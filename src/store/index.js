@@ -7,7 +7,8 @@ import dashboard from "./modules/dashboard/index";
 import salesperson from "./modules/salesperson/index";
 import invoice from "./modules/invoice/index";
 import cars from "./modules/cars/index";
-import service from "./modules/service/index"
+import service from "./modules/service/index";
+import ticket from "./modules/ticket/index";
 
 Vue.use(Vuex);
 
@@ -20,7 +21,8 @@ const store = new Vuex.Store({
     salesperson,
     invoice,
     cars,
-    service
+    service,
+    ticket
   },
 });
 

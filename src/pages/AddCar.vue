@@ -19,16 +19,10 @@
                                     <h4 class="px-3">Add Car</h4>
                                     <b-row>
                                         <b-col cols="6" class="mt-3">
-                                            <!-- <FormInput
-                          label="Serial Number"
-                          :value="car.serial_number"
-                        />
-                        <FormInput label="Model" :value="car.model" />
-                        <FormInput label="Year" :value="car.year" />
-                        <FormInput label="Price" :value="car.price" /> -->
                                             <!-- @serial_number -->
                                             <div class="mb-3">
-                                                <b-form-group label="Serial Number" id="label" class="ml-2">
+                                                <b-form-group label="Serial Number" id="label" class="ml-2"
+                                                    :state="car.serial_number">
                                                 </b-form-group>
                                                 <b-form-input placeholder="Enter Serial Number"
                                                     v-model="car.serial_number"></b-form-input>
@@ -36,7 +30,7 @@
 
                                             <!-- @model -->
                                             <div class="mb-3">
-                                                <b-form-group label="Model" id="label" class="ml-2">
+                                                <b-form-group label="Model" id="label" class="ml-2" :state="car.model">
                                                 </b-form-group>
                                                 <b-form-input placeholder="Enter Model" v-model="car.model">
                                                 </b-form-input>
@@ -44,7 +38,7 @@
 
                                             <!-- @year -->
                                             <div class="mb-3">
-                                                <b-form-group label="Year" id="label" class="ml-2">
+                                                <b-form-group label="Year" id="label" class="ml-2" :state="car.year">
                                                 </b-form-group>
                                                 <b-form-input placeholder="Enter Year" v-model="car.year">
                                                 </b-form-input>
@@ -54,7 +48,7 @@
                                         <b-col cols="6" class="mt-3">
                                             <!-- @price -->
                                             <div class="mb-3">
-                                                <b-form-group label="Price" id="label" class="ml-2">
+                                                <b-form-group label="Price" id="label" class="ml-2" :state="car.price">
                                                 </b-form-group>
                                                 <b-form-input placeholder="Enter Price" v-model="car.price">
                                                 </b-form-input>
@@ -62,7 +56,7 @@
 
                                             <!-- @brand -->
                                             <div class="mb-3">
-                                                <b-form-group label="Brand" id="label" class="ml-2">
+                                                <b-form-group label="Brand" id="label" class="ml-2" :state="car.brand">
                                                 </b-form-group>
                                                 <b-form-input placeholder="Enter Brand" v-model="car.brand">
                                                 </b-form-input>
@@ -70,37 +64,47 @@
 
                                             <!-- @color -->
                                             <div class="mb-3">
-                                                <b-form-group label="Color" id="label" class="ml-2">
+                                                <b-form-group label="Color" id="label" class="ml-2" :state="car.color">
                                                 </b-form-group>
                                                 <b-form-input placeholder="Enter Color" v-model="car.color">
                                                 </b-form-input>
                                             </div>
-                                            <!-- <FormInput label="Brand" :value="car.brand" />
-                        <FormInput label="Color" :value="car.color" /> -->
 
-                                            <!-- <RadioComponent class="mt-4" :selectValue="car.car_for_sale" :selectValueOption="car.car_for_sale"/> -->
                                             <!-- @car_for_sale -->
                                             <div class="mb-3">
-                                                <b-form-group label="For Sale?" class="ml-2"
+                                                <b-form-group label="For Sale?" class="ml-2" :state="car.car_for_sale"
                                                     v-slot="{ ariaDescribedby }">
                                                     <b-row class="d-flex">
                                                         <b-form-radio v-model="car.car_for_sale"
-                                                            :aria-describedby="ariaDescribedby" value="Yes">Yes
+                                                            :aria-describedby="ariaDescribedby" value="yes">Yes
                                                         </b-form-radio>
                                                         <b-form-radio class="ml-3" v-model="car.car_for_sale"
-                                                            :aria-describedby="ariaDescribedby" value="No">No
+                                                            :aria-describedby="ariaDescribedby" value="no">No
                                                         </b-form-radio>
                                                     </b-row>
                                                 </b-form-group>
                                             </div>
                                             <b-container class="button-container d-flex justify-content-end">
                                                 <b-button class="mr-2" type="reset">Reset</b-button>
-                                                <b-button variant="success" type="submit" @click="addCar">Save
-                                                </b-button>
+                                                <b-button variant="success" type="submit" class="btn btn-success send"
+                                                    @click="saveCar">
+                                                    Submit</b-button>
                                             </b-container>
                                         </b-col>
                                     </b-row>
                                 </b-container>
+                                <div class="alert-container mt-3">
+                                    <b-alert dismissible class="alert" v-model="alert.showAlert"
+                                        @dismissed="alert.showAlert = null" :variant="alert.variant">
+                                        <div class="alertborder">
+                                            <b-icon class="mr-2"
+                                                :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' "
+                                                fill="black">
+                                            </b-icon>
+                                            {{ alert.message }}
+                                        </div>
+                                    </b-alert>
+                                </div>
                             </b-col>
                         </b-col>
                     </b-row>
@@ -123,6 +127,7 @@ export default {
     data() {
         return {
             car: {
+   
                 serial_number: null,
                 brand: null,
                 model: null,
@@ -131,15 +136,103 @@ export default {
                 color: null,
                 car_for_sale: null,
             },
+            item: {
+                car_id: null,
+                serial_number: null,
+                brand: null,
+                model: null,
+                price: null,
+                year: null,
+                color: null,
+                car_for_sale: null,
+            },
+            state: {
+                car_id: null,
+                serial_number: null,
+                brand: null,
+                model: null,
+                price: null,
+                year: null,
+                color: null,
+                car_for_sale: null,
+            },
+            alert: {
+                dismissSecs: 0,
+                showAlert: 0,
+                variant: "",
+                message: ""
+            },
         };
     },
 
     methods: {
-        async addCar() {
-            await this.$store.dispatch("addCar", this.car);
-            this.$router.push("/cars");
-            alert("Added car successfully!");
+        showAlert(message, variant) {
+            this.alert = {
+                dismissSecs: 10,
+                showAlert: 5,
+                message,
+                variant
+            }
         },
+        addCar() {
+            this.$store.dispatch("addCar", this.car)
+        },
+
+        async saveCar() {
+            console.log(this.car)
+            if (!this.validation()) {
+                this.showAlert("Warning: Please fill out the fields", "warning");
+
+            } else {
+                this.$store.dispatch("addCar", this.car);
+                this.showAlert("Successfully Created", "success");
+            }
+        },
+
+        validation() {
+            if (this.car.serial_number == null || this.car.serial_number < 1) {
+                this.state.serial_number = false;
+            } else {
+                this.state.serial_number = true;
+
+            } if (this.car.brand == null || this.car.brand < 1) {
+                this.state.brand = false;
+            } else {
+                this.state.brand = true;
+
+            } if (this.car.model == null || this.car.model < 1) {
+                this.state.model = false;
+            } else {
+                this.state.model = true;
+
+            } if (this.car.color == true || this.car.model < 1) {
+                this.state.color = false;
+            } else {
+                this.state.color = true;
+
+            } if (this.car.year == null || this.car.color < 1) {
+                this.state.year = false;
+            } else {
+                this.state.year = true;
+
+            } if (this.car.price == null || this.car.price < 1) {
+                this.state.price = false;
+            } else {
+                this.state.year = true;
+
+            } if (this.car.car_for_sale == null) {
+                this.state.car_for_sale = false;
+            } else {
+                this.state.year = true;
+            }
+
+            if (this.car.serial_number != null && this.car.brand != null && this.car.model != null &&
+                this.car.color != null && this.car.year != null && this.car.price != null && this.car.car_for_sale != null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     },
 };
 </script>

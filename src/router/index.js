@@ -10,15 +10,13 @@ import MechanicPage from "../pages/MechanicPage.vue";
 import ServicesPage from "../pages/ServicesPage.vue";
 import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
 import AddCar from "../pages/AddCar.vue";
-import AddServiceTicket from "../pages/AddServiceTicket.vue";
-import UserProfile from "../pages/UserProfile.vue";
 import AboutPage from "../pages/AboutPage.vue"
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "LogIn",
     component: LogIn,
   },
@@ -73,17 +71,7 @@ const routes = [
     component: AddCar,
   },
   {
-    path: "/add-service-ticket",
-    name: "AddServiceTicket",
-    component: AddServiceTicket,
-  },
-  {
-    path: "/profile",
-    name: "UserProfile",
-    component: UserProfile,
-  },
-  {
-    path: "/about",
+    path: "/",
     name: "AboutPage",
     component: AboutPage
   }
@@ -97,7 +85,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // If the user is not logged in, redirect to /login
-  const publicPages = ["/", "/about"];
+  const publicPages = ["/", "/login"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("user");
 

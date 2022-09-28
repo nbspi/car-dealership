@@ -13,7 +13,7 @@
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Customers</h4>
                                     <b-col class="mt-3">
-                                        <b-form>
+                                        <b-form @submit.prevent>
                                             <div class="form-group mb-3">
                                                 <b-form-group label="First Name" class="ml-2"
                                                     :state="customer.firstname">
@@ -233,6 +233,7 @@ export default {
             };
             this.$bvModal.show("modal-form")
         },
+
         showDeleteModal(item) {
             this.item = {
                 customer_id: item.customer_id,
@@ -244,6 +245,7 @@ export default {
             this.$bvModal.show("delete-modal");
             console.log(item);
         },
+
         showAlert(message, variant) {
             this.alert = {
                 dismissSecs: 10,
@@ -252,22 +254,29 @@ export default {
                 variant
             }
         },
+
         showModal(id) {
             this.index = id
         },
+
         addCustomer() {
             this.$store.dispatch("addCustomer", this.customer);
         },
+
         async saveCustomer() {
             console.log(this.customer)
             if (!this.validation()) {
                 this.showAlert("Warning: Please fill out the fields", "warning");
 
             } else {
-                this.$store.dispatch("addCustomer", this.customer);
+                await this.$store.dispatch("addCustomer", this.customer);
+                await this.$store.dispatch("fetchCustomer");
                 this.showAlert("Successfully Created", "success");
+                console.log("customerList", this.customerList);
+                this.clear();
             }
         },
+
         async editItem() {
             try {
                 console.log();
@@ -278,6 +287,7 @@ export default {
                 console.log(error);
             }
         },
+
         async deleteItem() {
             try {
                 await this.$store.dispatch("deleteCustomer", this.item.customer_id);
@@ -288,6 +298,17 @@ export default {
                 console.log(error);
             }
         },
+
+        clear() {
+            this.customer = {
+                customer_id: null,
+                firstname: null,
+                lastname: null,
+                contact: null,
+                address: null
+            }
+        },
+
         validation() {
             if (this.customer.firstname == null || this.customer.firstname.length < 1) {
                 this.state.firstname = false;
@@ -305,7 +326,7 @@ export default {
                 this.state.contact = true;
             }
 
-            if (this.customer.firstname != null && this.customer.lastname != null && this.customer.contact != null && this.customer.address != null ) {
+            if (this.customer.firstname != null && this.customer.lastname != null && this.customer.contact != null && this.customer.address != null) {
                 return true;
             } else {
                 return false;

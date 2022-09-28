@@ -17,11 +17,12 @@
               <b-row class="mt-5 d-flex flex-column justify-content-between">
                 <h4 class="pl-2">Top Selling | <span>This Month</span></h4>
                 <b-col class="mt-3">
-                  <b-table hover :items="listTopSellers">
+                  <b-table class="top-sellers" hover :items="listTopSellers" :per-page="perPage"
+                    :current-page="currentPage">
                   </b-table>
                   <b-row fluid class="mt-4 d-flex justify-content-end">
                     <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
-                      aria-controls="my-table"></b-pagination>
+                      aria-controls="top-sellers"></b-pagination>
                   </b-row>
                 </b-col>
               </b-row>
@@ -85,13 +86,8 @@ export default {
   data() {
     return {
       perPage: 5,
-      currentPage: 1
-      // items: [
-      //   { product: 40, price: '$23434', sold: '134' },
-      //   { product: 40, price: '$23434', sold: '134' },
-      //   { product: 40, price: '$23434', sold: '134' },
-      //   { product: 40, price: '$23434', sold: '134' },
-      // ]
+      currentPage: 1,
+      value: null
     };
   },
 };
