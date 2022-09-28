@@ -3,7 +3,7 @@
         <b-row>
             <SideBar />
             <b-col xl="10" lg="9" sm="9">
-                <HeaderComponent title="Service Ticket" />
+                <HeaderComponent title="Ticket" />
                 <b-container fluid class="pt-2">
                     <b-row class="my-2 d-flex justify-content-end px-3">
                         <router-link to="/add-service-ticket" class="btn btn-success" exact>Add Service Ticket
@@ -114,12 +114,12 @@ export default {
                 comment: null
             },
             fields: [
-                { key: "service_ticket_number", label: "Service Ticket", sortable: true },
+                { key: "service_ticket_number", label: "Ticket No.", sortable: true },
                 // { key: "date_received", label: "Date Received", sortable: true },
                 // { key: "date_returned", label: "Date Returned", sortable: true },
                 { key: "customer_name", label: "Customer", sortable: true },
                 { key: "mechanic_name", label: "Mechanic", sortable: true },
-                { key: "serial_number", label: "Serial Number", sortable: true },
+                { key: "serial_number", label: "Serial No.", sortable: true },
                 { key: "brand", label: "Brand", sortable: true },
                 { key: "model", label: "Model", sortable: true },
                 { key: "actions", label: "Actions" },

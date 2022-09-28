@@ -31,7 +31,7 @@ export default {
 
     async fetchMonthlySales({ commit }) {
       const response = await axios.get(`${API_URL}/sales-number`);
-      console.log(response.data[0].count);
+      console.log(response.data);
       commit("SET_MONTHLY_SALES_LIST", response.data[0].count);
     },
     async fetchMonthlyRevenue({ commit }) {
@@ -53,9 +53,11 @@ export default {
     SET_MONTHLY_SALES_LIST(state, monthlySales) {
       state.monthlySales = monthlySales;
     },
+
     SET_MONTHLY_REVENUE_LIST(state, monthlyRevenue) {
       state.monthlyRevenue = monthlyRevenue;
     },
+    
     SET_MONTHLY_CUSTOMERS_LIST(state, monthlyCustomers) {
       state.monthlyCustomers = monthlyCustomers;
     },

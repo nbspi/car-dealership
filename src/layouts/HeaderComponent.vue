@@ -7,7 +7,7 @@
                 </div>
             </b-col>
             <b-col sm="12" xl="10" id="search-container"
-                class="d-flex justify-content-sm-center justify-content-xl-end">
+                class="d-flex justify-content-sm-between justify-content-xl-end">
                 <b-nav-form class="mr-3">
                     <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
                     <b-button variant="outline-light" class="my-sm-0 btn d-flex " type="submit">

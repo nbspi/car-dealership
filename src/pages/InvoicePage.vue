@@ -13,7 +13,7 @@
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Invoice</h4>
                                     <b-col class="mt-3">
-                                        <b-form>
+                                        <b-form @submit.prevent>
                                             <div class="mb-3">
                                                 <b-form-group label="Invoice Date" id="invoice-date" class="ml-2">
                                                 </b-form-group>
@@ -40,10 +40,10 @@
                                                             <div class="d-flex justify-content-center">
                                                                 <div>
                                                                     <b-button v-b-modal
-                                                                        :style="item.salesperson_id == activeItem ? 'background: green !important;' : ''"
+                                                                        :style="item.salesperson_id == activeItem.salesperson ? 'background: green !important;' : ''"
                                                                         @click="selectSalesperson(item.salesperson_id)">
                                                                         <b-icon
-                                                                            :icon="item.salesperson_id == activeItem ? 'check-circle': 'check'">
+                                                                            :icon="item.salesperson_id == activeItem.salesperson ? 'check-circle': 'check'">
                                                                         </b-icon>
                                                                     </b-button>
                                                                 </div>
@@ -71,10 +71,10 @@
                                                                         </b-icon>
                                                                     </b-button> -->
                                                                     <b-button v-b-modal
-                                                                        :style="item.salesperson_id == activeItem ? 'background: green !important;' : ''"
+                                                                        :style="item.customer_id == activeItem.customer ? 'background: green !important;' : ''"
                                                                         @click="selectCustomer(item.customer_id)">
                                                                         <b-icon
-                                                                            :icon="item.customer_id == activeItem ? 'check-circle': 'check'">
+                                                                            :icon="item.customer_id == activeItem.customer ? 'check-circle': 'check'">
                                                                         </b-icon>
                                                                     </b-button>
                                                                 </div>
@@ -103,10 +103,10 @@
                                                                         </b-icon>
                                                                     </b-button> -->
                                                                     <b-button v-b-modal
-                                                                        :style="item.car_id == activeItem ? 'background: green !important;' : ''"
+                                                                        :style="item.car_id == activeItem.car ? 'background: green !important;' : ''"
                                                                         @click="selectCar(item.car_id)">
                                                                         <b-icon
-                                                                            :icon="item.car_id == activeItem ? 'check-circle': 'check'">
+                                                                            :icon="item.car_id == activeItem.car ? 'check-circle': 'check'">
                                                                         </b-icon>
                                                                     </b-button>
                                                                 </div>
@@ -187,7 +187,11 @@ export default {
             currentPage: 1,
             value: '',
             newDate: new Date(),
-            activeItem: null,
+            activeItem: {
+                salesperson: null,
+                customer: null,
+                car: null
+            },
             invoice: {
                 salesperson_id: null,
                 customer_id: null,
@@ -252,20 +256,20 @@ export default {
         selectSalesperson(salesperson_id) {
             this.invoice.salesperson_id = salesperson_id
             console.log(salesperson_id);
-            this.activeItem = salesperson_id;
+            this.activeItem.salesperson = salesperson_id;
 
         },
 
         selectCustomer(customer_id) {
             this.invoice.customer_id = customer_id
             console.log(customer_id);
-            this.activeItem = customer_id;
+            this.activeItem.customer = customer_id;
         },
 
         selectCar(car_id) {
             this.invoice.car_id = car_id
             console.log(car_id);
-            this.activeItem = car_id;
+            this.activeItem.car = car_id;
         },
 
         onRowSelected(listSalesperson) {

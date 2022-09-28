@@ -11,7 +11,7 @@
               <b-row class="d-flex justify-content-between">
                 <DashboardCard title="Sales" icon="cart4" description="Total Sales" :value="salesPerMonth" />
                 <DashboardCard title="Revenue" icon="cash-stack" description="Total Profit"
-                  :value="monthlyRevenuelist" />
+                  :value="monthlyRevenuelist | abbr" />
                 <DashboardCard title="Customers" icon="people" description="Customers" :value="listCustomersPerMonth" />
               </b-row>
               <b-row class="mt-5 d-flex flex-column justify-content-between">
@@ -90,6 +90,16 @@ export default {
       value: null
     };
   },
+
+  filters: {
+    abbr: function (num) {
+      if (String(num).length < 7) {
+        return Math.floor(num / 1000) + 'K';
+      } else {
+        return Math.floor(num / 1000000) + 'M';
+      }
+    }
+  }
 };
 </script>
 
