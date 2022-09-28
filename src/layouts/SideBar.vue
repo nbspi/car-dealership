@@ -50,6 +50,11 @@
                             <b-icon class="mr-3" icon="person-lines-fill" aria-hidden="true"></b-icon>Salesperson
                         </router-link>
                     </div>
+                    <div class="mb-2 inactive">
+                        <router-link to="/user" class="nav-link d-flex align-items-center" exact>
+                            <b-icon class="mr-3" icon="person-circle" aria-hidden="true"></b-icon>User
+                        </router-link>
+                    </div>
                 </b-nav>
             </nav>
         </div>
