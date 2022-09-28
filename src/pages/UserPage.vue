@@ -10,17 +10,16 @@
                             <h4 class="px-3">Add User</h4>
                             <b-row>
                                 <b-col cols="4" class="d-flex justify-content-center align-items-center">
-                                    <div class="">
-                                        <b-avatar
-                                            src="https://i.pinimg.com/564x/99/4a/15/994a150a2021137245d42f47d3f27bbf.jpg"
-                                            size="10rem"></b-avatar>
+                                    <div>
+                                        <b-avatar id="avatar" :src="require('../assets/img/avatar3.png')" size="10rem">
+                                        </b-avatar>
                                     </div>
                                 </b-col>
-                                <b-col class="mt-3">
+                                <b-col>
                                     <b-form @submit.prevent>
                                         <div class="d-flex">
                                             <b-col>
-                                                <div class="form-group mb-3">
+                                                <div class="form-group mb-2">
                                                     <b-form-group label="First Name" class="ml-2"
                                                         :state="register.firstname">
                                                     </b-form-group>
@@ -29,7 +28,7 @@
                                                         required>
                                                     </b-form-input>
                                                 </div>
-                                                <div class="form-group mb-3">
+                                                <div class="form-group mb-2">
                                                     <b-form-group label="Last Name" class="ml-2"
                                                         :state="register.lastname">
                                                     </b-form-group>
@@ -38,9 +37,7 @@
                                                         required>
                                                     </b-form-input>
                                                 </div>
-                                            </b-col>
-                                            <b-col>
-                                                <div class="form-group mb-3">
+                                                <div class="form-group mb-2">
                                                     <b-form-group label="Email Address" class="ml-2"
                                                         :state="register.email">
                                                     </b-form-group>
@@ -49,7 +46,9 @@
                                                         required>
                                                     </b-form-input>
                                                 </div>
-                                                <div class="form-group mb-3">
+                                            </b-col>
+                                            <b-col>
+                                                <div class="form-group mb-2">
                                                     <b-form-group label="Password" class="ml-2"
                                                         :state="register.password">
                                                     </b-form-group>
@@ -57,6 +56,16 @@
                                                         placeholder="Enter Password" v-model="register.password"
                                                         required>
                                                     </b-form-input>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <b-form-group label="Confirm Password" class="ml-2"
+                                                        :state="register.confirm_password">
+                                                    </b-form-group>
+                                                    <b-form-input id="password" type="password"
+                                                        @keyup="passwordValidation()" placeholder="Confirm Password"
+                                                        v-model="register.confirmpassword" required>
+                                                    </b-form-input>
+                                                    <span id="wrong_pass_alert"></span>
                                                 </div>
                                             </b-col>
                                         </div>
@@ -144,7 +153,7 @@
                     <b-form-group label="Email Address" class="ml-2">
                     </b-form-group>
                     <b-form-input id="email" placeholder="Enter Email Address" type="email" v-model="item.email"
-                        autocomplete="off" required>
+                        autocomplete="off" disabled>
                     </b-form-input>
                 </div>
                 <div class="modal-form__form-group mb-3">
@@ -209,13 +218,15 @@ export default {
                 email: null,
                 password: null,
                 firstname: null,
-                lastname: null
+                lastname: null,
+                confirm_password: null
             },
             state: {
                 email: null,
                 password: null,
                 firstname: null,
-                lastname: null
+                lastname: null,
+                confirm_password: null
             },
             item: {
                 user_id: null,
@@ -250,7 +261,7 @@ export default {
             };
             this.$bvModal.show("modal-form")
         },
-        
+
         showDeleteModal(item) {
             this.item = {
                 user_id: item.user_id,
@@ -352,6 +363,21 @@ export default {
             } else {
                 return false;
             }
+        },
+
+        passwordValidation() {
+            if (this.register.password != this.register.confirm_password) {
+                // this.showAlert("Warning: Password do not match", "danger");
+                document.getElementById('wrong_pass_alert').style.color = 'red';
+                document.getElementById('wrong_pass_alert').innerHTML
+                    = '☒ Use same password';
+            } else {
+                // this.showAlert("Nice", "success");
+                document.getElementById('wrong_pass_alert').style.color = 'green';
+                document.getElementById('wrong_pass_alert').innerHTML
+                  = '☒ Use same password';
+
+            }
         }
     }
 }
@@ -364,5 +390,9 @@ nav {
 
 div.py-2 {
     padding: 0 !important;
+}
+
+#avatar {
+    outline: none !important;
 }
 </style>

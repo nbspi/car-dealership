@@ -150,7 +150,7 @@ legend {
 }
 
 input:focus,
-#textarea {
+#textarea:focus {
     border: solid 1px var(--primary-color) !important;
 }
 
@@ -175,4 +175,9 @@ input::-webkit-inner-spin-button {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+}
+
+#avatar {
+    outline: none !important;
+    border: none !important;
 }

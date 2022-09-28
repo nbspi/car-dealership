@@ -73,7 +73,7 @@ const routes = [
     component: AboutPage,
   },
   {
-    path: "/add-service-ticket",
+    path: "/service-ticket/add-ticket",
     name: "AddServiceTicket",
     component: AddServiceTicket,
   },

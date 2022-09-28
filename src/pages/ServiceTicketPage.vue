@@ -6,7 +6,7 @@
                 <HeaderComponent title="Ticket" />
                 <b-container fluid class="pt-2">
                     <b-row class="my-2 d-flex justify-content-end px-3">
-                        <router-link to="/add-service-ticket" class="btn btn-success" exact>Add Service Ticket
+                        <router-link to="/service-ticket/add-ticket" class="btn btn-success" exact>Add Service Ticket
                         </router-link>
                     </b-row>
                     <b-row class="d-flex justify-content-center my-3">
@@ -115,8 +115,6 @@ export default {
             },
             fields: [
                 { key: "service_ticket_number", label: "Ticket No.", sortable: true },
-                // { key: "date_received", label: "Date Received", sortable: true },
-                // { key: "date_returned", label: "Date Returned", sortable: true },
                 { key: "customer_name", label: "Customer", sortable: true },
                 { key: "mechanic_name", label: "Mechanic", sortable: true },
                 { key: "serial_number", label: "Serial No.", sortable: true },

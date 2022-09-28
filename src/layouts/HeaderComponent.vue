@@ -15,7 +15,7 @@
                     </b-button>
                 </b-nav-form>
                 <div>
-                    <b-avatar variant="secondary"></b-avatar>
+                    <b-avatar id="avatar" :src="require('../assets/img/avatar3.png')"></b-avatar>
                     <b-dropdown :text="currentUser.firstname + ` ` + currentUser.lastname" variant="secondary"
                         class="user-dropdown m-2">
                         <b-dropdown-item href="#">Profile</b-dropdown-item>

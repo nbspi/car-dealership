@@ -21,7 +21,7 @@
                         </router-link>
                     </div>
                     <div class="mb-2 inactive">
-                        <router-link to="/cars" class="nav-link d-flex align-items-center" exact>
+                        <router-link to="/cars" router-link-active class="nav-link d-flex align-items-center">
                             <b-icon class="mr-3" icon="truck" aria-hidden="true"></b-icon>Cars
                         </router-link>
                     </div>
@@ -36,7 +36,7 @@
                         </router-link>
                     </div>
                     <div class="mb-2 inactive">
-                        <router-link to="/service-ticket" class="nav-link d-flex align-items-center" exact>
+                        <router-link to="/service-ticket" class="nav-link d-flex align-items-center">
                             <b-icon class="mr-3" icon="sliders" aria-hidden="true"></b-icon>Service Ticket
                         </router-link>
                     </div>
@@ -76,6 +76,10 @@ export default {
     background: linear-gradient(145deg, rgba(104, 118, 172, 1) 0%, rgba(130, 155, 184, 1) 100%);
 
 }
+
+/* a.router-link-active {
+    border: 1px solid red;
+} */
 
 .sidebar a:hover:not(.active) {
     background-color: var(--primary-color);
