@@ -28,7 +28,7 @@
             <b-col md="12" lg="6" class="py-5 d-flex justify-content-center align-items-center">
                 <b-col cols="8" class="text-container">
                     <h6>The Best Car Facility in Town </h6>
-                    <h1 text-justify>Lou Geh Car Dealership & Service Facility</h1>
+                    <h1 class="title" text-justify>Lou Geh Car Dealership & Service Facility</h1>
                     <div class="text-justify mt-2">
                         <h6>The Lou Geh Car Dealership provides many of the best services to its customers which makes
                             it efficient. XD
@@ -46,7 +46,7 @@
             </b-col>
             <b-col md="12" lg="6">
                 <div class="d-flex justify-content-center">
-                    <img class="hero-img" src="../assets/img/4.svg" alt="">
+                    <img class="hero-img" src="../assets/img/4.svg" alt="car-driving.svg">
                 </div>
 
             </b-col>
@@ -54,7 +54,7 @@
         <b-row class="bottom-container pt-4">
             <b-col class="d-flex justify-content-center">
                 <div class="card">
-                    <img src="../assets/img/1.png" alt="">
+                    <img src="../assets/img/1.png" alt="affordable-rates.png">
                     <div class="d-flex justify-content-center">
                         <p>Affordable Rates</p>
                     </div>
@@ -62,7 +62,7 @@
             </b-col>
             <b-col class="d-flex justify-content-center">
                 <div class="card">
-                    <img src="../assets/img/2.png" alt="">
+                    <img src="../assets/img/2.png" alt="service-experts.png">
                     <div class="d-flex justify-content-center">
                         <p>Service Experts</p>
                     </div>
@@ -70,7 +70,7 @@
             </b-col>
             <b-col class="d-flex justify-content-center">
                 <div class="card">
-                    <img src="../assets/img/3.png" alt="">
+                    <img src="../assets/img/3.png" alt="hassle-free.png">
                     <div class="d-flex justify-content-center">
                         <p>Hassle-Free Transaction</p>
                     </div>
@@ -112,7 +112,7 @@ export default {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2390accc' fill-opacity='0.07'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1470px) {
     .card {
         margin: 20px 0px 20px 0px !important;
     }
@@ -191,12 +191,12 @@ export default {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-    color: var(--primary-color);
+    color: #f9c74f;
 }
 
 .navbar .active {
     font-weight: 600;
-    color: #fff;
+    color: #fdfffc;
 }
 
 .navbar .active:hover {
@@ -255,5 +255,9 @@ h1 {
 .register-btn:active {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
+}
+
+.title {
+    color: #372549 !important;
 }
 </style>

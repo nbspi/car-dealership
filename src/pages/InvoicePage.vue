@@ -39,7 +39,7 @@
                                                         <template v-slot:cell(actions)="{item}">
                                                             <div class="d-flex justify-content-center">
                                                                 <div>
-                                                                    <b-button v-b-modal
+                                                                    <b-button v-b-modal :state="invoice.salesperson_id"
                                                                         :style="item.salesperson_id == activeItem.salesperson ? 'background: green !important;' : ''"
                                                                         @click="selectSalesperson(item.salesperson_id)">
                                                                         <b-icon
@@ -70,7 +70,7 @@
                                                                         <b-icon class="delete-btn" icon="trash-fill">
                                                                         </b-icon>
                                                                     </b-button> -->
-                                                                    <b-button v-b-modal
+                                                                    <b-button v-b-modal :state="invoice.customer_id"
                                                                         :style="item.customer_id == activeItem.customer ? 'background: green !important;' : ''"
                                                                         @click="selectCustomer(item.customer_id)">
                                                                         <b-icon
@@ -102,7 +102,7 @@
                                                                         <b-icon class="delete-btn" icon="trash-fill">
                                                                         </b-icon>
                                                                     </b-button> -->
-                                                                    <b-button v-b-modal
+                                                                    <b-button v-b-modal :state="invoice.car_id"
                                                                         :style="item.car_id == activeItem.car ? 'background: green !important;' : ''"
                                                                         @click="selectCar(item.car_id)">
                                                                         <b-icon
@@ -197,6 +197,11 @@ export default {
                 customer_id: null,
                 car_id: null,
             },
+            state: {
+                salesperson_id: null,
+                customer_id: null,
+                car_id: null,
+            },
             fields: [
                 { key: "invoice_number", label: "Invoice Number", sortable: true },
                 {
@@ -250,7 +255,7 @@ export default {
         async addInvoice() {
             await this.$store.dispatch("createInvoice", this.invoice);
             console.log(this.invoice)
-            // location.reload();
+            location.reload();
         },
 
         selectSalesperson(salesperson_id) {
@@ -278,6 +283,12 @@ export default {
 
         deleteInvoice(invoice_number) {
             console.log(invoice_number)
+        },
+
+        validation() {
+            if (this.invoice.salesperson_id == null ) {
+                this.state.salesperson_id = false;
+            }
         }
     }
 }

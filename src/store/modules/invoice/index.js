@@ -32,8 +32,5 @@ export default {
       state.invoiceState = invoiceState;
     },
 
-    ADD_INVOICE(state, data) {
-      state.invoiceState.push(data);
-    },
   },
 };
