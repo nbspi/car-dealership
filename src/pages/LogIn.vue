@@ -277,6 +277,12 @@ body {
   }
 }
 
+@media (max-width: 720px) {
+  .car {
+    width: 100%;
+  }
+}
+
 .right {
   padding-top: 20px;
 }

@@ -30,22 +30,22 @@
                                                     </b-form-input>
                                                 </div>
                                                 <div class="form-group mb-3">
-                                                    <b-form-group label="Email Address" class="ml-2"
-                                                        :state="register.email">
+                                                    <b-form-group label="Last Name" class="ml-2"
+                                                        :state="register.lastname">
                                                     </b-form-group>
-                                                    <b-form-input id="email" type="email"
-                                                        placeholder="Enter Email Address" v-model="register.email"
+                                                    <b-form-input id="lastname" type="text"
+                                                        placeholder="Enter Last Name" v-model="register.lastname"
                                                         required>
                                                     </b-form-input>
                                                 </div>
                                             </b-col>
                                             <b-col>
                                                 <div class="form-group mb-3">
-                                                    <b-form-group label="Last Name" class="ml-2"
-                                                        :state="register.lastname">
+                                                    <b-form-group label="Email Address" class="ml-2"
+                                                        :state="register.email">
                                                     </b-form-group>
-                                                    <b-form-input id="lastname" type="text"
-                                                        placeholder="Enter Last Name" v-model="register.lastname"
+                                                    <b-form-input id="email" type="email"
+                                                        placeholder="Enter Email Address" v-model="register.email"
                                                         required>
                                                     </b-form-input>
                                                 </div>
@@ -206,7 +206,6 @@ export default {
             },
             modalShow: false,
             register: {
-                user_id: null,
                 email: null,
                 password: null,
                 firstname: null,
@@ -243,6 +242,7 @@ export default {
     methods: {
         showUpdateModal(item) {
             this.item = {
+                user_id: item.user_id,
                 firstname: item.firstname,
                 lastname: item.lastname,
                 email: item.email,
@@ -253,6 +253,7 @@ export default {
         
         showDeleteModal(item) {
             this.item = {
+                user_id: item.user_id,
                 firstname: item.firstname,
                 lastname: item.lastname,
                 email: item.email,
@@ -335,7 +336,7 @@ export default {
             } else {
                 this.state.lastname = true;
 
-            } if (this.regiser.email == null || this.regiser.email.length < 1) {
+            } if (this.register.email == null || this.register.email.length < 1) {
                 this.state.email = false;
             } else {
                 this.state.email = true;

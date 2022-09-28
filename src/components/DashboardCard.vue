@@ -25,16 +25,16 @@ export default {
     name: "DashboardCard",
     props: {
         title: {
-            type: String
+            type: Object.String
         },
         icon: {
-            type: String
+            type: Object.String
         },
         description: {
-            type: String
+            type: Object.String
         },
         value: {
-            type: String
+            type: Object.String
         }
     }
 }
