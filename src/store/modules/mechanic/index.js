@@ -12,43 +12,81 @@ export default {
   },
   actions: {
     async addMechanic({ commit }, data) {
-      const response = await axios.post(`${API_URL}/mechanic/add`, {
-        firstname: data.firstname,
-        lastname: data.lastname,
-        contact: data.contact,
-      });
-      console.log(response);
-      commit("ADD_MECHANIC", response.data);
+      return await axios({
+        method: "POST",
+        url: `${API_URL}/mechanic/add`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        data: {
+          firstname: data.firstname,
+          lastname: data.lastname,
+          contact: data.contact,
+        },
+      })
+        .then((response) => {
+          commit("ADD_MECHANIC", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     async fetchMechanic({ commit }) {
-      const response = await axios.get(`${API_URL}/mechanic`);
-      console.log(response);
-      commit("FETCH_ALL_MECHANIC", response.data);
+      return await axios({
+        method: "GET",
+        url: `${API_URL}/mechanic`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          commit("FETCH_ALL_MECHANIC", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
+
 
     async deleteMechanic({ commit }, mechanic_id) {
-      const response = await axios.patch(
-        `${API_URL}/mechanic/delete/${mechanic_id}`
-      );
-
-      commit("DELETE_MECHANIC", response.data);
-      console.log(response.data);
+      return await axios({
+        method: "PATCH",
+        url: `${API_URL}/mechanic/delete/${mechanic_id}`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          commit("DELETE_MECHANIC", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
+
     async editMechanic({ commit }, mechanic) {
-      await axios
-        .put(`${API_URL}/mechanic/edit/${mechanic.mechanic_id}`, {
+      return await axios({
+        method: "PUT",
+        url: `${API_URL}/mechanic/edit/${mechanic.mechanic_id}`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        data: {
           firstname: mechanic.firstname,
           lastname: mechanic.lastname,
           contact: mechanic.contact,
-        })
+        },
+      })
         .then((response) => {
           commit("UPDATE_MECHANIC", response.data);
-          console.log(response.data);
-          return response;
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
+
   },
   mutations: {
     FETCH_ALL_MECHANIC(state, mechanicState) {

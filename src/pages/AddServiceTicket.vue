@@ -20,14 +20,7 @@
                                     <b-form>
                                         <div class="d-flex">
                                             <b-col cols="6" class="mt-3">
-                                                <!-- @service ticket number -->
-                                                <div class="mb-3">
-                                                    <b-form-group label="Service Ticket Number" id="label" class="ml-2"
-                                                        :state="ticket.service_ticket_number">
-                                                    </b-form-group>
-                                                    <b-form-input placeholder="Enter Serial Number"
-                                                        v-model="ticket.service_ticket_number" required></b-form-input>
-                                                </div>
+                                               
 
                                                 <!-- @date received -->
                                                 <div class="mb-3">
@@ -38,40 +31,79 @@
                                                     </b-form-datepicker>
                                                 </div>
 
-                                                <!-- @date returned -->
+                                                
+                                                <!-- @mechanic -->
                                                 <div class="mb-3">
                                                     <b-form-group label="Mechanic Name" id="label" class="ml-2"
-                                                        :state="ticket.mechanic_name">
+                                                        :state="ticket.mechanic_id">
                                                     </b-form-group>
-                                                    <b-form-input placeholder="Enter Mechanic Name"
-                                                        v-model="ticket.mechanic_name" required>
-                                                    </b-form-input>
+                                                    <b-button block v-b-modal.mechanic-modal>Select</b-button>
+                                                    <!-- <b-form-input placeholder="Enter Mechanic Name"
+                                                        v-model="ticket.mechanic_id" required>
+                                                    </b-form-input> -->
                                                 </div>
 
-                                                <!-- @brand -->
+                                                <b-modal id="mechanic-modal" title="Mechanic" centered size="xl">
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-table id="car-table" hover :items="listMechanic"
+                                                        :fields="mechanicFields">
+                                                        <template v-slot:cell(actions)="{item}">
+                                                            <div class="d-flex justify-content-center">
+                                                                <div>                                                                 
+                                                                    <b-button v-b-modal :state="ticket.mechanic_id"
+                                                                        :style="item.mechanic_id == activeItem.mechanic ? 'background: green !important;' : ''"
+                                                                        @click="selectMechanic(item.mechanic_id)">
+                                                                        <b-icon
+                                                                            :icon="item.mechanic_id == activeItem.mechanic ? 'check-circle': 'check'">
+                                                                        </b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </b-table>
+                                                </b-row>
+                                            </b-modal>
+                                                
+                                                <!-- @Car -->
                                                 <div class="mb-3">
-                                                    <b-form-group label="Brand" id="label" class="ml-2"
-                                                        :state="ticket.brand">
+                                                    <b-form-group label="Car" id="label" class="ml-2"
+                                                        :state="ticket.car_id">
                                                     </b-form-group>
-                                                    <b-form-input placeholder="Enter Brand" v-model="ticket.brand"
+                                                    <!-- <b-form-input placeholder="Enter Car" v-model="ticket.car_id"
                                                         required>
-                                                    </b-form-input>
+                                                    </b-form-input> -->
+
+                                                    <b-button block v-b-modal.car-modal>Select</b-button>
                                                 </div>
+
+                                                <b-modal id="car-modal" title="Car" centered size="xl">
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-table id="car-table" hover :items="listCars"
+                                                        :fields="carsFields">
+                                                        <template v-slot:cell(actions)="{item}">
+                                                            <div class="d-flex justify-content-center">
+                                                                <div>                                                                 
+                                                                    <b-button v-b-modal :state="ticket.car_id"
+                                                                        :style="item.car_id == activeItem.car ? 'background: green !important;' : ''"
+                                                                        @click="selectCar(item.car_id)">
+                                                                        <b-icon
+                                                                            :icon="item.car_id == activeItem.car ? 'check-circle': 'check'">
+                                                                        </b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </b-table>
+                                                </b-row>
+                                            </b-modal>
+
+
                                             </b-col>
 
                                             <b-col cols="6" class="mt-3">
-                                                <!-- @customer name -->
-                                                <div class="mb-3">
-                                                    <b-form-group label="Customer Name" id="label" class="ml-2"
-                                                        :state="ticket.customer_name">
-                                                    </b-form-group>
-                                                    <b-form-input placeholder="Enter Customer Name"
-                                                        v-model="ticket.customer_name" required>
-                                                    </b-form-input>
-                                                </div>
 
-                                                <!-- @date returned -->
-                                                <div class="mb-3">
+                                                 <!-- @date returned -->
+                                                 <div class="mb-3">
                                                     <b-form-group label="Date Returned" id="label" class="ml-2"
                                                         :state="ticket.date_returned">
                                                     </b-form-group>
@@ -79,25 +111,70 @@
                                                     </b-form-datepicker>
                                                 </div>
 
-                                                <!-- @Serial Number -->
+                                                <!-- @customer name -->
                                                 <div class="mb-3">
-                                                    <b-form-group label="Car Serial Number" id="label" class="ml-2"
-                                                        :state="ticket.serial_number">
+                                                    <b-form-group label="Customer Name" id="label" class="ml-2"
+                                                        :state="ticket.customer_id">
                                                     </b-form-group>
-                                                    <b-form-input placeholder="Enter Car Serial Number"
-                                                        v-model="ticket.serial_number" required>
-                                                    </b-form-input>
+                                                    <!-- <b-form-input placeholder="Enter Customer Name"
+                                                        v-model="ticket.customer_id" required>
+                                                    </b-form-input> -->
+                                                    <b-button block v-b-modal.customer-modal>Select</b-button>
+
                                                 </div>
 
-                                                <!-- @model -->
+                                                <b-modal id="customer-modal" title="Customer" centered size="xl">
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-table hover :items="listCustomers" :fields="customerFields">
+                                                        <template v-slot:cell(actions)="{item}">
+                                                            <div class="d-flex justify-content-center">
+                                                                <div>                                                      
+                                                                    <b-button v-b-modal :state="ticket.customer_id"
+                                                                        :style="item.customer_id == activeItem.customer ? 'background: green !important;' : ''"
+                                                                        @click="selectCustomer(item.customer_id)">
+                                                                        <b-icon
+                                                                            :icon="item.customer_id == activeItem.customer ? 'check-circle': 'check'">
+                                                                        </b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </b-table>
+                                                </b-row>
+                                            </b-modal>
+                                               
+
+                                                <!-- @Service -->
                                                 <div class="mb-3">
-                                                    <b-form-group label="Model" id="label" class="ml-2"
-                                                        :state="ticket.model">
+                                                    <b-form-group label="Service" id="label" class="ml-2"
+                                                        :state="ticket.service_id">
                                                     </b-form-group>
-                                                    <b-form-input placeholder="Enter Model" v-model="ticket.model"
-                                                        required>
-                                                    </b-form-input>
+                                                    <b-button block v-b-modal.service-modal>Select</b-button>
+                                                    <!-- <b-form-input placeholder="Enter Service"
+                                                        v-model="ticket.service_id" required>
+                                                    </b-form-input> -->
                                                 </div>
+
+                                                <b-modal id="service-modal" title="Service" centered size="xl">
+                                                <b-row class="d-flex justify-content-center">
+                                                    <b-table hover :items="listService" :fields="serviceFields">
+                                                        <template v-slot:cell(actions)="{item}">
+                                                            <div class="d-flex justify-content-center">
+                                                                <div>                                                      
+                                                                    <b-button v-b-modal :state="ticket.service_id"
+                                                                        :style="item.service_id == activeItem.service ? 'background: green !important;' : ''"
+                                                                        @click="selectService(item.service_id)">
+                                                                        <b-icon
+                                                                            :icon="item.service_id == activeItem.service ? 'check-circle': 'check'">
+                                                                        </b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </b-table>
+                                                </b-row>
+                                            </b-modal>
+
 
                                             </b-col>
                                         </div>
@@ -105,9 +182,9 @@
                                         <!-- @comment -->
                                         <div class="px-3 mb-3">
                                             <b-form-group label="Comment" id="label" class="ml-2"
-                                                :state="ticket.comment">
+                                                :state="ticket.comments">
                                             </b-form-group>
-                                            <b-form-textarea id="textarea" v-model="ticket.comment"
+                                            <b-form-textarea id="textarea" v-model="ticket.comments"
                                                 placeholder="Enter comment ..." rows="2" max-rows="6" required>
                                             </b-form-textarea>
                                         </div>
@@ -147,7 +224,7 @@
 <script>
 import SideBar from "../layouts/SideBar.vue";
 import HeaderComponent from "../layouts/HeaderComponent.vue";
-
+import { mapGetters, mapState } from 'vuex'
 export default {
     name: "AddCar",
     components: {
@@ -156,41 +233,40 @@ export default {
     },
     data() {
         return {
+            activeItem: {
+                mechanic: null,
+                customer: null,
+                car: null,
+                service: null
+            },
             ticket: {
-                service_ticket_id: null,
-                service_ticket_number: null,
                 date_received: null,
                 date_returned: null,
-                customer_name: null,
-                mechanic_name: null,
-                serial_number: null,
-                brand: null,
-                model: null,
-                comment: null
+                customer_id: null,
+                mechanic_id: null,
+                car_id: null,
+                service_id: null,
+                comments: null
             },
             item: {
                 service_ticket_id: null,
                 service_ticket_number: null,
                 date_received: null,
                 date_returned: null,
-                customer_name: null,
-                mechanic_name: null,
-                serial_number: null,
-                brand: null,
-                model: null,
-                comment: null
+                customer_id: null,
+                mechanic_id: null,
+                car_id: null,
+                service_id: null,
+                comments: null
             },
             state: {
-                service_ticket_id: null,
-                service_ticket_number: null,
                 date_received: null,
                 date_returned: null,
-                customer_name: null,
-                mechanic_name: null,
-                serial_number: null,
-                brand: null,
-                model: null,
-                comment: null
+                customer_id: null,
+                mechanic_id: null,
+                car_id: null,
+                service_id: null,
+                comments: null
             },
             alert: {
                 dismissSecs: 0,
@@ -198,9 +274,67 @@ export default {
                 variant: "",
                 message: ""
             },
+
+            customerFields: [
+                { key: "customer_id", label: "ID", sortable: true },
+                { key: "firstname", label: "First Name", sortable: true },
+                { key: "lastname", label: "Last Name", sortable: true },
+                { key: "contact", label: "Contact", sortable: true },
+                { key: "address", label: "Address", sortable: true },
+                { key: "actions", label: "Actions" },
+            ],
+
+            carsFields: [
+                { key: "serial_number", label: "Serial Number", sortable: true },
+                { key: "brand", label: "Brand", sortable: true },
+                { key: "model", label: "Model", sortable: true },
+                { key: "color", label: "Color", sortable: true },
+                { key: "year", label: "Year", sortable: true },
+                { key: "price", label: "Price", sortable: true },
+                { key: "actions", label: "Actions" },
+            ],
+
+            mechanicFields: [
+                { key: "mechanic_id", label: "ID", sortable: true },
+                { key: "firstname", label: "First Name", sortable: true },
+                { key: "lastname", label: "Last Name", sortable: true },
+                { key: "contact", label: "Contact", sortable: true },
+                { key: "actions", label: "Actions" },
+            ],
+            serviceFields: [
+                { key: "service_id", label: "ID", sortable: true },
+                { key: "service_name", label: "Service Name", sortable: true },
+                { key: "hourly_rate", label: "Hourly Rate", sortable: true },
+                { key: "actions", label: "Actions" },
+            ],
+
+
         };
     },
+    computed: {
+        ...mapState(['invoiceState']),
+        ...mapGetters({
+            invoiceList: "fetchInvoice",
+            listCustomers: "fetchCustomer",
+            listCars: "fetchCars",
+            listAvailableCars: "fetchAvailableCars",
+            listMechanic: "fetchMechanic",
+            listService: "fetchService",
+        }),
+        rows() {
+            return this.invoiceList.length
+        }
+    },
+    async mounted() {
+        await this.$store.dispatch("fetchCars");
+        await this.$store.dispatch("fetchInvoice");
+        await this.$store.dispatch("fetchCustomer");
+        await this.$store.dispatch("fetchAvailableCars");
+        await this.$store.dispatch("fetchService");
+        await this.$store.dispatch("fetchMechanic");
+        
 
+    },
     methods: {
         showAlert(message, variant) {
             this.alert = {
@@ -226,54 +360,73 @@ export default {
             }
         },
 
-        validation() {
-            if (this.ticket.service_ticket_number == null || this.service_ticket_number.length < 1) {
-                this.state.service_ticket_number = false;
-            } else {
-                this.state.service_ticket_number = true;
+        selectMechanic(mechanic_id) {
+            this.ticket.mechanic_id = mechanic_id
+            console.log(mechanic_id);
+            this.activeItem.mechanic = mechanic_id;
 
-            } if (this.ticket.date_received == null || this.ticket.date_received.length < 1) {
+        },
+
+        selectCustomer(customer_id) {
+            this.ticket.customer_id = customer_id
+            console.log(customer_id);
+            this.activeItem.customer = customer_id;
+        },
+
+        selectCar(car_id) {
+            this.ticket.car_id = car_id
+            console.log(car_id);
+            this.activeItem.car = car_id;
+        },
+
+        selectService(service_id ) {
+            this.ticket.service_id = service_id 
+            console.log(service_id );
+            this.activeItem.service = service_id ;
+        },
+
+
+        validation() {
+           
+
+            if (this.ticket.date_received == null || this.ticket.date_received.length < 1) {
                 this.state.date_received = false;
             } else {
                 this.state.date_received = true;
 
-            } if (this.ticket.mechanic_name == null || this.ticket.mechanic_name.length < 1) {
-                this.state.mechanic_name = false;
+            } if (this.ticket.mechanic_id == null || this.ticket.mechanic_id.length < 1) {
+                this.state.mechanic_id = false;
             } else {
-                this.state.mechanic_name = true;
+                this.state.mechanic_id = true;
 
-            } if (this.ticket.brand == null || this.ticket.brand.length < 1) {
-                this.state.brand = false;
+            } if (this.ticket.customer_id == null || this.ticket.customer_id.length < 1) {
+                this.state.customer_id = false;
             } else {
-                this.state.brand = true;
-
-            } if (this.ticket.customer_name == null || this.ticket.customer_name.length < 1) {
-                this.state.customer_name = false;
-            } else {
-                this.state.customer_name = true;
+                this.state.customer_id = true;
 
             } if (this.ticket.date_returned == null || this.ticket.date_returned.length < 1) {
                 this.state.date_returned = false;
             } else {
                 this.state.date_returned = true;
 
-            } if (this.ticket.serial_number == null || this.ticket.serial_number.length < 1) {
-                this.state.serial_number = false;
+            } if (this.ticket.service_id == null || this.ticket.service_id.length < 1) {
+                this.state.service_id = false;
             } else {
-                this.state.serial_number = true;
+                this.state.service_id = true;
 
-            } if (this.ticket.model == null || this.ticket.model.length < 1) {
-                this.state.model = false;
+            } if (this.ticket.car_id == null || this.ticket.car_id.length < 1) {
+                this.state.car_id = false;
             } else {
-                this.state.model = true;
+                this.state.car_id = true;
 
-            } if (this.ticket.comment == null || this.ticket.comment.length < 1) {
-                this.state.comment = false;
+            } if (this.ticket.comments == null || this.ticket.comments.length < 1) {
+                this.state.comments = false;
             } else {
-                this.state.comment = true;
+                this.state.comments = true;
             }
 
-            if (this.ticket.service_ticket_number != null && this.ticket.date_received != null && this.ticket.date_returned != null && this.ticket.mechanic_name != null && this.ticket.brand != null && this.ticket.customer_name != null && this.ticket.serial_number != null && this.ticket.model != null && this.ticket.comment != null) {
+            if (this.ticket.date_received != null && this.ticket.date_returned != null && 
+            this.ticket.mechanic_id != null && this.ticket.service_id != null && this.ticket.customer_id != null && this.ticket.car_id != null && this.ticket.comments != null) {
                 return true;
             } else {
                 return false;

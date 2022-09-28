@@ -64,12 +64,7 @@
                                                     <b-table hover :items="listCustomers" :fields="customerFields">
                                                         <template v-slot:cell(actions)="{item}">
                                                             <div class="d-flex justify-content-center">
-                                                                <div>
-                                                                    <!-- <b-button v-b-modal v-model="invoice.customer_id"
-                                                                        @click="selectCustomer(item.customer_id)">
-                                                                        <b-icon class="delete-btn" icon="trash-fill">
-                                                                        </b-icon>
-                                                                    </b-button> -->
+                                                                <div>                                                      
                                                                     <b-button v-b-modal :state="invoice.customer_id"
                                                                         :style="item.customer_id == activeItem.customer ? 'background: green !important;' : ''"
                                                                         @click="selectCustomer(item.customer_id)">
@@ -92,16 +87,11 @@
 
                                             <b-modal id="car-modal" title="Car" centered size="xl">
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-table id="car-table" hover :items="listCars"
+                                                    <b-table id="car-table" hover :items="listAvailableCars"
                                                         :fields="carsFields">
                                                         <template v-slot:cell(actions)="{item}">
                                                             <div class="d-flex justify-content-center">
-                                                                <div>
-                                                                    <!-- <b-button v-b-modal v-model="invoice.car_id"
-                                                                        @click="selectCar(item.car_id)">
-                                                                        <b-icon class="delete-btn" icon="trash-fill">
-                                                                        </b-icon>
-                                                                    </b-button> -->
+                                                                <div>                                                                 
                                                                     <b-button v-b-modal :state="invoice.car_id"
                                                                         :style="item.car_id == activeItem.car ? 'background: green !important;' : ''"
                                                                         @click="selectCar(item.car_id)">
@@ -132,7 +122,7 @@
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Invoice Records</h5>
                                     <b-table hover :items="invoiceList" :fields="fields" :per-page="perPage"
-                                        :current-page="currentPage">
+                                        :current-page="currentPage" responsive>
                                     </b-table>
                                     <b-row fluid class="mt-4 d-flex justify-content-end">
                                         <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
@@ -168,6 +158,7 @@ export default {
             invoiceList: "fetchInvoice",
             listCustomers: "fetchCustomer",
             listCars: "fetchCars",
+            listAvailableCars: "fetchAvailableCars",
             listSalesperson: "fetchSalesperson",
         }),
         rows() {
@@ -178,6 +169,7 @@ export default {
         await this.$store.dispatch("fetchCars");
         await this.$store.dispatch("fetchInvoice");
         await this.$store.dispatch("fetchCustomer");
+        await this.$store.dispatch("fetchAvailableCars");
         await this.$store.dispatch("fetchSalesperson");
     },
 
@@ -218,16 +210,10 @@ export default {
 
             ],
             salespersonFields: [
-                { key: "salesperson_id", label: "Invoice Number" },
-                {
-                    key: "created_at",
-                    label: "Invoice Date",
-                    formatter: (value) => {
-                        return moment(value).format("MMM DD, YYYY");
-                    },
-                },
-                { key: "firstname", label: "Salesperson Name" },
-                { key: "lastname", label: "Customer Name" },
+                { key: "salesperson_id", label: "Salesperson ID" },
+                { key: "firstname", label: "First Name" },
+                { key: "lastname", label: "Last Name" },
+                { key: "contact", label: "Contact", sortable: true },
                 { key: "actions", label: "Actions" },
             ],
             customerFields: [

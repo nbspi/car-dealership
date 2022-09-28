@@ -12,6 +12,8 @@ import ServiceTicketPage from "../pages/ServiceTicketPage.vue";
 import AddCar from "../pages/AddCar.vue";
 import AboutPage from "../pages/AboutPage.vue";
 import AddServiceTicket from "../pages/AddServiceTicket.vue";
+import EditServiceTicket from "../pages/EditServiceTicket.vue";
+
 import User from "../pages/UserPage.vue";
 
 Vue.use(VueRouter);
@@ -76,6 +78,11 @@ const routes = [
     path: "/service-ticket/add-ticket",
     name: "AddServiceTicket",
     component: AddServiceTicket,
+  },
+  {
+    path: "/service-ticket/edit-ticket/:id",
+    name: "EditServiceTicket",
+    component: EditServiceTicket,
   },
   {
     path: "/user",

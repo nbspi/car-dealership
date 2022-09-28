@@ -4,11 +4,17 @@ import { API_URL } from "../../../config/dev.env";
 export default {
   state: {
     carState: [],
+    availableCarsState: []
   },
   getters: {
     fetchCars: (state) => {
       return state.carState;
     },
+
+    fetchAvailableCars: (state) => {
+      return state.availableCarsState;
+    }, 
+
   },
   actions: {
     async addCar({ commit }, data) {
@@ -31,6 +37,12 @@ export default {
       commit("FETCH_ALL_CAR", response.data);
     },
 
+    async fetchAvailableCars({ commit }) {
+      const response = await axios.get(`${API_URL}/car/for-sale`);
+      console.log(response.data);
+      commit("FETCH_AVAILABLE_CARS", response.data);
+    },
+
     async deleteCar({ commit }, car_id) {
       const response = await axios.patch(`${API_URL}/car/delete/${car_id}`);
 
@@ -41,6 +53,10 @@ export default {
   mutations: {
     FETCH_ALL_CAR(state, carState) {
       state.carState = carState;
+    },
+
+    FETCH_AVAILABLE_CARS(state, availableCarsState) {
+      state.availableCarsState = availableCarsState;
     },
 
     DELETE_CAR(state, car_id) {

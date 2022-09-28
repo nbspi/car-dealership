@@ -20,7 +20,7 @@
                                         <template v-slot:cell(actions)="{ item }">
                                             <div class="d-flex justify-content-center">
                                                 <div>
-                                                    <b-button @click="showUpdateModal(item)">
+                                                    <b-button :to="{ name: 'EditServiceTicket', params: { id: item.service_ticket_id } }">
                                                         <b-icon class="edit-btn" icon="pencil-square"></b-icon>
                                                     </b-button>
                                                 </div>
@@ -128,6 +128,10 @@ export default {
         showModal(id) {
             this.index = id
         },
+        showEdit(ticket_id){
+            this.ticket.service_ticket_id = ticket_id
+            this.$router.push(`/service-ticket/edit-ticket/${ticket_id}`)
+        }
 
     }
 }
