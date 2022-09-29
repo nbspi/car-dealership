@@ -7,12 +7,12 @@
         <HeaderComponent title="Dashboard" />
         <b-container fluid class="pt-2">
           <b-row class="my-3">
-            <b-col cols="8">
+            <b-col sm="12" xl="8" class="upper-container px-2">
               <b-row class="d-flex justify-content-between">
-                <DashboardCard title="Sales" icon="cart4" description="Total Sales" :value="salesPerMonth" />
-                <DashboardCard title="Revenue" icon="cash-stack" description="Total Profit"
+                <DashboardCard id="sales" title="Total Sales" icon="cart4" description="Sales" :value="salesPerMonth" />
+                <DashboardCard id="revenue" title="Total Revenue" icon="cash-stack" description="Profit"
                   :value="monthlyRevenuelist | abbr" />
-                <DashboardCard title="Customers" icon="people" description="Customers" :value="listCustomersPerMonth" />
+                <DashboardCard id="customer" title="Customers" icon="people" description="Customers" :value="listCustomersPerMonth" />
               </b-row>
               <b-row class="mt-5 d-flex flex-column justify-content-between">
                 <h4 class="pl-2">Top Selling | <span>This Month</span></h4>
@@ -27,7 +27,7 @@
                 </b-col>
               </b-row>
             </b-col>
-            <b-col cols="4">
+            <b-col md="12" xl="4" class="table-container">
               <b-container class="recent-activity p-2">
                 <h5 class="px-3 mt-1">
                   <p>Recent Activity | <span>Today</span></p>
@@ -125,5 +125,15 @@ span {
 .recent-activity {
   background-color: var(--background-color);
   border-radius: 10px;
+}
+
+@media (max-width:1199px) {
+  .table-container {
+    margin-top: 20px;
+  }
+
+  /* .upper-container {
+    padding: 0px 20px 0px 20px;
+  } */
 }
 </style>

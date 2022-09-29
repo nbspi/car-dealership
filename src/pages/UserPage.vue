@@ -11,7 +11,7 @@
                             <b-row>
                                 <b-col cols="4" class="d-flex justify-content-center align-items-center">
                                     <div>
-                                        <b-avatar id="avatar" :src="require('../assets/img/avatar3.png')" size="10rem">
+                                        <b-avatar id="avatar" :src="require('../assets/img/avatar2.png')" size="10rem">
                                         </b-avatar>
                                     </div>
                                 </b-col>
@@ -65,7 +65,7 @@
                                                         @keyup="passwordValidation()" placeholder="Confirm Password"
                                                         v-model="register.confirm_password" required>
                                                     </b-form-input>
-                                                    <span id="wrong_pass_alert"></span>
+                                                    <span class="p-3" id="wrong_pass_alert"></span>
                                                 </div>
                                             </b-col>
                                         </div>
@@ -368,27 +368,20 @@ export default {
         passwordValidation() {
 
             if (this.register.password != this.register.confirm_password) {
-                // this.showAlert("Warning: Password do not match", "danger");
                 console.log(this.register.password.length)
                 document.getElementById('wrong_pass_alert').style.color = 'red';
-                
-                document.getElementById('wrong_pass_alert').innerHTML
-                    = '☒ Use same password';
-            } 
-            else {
-                    document.getElementById('wrong_pass_alert').style.color = 'green';
-                document.getElementById('wrong_pass_alert').innerHTML = 'Aju Nice!';     
-            }
-            // else if (this.register.password == this.register.confirm_password) {
-            //     // this.showAlert("Nice", "success");
-            //     document.getElementById('wrong_pass_alert').style.color = 'green';
-            //     document.getElementById('wrong_pass_alert').innerHTML = 'Aju Nice!';       
 
-            // }
-          
+                document.getElementById('wrong_pass_alert').innerHTML
+                    = 'Warning: Passwords do not match';
+            }
+            else {
+                document.getElementById('wrong_pass_alert').style.color = 'green';
+                document.getElementById('wrong_pass_alert').innerHTML = 'Aju Nice!';
+            }
+
         },
 
-   
+
     }
 }
 </script>
