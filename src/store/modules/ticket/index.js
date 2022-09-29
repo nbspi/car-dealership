@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../../config/dev.env";
-
+import router from "../../../router/index"
 export default {
   state: {
     ticketState: [],
@@ -36,15 +36,22 @@ export default {
       const response = await axios.patch(
         `${API_URL}/ticket/delete/${service_ticket_id}`
       );
-
+console.log(service_ticket_id);
       commit("DELETE_TICKET", response.data);
-      console.log(response.data);
+      // console.log(response.data);
     },
   },
   mutations: {
     FETCH_ALL_TICKET(state, ticketState) {
       state.ticketState = ticketState;
     },
+
+    ADD_TICKET(state, data) {
+      state.ticketState.push(data);
+      router.push("/service-ticket")
+    },
+
+ 
 
     DELETE_TICKET(state, service_ticket_id) {
       let index = state.ticketState.findIndex((ticket) => ticket.service_ticket_id == service_ticket_id);

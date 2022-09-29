@@ -17,7 +17,7 @@
                             <b-col class="">
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Service Ticket</h4>
-                                    <b-form>
+                                   
                                         <div class="d-flex">
                                             <b-col cols="6" class="mt-3">
                                                
@@ -197,7 +197,7 @@
                                             </div>
 
                                         </b-container>
-                                    </b-form>
+                                 
                                 </b-container>
 
                                 <div class="alert-container mt-3">
@@ -276,7 +276,7 @@ export default {
             },
 
             customerFields: [
-                { key: "customer_id", label: "ID", sortable: true },
+                // { key: "customer_id", label: "ID", sortable: true },
                 { key: "firstname", label: "First Name", sortable: true },
                 { key: "lastname", label: "Last Name", sortable: true },
                 { key: "contact", label: "Contact", sortable: true },
@@ -290,21 +290,43 @@ export default {
                 { key: "model", label: "Model", sortable: true },
                 { key: "color", label: "Color", sortable: true },
                 { key: "year", label: "Year", sortable: true },
-                { key: "price", label: "Price", sortable: true },
+                // { key: "price", label: "Price", sortable: true },
+                {
+                    key: "price", label: "Price", sortable: true,
+                    formatter: (price) => {
+                        let formatter = new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "Php",
+                            minimumFractionDigits: 2
+                        });
+                        return formatter.format(price);
+                    }
+                },
                 { key: "actions", label: "Actions" },
             ],
 
             mechanicFields: [
-                { key: "mechanic_id", label: "ID", sortable: true },
+                // { key: "mechanic_id", label: "ID", sortable: true },
                 { key: "firstname", label: "First Name", sortable: true },
                 { key: "lastname", label: "Last Name", sortable: true },
                 { key: "contact", label: "Contact", sortable: true },
                 { key: "actions", label: "Actions" },
             ],
             serviceFields: [
-                { key: "service_id", label: "ID", sortable: true },
+                // { key: "service_id", label: "ID", sortable: true },
                 { key: "service_name", label: "Service Name", sortable: true },
-                { key: "hourly_rate", label: "Hourly Rate", sortable: true },
+                // { key: "hourly_rate", label: "Hourly Rate", sortable: true },
+                {
+                    key: "hourly_rate", label: "Hourly Rate", sortable: true,
+                    formatter: (hourly_rate) => {
+                        let formatter = new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "Php",
+                            minimumFractionDigits: 2
+                        });
+                        return formatter.format(hourly_rate);
+                    }
+                },
                 { key: "actions", label: "Actions" },
             ],
 

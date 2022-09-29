@@ -47,12 +47,20 @@
         </b-row>
 
         <!--UPDATE MODAL-->
-        <b-modal id="modal-form" title="Edit Customer" @ok="editItem">
+        <b-modal id="modal-form" title="Edit Car" @ok="editItem">
             <div>
                 <div class="mb-3">
                     <b-form-group label="Serial Number" id="label" class="ml-2" :state="car.serial_number">
                     </b-form-group>
                     <b-form-input placeholder="Enter Serial Number" v-model="item.serial_number"></b-form-input>
+                </div>
+
+                <!-- @brand -->
+                <div class="mb-3">
+                    <b-form-group label="Brand" id="label" class="ml-2" :state="car.brand">
+                    </b-form-group>
+                    <b-form-input placeholder="Enter Brand" v-model="item.brand">
+                    </b-form-input>
                 </div>
 
                 <!-- @model -->
@@ -78,14 +86,6 @@
                     </b-form-input>
                 </div>
 
-                <!-- @brand -->
-                <div class="mb-3">
-                    <b-form-group label="Brand" id="label" class="ml-2" :state="car.brand">
-                    </b-form-group>
-                    <b-form-input placeholder="Enter Brand" v-model="item.brand">
-                    </b-form-input>
-                </div>
-
                 <!-- @color -->
                 <div class="mb-3">
                     <b-form-group label="Color" id="label" class="ml-2" :state="car.color">
@@ -96,12 +96,12 @@
 
                 <!-- @car_for_sale -->
                 <div class="mb-3">
-                    <b-form-group label="For Sale?" class="ml-2" :state="car.car_for_sale" v-slot="{ ariaDescribedby }">
+                    <b-form-group label="Brand new?" class="ml-2" :state="car.brand_new" v-slot="{ ariaDescribedby }">
                         <b-row class="d-flex">
-                            <b-form-radio v-model="item.car_for_sale" :aria-describedby="ariaDescribedby" value="true">
+                            <b-form-radio v-model="item.brand_new" :aria-describedby="ariaDescribedby" value="true">
                                 Yes
                             </b-form-radio>
-                            <b-form-radio class="ml-3" v-model="item.car_for_sale" :aria-describedby="ariaDescribedby"
+                            <b-form-radio class="ml-3" v-model="item.brand_new" :aria-describedby="ariaDescribedby"
                                 value="false">No
                             </b-form-radio>
                         </b-row>
@@ -162,7 +162,7 @@ export default {
                 price: null,
                 year: null,
                 color: null,
-                car_for_sale: null,
+                brand_new: null,
             },
             item: {
                 car_id: null,
@@ -172,7 +172,7 @@ export default {
                 price: null,
                 year: null,
                 color: null,
-                car_for_sale: null,
+                brand_new: null,
             },
             fields: [
                 { key: "serial_number", label: "Serial Number", sortable: true },
@@ -205,7 +205,7 @@ export default {
                 color: item.color,
                 year: item.year,
                 price: item.price,
-                car_for_sale: item.car_for_sale
+                brand_new: item.brand_new
             };
             this.$bvModal.show("modal-form")
         },
@@ -218,7 +218,7 @@ export default {
                 color: item.color,
                 year: item.year,
                 price: item.price,
-                car_for_sale: item.car_for_sale
+                brand_new: item.brand_new
             };
             this.$bvModal.show("delete-modal");
             console.log(item)

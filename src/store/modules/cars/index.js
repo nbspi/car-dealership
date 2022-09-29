@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../../config/dev.env";
+import router from "../../../router/index"
 
 export default {
   state: {
@@ -25,7 +26,7 @@ export default {
         color: data.color,
         year: data.year,
         price: data.price,
-        car_for_sale: data.car_for_sale
+        brand_new: data.brand_new,
       });
       console.log(response);
       commit("ADD_CAR", response.data);
@@ -49,8 +50,32 @@ export default {
       commit("DELETE_CAR", response.data);
       console.log(response.data);
     },
+
+    async editCar({ commit }, car) {
+      await axios
+        .put(`${API_URL}/car/edit/${car.car_id}`, {
+          serial_number: car.serial_number,
+          brand: car.brand,
+          model: car.model,
+          color: car.color,
+          year: car.year,
+          price: car.price,
+          brand_new: car.brand_new,
+        })
+        .then((response) => {
+          commit("UPDATE_CUSTOMER", response.data);
+          console.log(response.data);
+          return response;
+        });
+    },
+
   },
   mutations: {
+    ADD_CAR(state, data) {
+      state.carState.push(data);
+      router.push("/cars")
+    },
+    
     FETCH_ALL_CAR(state, carState) {
       state.carState = carState;
     },

@@ -21,10 +21,10 @@
                                             <template v-slot:cell(actions)="{ item }">
                                                 <div class="d-flex justify-content-center">
                                                     <div>
-                                                        <b-button
+                                                        <!-- <b-button
                                                             :to="{ name: 'EditServiceTicket', params: { id: item.service_ticket_id } }">
                                                             <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                                                        </b-button>
+                                                        </b-button> -->
                                                     </div>
                                                     <div>
                                                         <b-button v-b-modal @click="showDeleteModal(item)">
@@ -48,7 +48,7 @@
         </b-row>
 
         <!-- delete-modal -->
-        <b-modal id="delete-modal" title="Delete Confirmation">
+        <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem" >
             <b-row class="d-flex justify-content-center">
                 <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
 
@@ -109,11 +109,10 @@ export default {
                 service_ticket_number: null,
                 date_received: null,
                 date_returned: null,
-                customer_name: null,
-                mechanic_name: null,
-                serial_number: null,
-                brand: null,
-                model: null,
+                customer_id: null,
+                mechanic_id: null,
+                car_id: null,   
+                service_id: null,
                 comment: null
             },
             fields: [
@@ -131,11 +130,47 @@ export default {
         showModal(id) {
             this.index = id
         },
-        showEdit(ticket_id) {
-            this.ticket.service_ticket_id = ticket_id
-            this.$router.push(`/service-ticket/edit-ticket/${ticket_id}`)
-        }
+        // showEdit(ticket_id){
+        //     this.ticket.service_ticket_id = ticket_id
+        //     this.$router.push(`/service-ticket/edit-ticket/${ticket_id}`)
+        // },
 
+        showUpdateModal(item) {
+        this.item = {
+            mechanic_id: item.mechanic_id,
+            firstname: item.firstname,
+            lastname: item.lastname,
+            contact: item.contact
+      };
+      this.$bvModal.show("modal-form")
+    },
+
+    showDeleteModal(item) {
+        this.item = {
+            service_ticket_id: item.service_ticket_id,
+                service_ticket_number: item.service_ticket_number,
+                date_received: item.date_received,
+                date_returned: item.date_returned,
+                customer_id: item.customer_id,
+                mechanic_id: item.mechanic_id,
+                car_id: item.car_id,   
+                service_id: item.service_id,
+                comments: item.comments
+      };
+      this.$bvModal.show("delete-modal");
+      console.log(item);
+    },
+
+        async deleteItem() {
+            try {
+                await this.$store.dispatch("deleteTicket", this.item.service_ticket_id);
+                console.log(this.item.service_ticket_id)
+                this.$bvModal.hide("delete-modal")
+                location.reload()
+            } catch (error) {
+                console.log(error);
+            }
+    },
     }
 }
 </script>

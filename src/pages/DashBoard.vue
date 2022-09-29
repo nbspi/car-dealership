@@ -9,20 +9,48 @@
           <b-row class="my-3">
             <b-col sm="12" xl="8" class="upper-container px-2">
               <b-row class="d-flex justify-content-between">
-                <DashboardCard id="sales" title="Total Sales" icon="cart4" description="Sales" :value="salesPerMonth" />
-                <DashboardCard id="revenue" title="Total Revenue" icon="cash-stack" description="Profit"
-                  :value="monthlyRevenuelist | abbr" />
-                <DashboardCard id="customer" title="Customers" icon="people" description="Customers" :value="listCustomersPerMonth" />
+                <DashboardCard
+                  id="sales"
+                  title="Total Sales"
+                  icon="cart4"
+                  description="Sales"
+                  :value="salesPerMonth"
+                />
+                <DashboardCard
+                  id="revenue"
+                  title="Total Revenue"
+                  icon="cash-stack"
+                  description="Profit"
+                  :value="monthlyRevenuelist | abbr"
+                />
+                <DashboardCard
+                  id="customer"
+                  title="Customers"
+                  icon="people"
+                  description="Customers"
+                  :value="listCustomersPerMonth"
+                />
               </b-row>
               <b-row class="mt-5 d-flex flex-column justify-content-between">
                 <h4 class="pl-2">Top Selling | <span>This Month</span></h4>
                 <b-col class="mt-3">
-                  <b-table class="top-sellers" hover :items="listTopSellers" :per-page="perPage"
-                    :current-page="currentPage">
+                  <b-table
+                    class="top-sellers"
+                    hover
+                    :items="listTopSellers"
+                    :fields="fields"
+                    :per-page="perPage"
+                    :current-page="currentPage"
+                  >
                   </b-table>
                   <b-row fluid class="mt-4 d-flex justify-content-end">
-                    <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
-                      aria-controls="top-sellers"></b-pagination>
+                    <b-pagination
+                      pills
+                      v-model="currentPage"
+                      :total-rows="rows"
+                      :per-page="perPage"
+                      aria-controls="top-sellers"
+                    ></b-pagination>
                   </b-row>
                 </b-col>
               </b-row>
@@ -64,7 +92,7 @@ export default {
     HeaderComponent,
     SideBar,
     DashboardCard,
-    SpinnerLoad
+    SpinnerLoad,
   },
 
   computed: {
@@ -73,8 +101,8 @@ export default {
     ...mapGetters({ monthlyRevenuelist: "monthlyRevenueRecord" }),
     ...mapGetters({ listCustomersPerMonth: "monthlyCustomersRecord" }),
     rows() {
-      return this.listTopSellers.length
-    }
+      return this.listTopSellers.length;
+    },
   },
   mounted() {
     this.$store.dispatch("fetchTopSellersList");
@@ -87,19 +115,35 @@ export default {
     return {
       perPage: 5,
       currentPage: 1,
-      value: null
+      value: null,
+      fields: [
+        { key: "carbrand", label: "Car Brand" },
+        {
+          key: "brandsales",
+          label: "Brand Sales",
+          formatter: (price) => {
+            let formatter = new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "Php",
+              minimumFractionDigits: 2,
+            });
+            return formatter.format(price);
+          },
+        },
+        { key: "count", label: "Count" },
+      ],
     };
   },
 
   filters: {
     abbr: function (num) {
       if (String(num).length < 7) {
-        return Math.floor(num / 1000) + 'K';
+        return Math.floor(num / 1000) + "K";
       } else {
-        return Math.floor(num / 1000000) + 'M';
+        return Math.floor(num / 1000000) + "M";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -127,7 +171,7 @@ span {
   border-radius: 10px;
 }
 
-@media (max-width:1199px) {
+@media (max-width: 1199px) {
   .table-container {
     margin-top: 20px;
   }

@@ -40,7 +40,6 @@ export default {
         .put(`${API_URL}/user/edit/${register.user_id}`, {
           firstname: register.firstname,
           lastname: register.lastname,
-          email: register.email,
           password: register.password
         })
         .then((response) => {

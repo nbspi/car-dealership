@@ -17,7 +17,7 @@
                             <b-col class="">
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Car</h4>
-                                    <b-form class="d-flex">
+                                    <b-form @submit.prevent class="d-flex">
                                         <b-col cols="6" class="mt-3">
                                             <!-- @serial_number -->
                                             <div class="mb-3">
@@ -72,14 +72,14 @@
 
                                             <!-- @car_for_sale -->
                                             <div class="mb-3">
-                                                <b-form-group label="For Sale?" class="ml-2" :state="car.car_for_sale"
+                                                <b-form-group label="Brand New?" class="ml-2" :state="car.brand_new"
                                                     v-slot="{ ariaDescribedby }">
                                                     <b-row class="d-flex">
-                                                        <b-form-radio v-model="car.car_for_sale"
-                                                            :aria-describedby="ariaDescribedby" value="yes">Yes
+                                                        <b-form-radio v-model="car.brand_new"
+                                                            :aria-describedby="ariaDescribedby" value="true">Yes
                                                         </b-form-radio>
-                                                        <b-form-radio class="ml-3" v-model="car.car_for_sale"
-                                                            :aria-describedby="ariaDescribedby" value="no">No
+                                                        <b-form-radio class="ml-3" v-model="car.brand_new"
+                                                            :aria-describedby="ariaDescribedby" value="false">No
                                                         </b-form-radio>
                                                     </b-row>
                                                 </b-form-group>
@@ -127,14 +127,13 @@ export default {
     data() {
         return {
             car: {
-                car_id: null,
                 serial_number: null,
                 brand: null,
                 model: null,
                 price: null,
                 year: null,
                 color: null,
-                car_for_sale: null,
+                brand_new: null,
             },
             item: {
                 car_id: null,
@@ -144,7 +143,7 @@ export default {
                 price: null,
                 year: null,
                 color: null,
-                car_for_sale: null,
+                brand_new: null,
             },
             state: {
                 car_id: null,
@@ -154,7 +153,7 @@ export default {
                 price: null,
                 year: null,
                 color: null,
-                car_for_sale: null,
+                brand_new: null,
             },
             alert: {
                 dismissSecs: 0,
@@ -185,7 +184,7 @@ export default {
 
             } else {
                 this.$store.dispatch("addCar", this.car);
-                this.showAlert("Successfully Created", "success");
+                this.showAlert("Successfully Created", "success");              
             }
         },
 
@@ -195,39 +194,39 @@ export default {
             } else {
                 this.state.serial_number = true;
 
-            } if (this.car.brand == null || this.car.brandserial_number.length < 1) {
+            } if (this.car.brand == null || this.car.brand.length < 1) {
                 this.state.brand = false;
             } else {
                 this.state.brand = true;
 
-            } if (this.car.model == null || this.car.modelserial_number.length < 1) {
+            } if (this.car.model == null || this.car.model.length < 1) {
                 this.state.model = false;
             } else {
                 this.state.model = true;
 
-            } if (this.car.color == true || this.car.modelserial_number.length < 1) {
+            } if (this.car.color == true || this.car.color.length < 1) {
                 this.state.color = false;
             } else {
                 this.state.color = true;
 
-            } if (this.car.year == null || this.car.colorserial_number.length < 1) {
+            } if (this.car.year == null || this.car.year.length < 1) {
                 this.state.year = false;
             } else {
                 this.state.year = true;
 
-            } if (this.car.price == null || this.car.priceserial_number.length < 1) {
+            } if (this.car.price == null || this.car.price.length < 1) {
                 this.state.price = false;
             } else {
                 this.state.year = true;
 
-            } if (this.car.car_for_sale == null) {
-                this.state.car_for_sale = false;
+            } if (this.car.brand_new == null) {
+                this.state.brand_new = false;
             } else {
-                this.state.year = true;
+                this.state.brand_new = true;
             }
 
             if (this.car.serial_number != null && this.car.brand != null && this.car.model != null &&
-                this.car.color != null && this.car.year != null && this.car.price != null && this.car.car_for_sale != null) {
+                this.car.color != null && this.car.year != null && this.car.price != null && this.car.brand_new != null) {
                 return true;
             } else {
                 return false;
