@@ -73,7 +73,7 @@
                             <b-col class="table-container ">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
-                                    <div>
+                                    <div class="table-responsive" >
                                         <b-table id="customer-table" hover :items="customerList" :fields="fields"
                                             :per-page="perPage" :current-page="currentPage" class="text-left">
                                             <template v-slot:cell(actions)="{ item }">
@@ -92,13 +92,11 @@
                                                 </div>
                                             </template>
                                         </b-table>
-                                        <b-row fluid class="mt-4 d-flex justify-content-end">
-                                            <b-pagination pills v-model="currentPage" :total-rows="rows"
-                                                :per-page="perPage" aria-controls="customer-table"></b-pagination>
-                                        </b-row>
-
-
                                     </div>
+                                    <b-row fluid class="mt-4 d-flex justify-content-end">
+                                        <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
+                                            aria-controls="customer-table"></b-pagination>
+                                    </b-row>
                                 </b-container>
 
                             </b-col>

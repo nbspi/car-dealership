@@ -63,25 +63,27 @@
                             <b-col class="table-container">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Service List</h5>
-                                    <b-table hover :items="serviceList" :fields="fields" :per-page="perPage"
-                                        :current-page="currentPage">
-                                        <template v-slot:cell(actions)="{ item }">
-                                            <div class="d-flex justify-content-center">
+                                    <div class="table-responsive">
+                                        <b-table hover :items="serviceList" :fields="fields" :per-page="perPage"
+                                            :current-page="currentPage">
+                                            <template v-slot:cell(actions)="{ item }">
                                                 <div class="d-flex justify-content-center">
-                                                    <div>
-                                                        <b-button v-b-modal @click="showUpdateModal(item)">
-                                                            <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                                                        </b-button>
-                                                    </div>
-                                                    <div>
-                                                        <b-button v-b-modal @click="showDeleteModal(item)">
-                                                            <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                        </b-button>
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <b-button v-b-modal @click="showUpdateModal(item)">
+                                                                <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                            </b-button>
+                                                        </div>
+                                                        <div>
+                                                            <b-button v-b-modal @click="showDeleteModal(item)">
+                                                                <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                                                            </b-button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </template>
-                                    </b-table>
+                                            </template>
+                                        </b-table>
+                                    </div>
                                     <b-row fluid class="mt-4 d-flex justify-content-end">
                                         <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
                                             aria-controls="mechanic-table"></b-pagination>

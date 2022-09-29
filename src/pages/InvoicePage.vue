@@ -20,12 +20,11 @@
                                                 <b-form-datepicker id="datepicker" v-model="newDate"
                                                     :date-format-options="{
                                                       year: 'numeric',
-                                                      month: 'long',
+                                                      month: 'short',
                                                       day: '2-digit',
                                                     }" disabled>
                                                 </b-form-datepicker>
                                             </div>
-
                                             <div class="mb-3">
                                                 <b-form-group label="Salesperson" id="sales-modal" class="ml-2">
                                                 </b-form-group>
@@ -61,21 +60,23 @@
 
                                             <b-modal id="customer-modal" title="Customer" centered size="xl">
                                                 <b-row class="d-flex justify-content-center">
-                                                    <b-table hover :items="listCustomers" :fields="customerFields">
-                                                        <template v-slot:cell(actions)="{item}">
-                                                            <div class="d-flex justify-content-center">
-                                                                <div>                                                      
-                                                                    <b-button v-b-modal :state="invoice.customer_id"
-                                                                        :style="item.customer_id == activeItem.customer ? 'background: green !important;' : ''"
-                                                                        @click="selectCustomer(item.customer_id)">
-                                                                        <b-icon
-                                                                            :icon="item.customer_id == activeItem.customer ? 'check-circle': 'check'">
-                                                                        </b-icon>
-                                                                    </b-button>
+                                                    <div class="table-responsive">
+                                                        <b-table hover :items="listCustomers" :fields="customerFields">
+                                                            <template v-slot:cell(actions)="{item}">
+                                                                <div class="d-flex justify-content-center">
+                                                                    <div>
+                                                                        <b-button v-b-modal :state="invoice.customer_id"
+                                                                            :style="item.customer_id == activeItem.customer ? 'background: green !important;' : ''"
+                                                                            @click="selectCustomer(item.customer_id)">
+                                                                            <b-icon
+                                                                                :icon="item.customer_id == activeItem.customer ? 'check-circle': 'check'">
+                                                                            </b-icon>
+                                                                        </b-button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </template>
-                                                    </b-table>
+                                                            </template>
+                                                        </b-table>
+                                                    </div>
                                                 </b-row>
                                             </b-modal>
 
@@ -91,7 +92,7 @@
                                                         :fields="carsFields">
                                                         <template v-slot:cell(actions)="{item}">
                                                             <div class="d-flex justify-content-center">
-                                                                <div>                                                                 
+                                                                <div>
                                                                     <b-button v-b-modal :state="invoice.car_id"
                                                                         :style="item.car_id == activeItem.car ? 'background: green !important;' : ''"
                                                                         @click="selectCar(item.car_id)">
@@ -272,7 +273,7 @@ export default {
         },
 
         validation() {
-            if (this.invoice.salesperson_id == null ) {
+            if (this.invoice.salesperson_id == null) {
                 this.state.salesperson_id = false;
             }
         }
