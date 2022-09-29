@@ -185,7 +185,7 @@ export default {
                 message: ""
             },
             fields: [
-                { key: "service_id", label: "Service ID", sortable: true },
+                // { key: "service_id", label: "Service ID", sortable: true },
                 { key: "service_name", label: "Service Name", sortable: true },
                 {
                     key: "hourly_rate", label: "Hourly Rate", sortable: true,

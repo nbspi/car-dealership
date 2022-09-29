@@ -117,6 +117,7 @@ export default {
             },
             fields: [
                 { key: "service_ticket_number", label: "Ticket No.", sortable: true },
+                { key: "service_name", label: "Service Name", sortable: true },
                 { key: "customer_name", label: "Customer", sortable: true },
                 { key: "mechanic_name", label: "Mechanic", sortable: true },
                 { key: "serial_number", label: "Serial No.", sortable: true },

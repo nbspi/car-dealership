@@ -189,7 +189,7 @@ export default {
         message: ""
       },
       fields: [
-        { key: "mechanic_id", label: "ID", sortable: true },
+        // { key: "mechanic_id", label: "ID", sortable: true },
         { key: "firstname", label: "First Name", sortable: true },
         { key: "lastname", label: "Last Name", sortable: true },
         { key: "contact", label: "Contact", sortable: true },
