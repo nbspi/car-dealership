@@ -61,9 +61,9 @@
                                                     <b-form-group label="Confirm Password" class="ml-2"
                                                         :state="register.confirm_password">
                                                     </b-form-group>
-                                                    <b-form-input id="password" type="password"
+                                                    <b-form-input id="confirm_password" type="password"
                                                         @keyup="passwordValidation()" placeholder="Confirm Password"
-                                                        v-model="register.confirmpassword" required>
+                                                        v-model="register.confirm_password" required>
                                                     </b-form-input>
                                                     <span id="wrong_pass_alert"></span>
                                                 </div>
@@ -89,7 +89,7 @@
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">User List</h5>
                                     <b-table id="user-table" hover :items="registerList" :fields="fields"
-                                        :per-page="perPage" :current-page="currentPage">
+                                        :per-page="perPage" :current-page="currentPage" responsive>
                                         <template v-slot:cell(actions)="{ item }">
                                             <div class="d-flex justify-content-center">
                                                 <div class="d-flex justify-content-center">
@@ -366,19 +366,29 @@ export default {
         },
 
         passwordValidation() {
+
             if (this.register.password != this.register.confirm_password) {
                 // this.showAlert("Warning: Password do not match", "danger");
+                console.log(this.register.password.length)
                 document.getElementById('wrong_pass_alert').style.color = 'red';
+                
                 document.getElementById('wrong_pass_alert').innerHTML
                     = '☒ Use same password';
-            } else {
-                // this.showAlert("Nice", "success");
-                document.getElementById('wrong_pass_alert').style.color = 'green';
-                document.getElementById('wrong_pass_alert').innerHTML
-                  = '☒ Use same password';
-
+            } 
+            else {
+                    document.getElementById('wrong_pass_alert').style.color = 'green';
+                document.getElementById('wrong_pass_alert').innerHTML = 'Aju Nice!';     
             }
-        }
+            // else if (this.register.password == this.register.confirm_password) {
+            //     // this.showAlert("Nice", "success");
+            //     document.getElementById('wrong_pass_alert').style.color = 'green';
+            //     document.getElementById('wrong_pass_alert').innerHTML = 'Aju Nice!';       
+
+            // }
+          
+        },
+
+   
     }
 }
 </script>

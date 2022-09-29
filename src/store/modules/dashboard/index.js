@@ -4,9 +4,9 @@ import { API_URL } from "../../../config/dev.env";
 export default {
   state: {
     topSellers: [],
-    monthlySales: {},
-    monthlyRevenue: {},
-    monthlyCustomers: {},
+    monthlySales: 0,
+    monthlyRevenue: 0,
+    monthlyCustomers: 0,
   },
   getters: {
     topSellersList: (state) => {
@@ -23,27 +23,97 @@ export default {
     },
   },
   actions: {
+    // async fetchTopSellersList({ commit }) {
+    //   const response = await axios.get(`${API_URL}/top-sellers`);
+    //   console.log(response.data);
+    //   commit("SET_TOPSELLERS_LIST", response.data);
+    // },
+
     async fetchTopSellersList({ commit }) {
-      const response = await axios.get(`${API_URL}/top-sellers`);
-      console.log(response.data);
-      commit("SET_TOPSELLERS_LIST", response.data);
+      return await axios({
+        method: "GET",
+        url: `${API_URL}/top-sellers`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          commit("SET_TOPSELLERS_LIST", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
+    // async fetchMonthlySales({ commit }) {
+    //   const response = await axios.get(`${API_URL}/sales-number`);
+    //   console.log(response.data);
+    //   commit("SET_MONTHLY_SALES_LIST", response.data[0].count);
+    // },
+
+
     async fetchMonthlySales({ commit }) {
-      const response = await axios.get(`${API_URL}/sales-number`);
-      console.log(response.data);
-      commit("SET_MONTHLY_SALES_LIST", response.data[0].count);
+      return await axios({
+        method: "GET",
+        url: `${API_URL}/sales-number`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          commit("SET_MONTHLY_SALES_LIST", response.data[0].count);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
+
+    // async fetchMonthlyRevenue({ commit }) {
+    //   const response = await axios.get(`${API_URL}/monthly-revenue`);
+    //   console.log(response.data);
+    //   commit("SET_MONTHLY_REVENUE_LIST", response.data[0].month_revenue);
+    // },
+
     async fetchMonthlyRevenue({ commit }) {
-      const response = await axios.get(`${API_URL}/monthly-revenue`);
-      console.log(response.data);
-      commit("SET_MONTHLY_REVENUE_LIST", response.data[0].month_revenue);
+      return await axios({
+        method: "GET",
+        url: `${API_URL}/monthly-revenue`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          commit("SET_MONTHLY_REVENUE_LIST", response.data[0].month_revenue);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
+
+
+    // async fetchMonthlyCustomer({ commit }) {
+    //   const response = await axios.get(`${API_URL}/customers-count`);
+    //   console.log(response.data);
+    //   commit("SET_MONTHLY_CUSTOMERS_LIST", response.data[0].count);
+    // },
+
     async fetchMonthlyCustomer({ commit }) {
-      const response = await axios.get(`${API_URL}/customers-count`);
-      console.log(response.data);
-      commit("SET_MONTHLY_CUSTOMERS_LIST", response.data[0].count);
+      return await axios({
+        method: "GET",
+        url: `${API_URL}/customers-count`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          commit("SET_MONTHLY_CUSTOMERS_LIST", response.data[0].count);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
+
+
   },
   mutations: {
     SET_TOPSELLERS_LIST(state, topSellers) {

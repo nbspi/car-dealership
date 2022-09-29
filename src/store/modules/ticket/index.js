@@ -12,16 +12,14 @@ export default {
   },
   actions: {
     async addTicket({ commit }, data) {
-      const response = await axios.post(`${API_URL}/ticket/add`, {
-        service_ticket_number: data.service_ticket_number,
+      const response = await axios.post(`${API_URL}/ticket/create`, {
         date_received: data.date_received,
         date_returned: data.date_returned,
-        customer_name: data.customer_name,
-        mechanic_name: data.mechanic_name,
-        serial_number: data.serial_number,
-        brand: data.brand,
-        model: data.model,
-        comment: data.comment,
+        customer_id: data.customer_id,
+        mechanic_id: data.mechanic_id,
+        car_id: data.car_id,
+        service_id: data.service_id,
+        comments: data.comments,
       });
       console.log(response);
       commit("ADD_TICKET", response.data);
@@ -32,6 +30,7 @@ export default {
       console.log(response);
       commit("FETCH_ALL_TICKET", response.data);
     },
+
 
     async deleteTicket({ commit }, service_ticket_id) {
       const response = await axios.patch(

@@ -162,6 +162,8 @@ input::-webkit-inner-spin-button {
 
 #sales-modal .modal-content,
 #customer-modal .modal-content,
+#mechanic-modal .modal-content,
+#service-modal .modal-content,
 #car-modal .modal-content {
     width: 900px !important;
     height: auto !important;
@@ -171,6 +173,8 @@ input::-webkit-inner-spin-button {
 #modal-form,
 #sales-modal,
 #customer-modal,
+#mechanic-modal,
+#service-modal,
 #car-modal {
     display: flex !important;
     align-items: center !important;
