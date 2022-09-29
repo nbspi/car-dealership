@@ -15,23 +15,26 @@
                             <b-col class="table-container">
                                 <b-container fluid class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Service Ticket Records</h5>
-                                    <b-table id="ticket-table" hover :items="ticketList" :fields="fields"
-                                        :per-page="perPage" :current-page="currentPage">
-                                        <template v-slot:cell(actions)="{ item }">
-                                            <div class="d-flex justify-content-center">
-                                                <div>
-                                                    <b-button :to="{ name: 'EditServiceTicket', params: { id: item.service_ticket_id } }">
-                                                        <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                                                    </b-button>
+                                    <div class="table-responsive">
+                                        <b-table id="ticket-table" hover :items="ticketList" :fields="fields"
+                                            :per-page="perPage" :current-page="currentPage">
+                                            <template v-slot:cell(actions)="{ item }">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <b-button
+                                                            :to="{ name: 'EditServiceTicket', params: { id: item.service_ticket_id } }">
+                                                            <b-icon class="edit-btn" icon="pencil-square"></b-icon>
+                                                        </b-button>
+                                                    </div>
+                                                    <div>
+                                                        <b-button v-b-modal @click="showDeleteModal(item)">
+                                                            <b-icon class="delete-btn" icon="trash-fill"></b-icon>
+                                                        </b-button>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <b-button v-b-modal @click="showDeleteModal(item)">
-                                                        <b-icon class="delete-btn" icon="trash-fill"></b-icon>
-                                                    </b-button>
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </b-table>
+                                            </template>
+                                        </b-table>
+                                    </div>
                                     <b-row fluid class="mt-4 d-flex justify-content-end">
                                         <b-pagination pills v-model="currentPage" :total-rows="rows" :per-page="perPage"
                                             aria-controls="ticket-table"></b-pagination>
@@ -45,7 +48,7 @@
         </b-row>
 
         <!-- delete-modal -->
-        <b-modal id="delete-modal" title="Delete Confirmation" >
+        <b-modal id="delete-modal" title="Delete Confirmation">
             <b-row class="d-flex justify-content-center">
                 <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
 
@@ -128,7 +131,7 @@ export default {
         showModal(id) {
             this.index = id
         },
-        showEdit(ticket_id){
+        showEdit(ticket_id) {
             this.ticket.service_ticket_id = ticket_id
             this.$router.push(`/service-ticket/edit-ticket/${ticket_id}`)
         }
