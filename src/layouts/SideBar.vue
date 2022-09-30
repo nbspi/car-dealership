@@ -37,7 +37,7 @@
                     </div>
                     <div class="mb-2 inactive">
                         <router-link to="/service-ticket" class="nav-link d-flex align-items-center">
-                            <b-icon class="mr-3" icon="sliders" aria-hidden="true"></b-icon>Service Ticket
+                            <b-icon class="mr-3" icon="sliders" aria-hidden="true"></b-icon>Ticket
                         </router-link>
                     </div>
                     <div class="mb-2 inactive">

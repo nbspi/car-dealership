@@ -12,7 +12,7 @@
                 <DashboardCard id="sales" title="Total Car Sales" icon="cart4" description="Sales" :value="salesPerMonth" />
                 <DashboardCard id="revenue" title="Total Revenue" icon="cash-stack" description="Profit"
                   :value="monthlyRevenuelist | abbr" />
-                <DashboardCard id="customer" title="Customers" icon="people" description="Customers"
+                <DashboardCard id="customer" title="Customers" icon="people" description="Clients"
                   :value="listCustomersPerMonth" />
               </b-row>
               <b-row class="mt-5 d-flex flex-column justify-content-between">
@@ -47,7 +47,7 @@
                 </b-col>
 
               </b-row> -->
-              <b-row class="recent-activity p-2 mt-3">
+              <b-row class="recent-activity p-2">
                 <h5 class="px-3 mt-1">
                   <p>Recent Activity | <span>Today</span></p>
                 </h5>

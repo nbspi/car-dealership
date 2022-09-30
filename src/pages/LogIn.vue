@@ -40,7 +40,7 @@
                   <div class="d-flex">
                     <label for="email" class="form-label ml-2 " :state="password">Password</label>
                   </div>
-                  <input type="password" v-model="password" placeholder="At least 6 characters"
+                  <input type="password" v-model="password" placeholder="At least 8 characters"
                     class="form-control form-control-lg" autocomplete="off" required>
                 </div>
                 <br>
@@ -267,6 +267,14 @@ body {
   }
 }
 
+@media (max-width: 1440px) {
+  .lou-geh {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+
 .car {
   height: 75%;
 }
@@ -276,6 +284,7 @@ body {
     width: 65%;
   }
 }
+
 
 @media (max-width: 720px) {
   .car {

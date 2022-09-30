@@ -53,7 +53,7 @@
                                                         :state="register.password">
                                                     </b-form-group>
                                                     <b-form-input id="password" type="password"
-                                                        placeholder="Enter Password" v-model="register.password"
+                                                        placeholder="Enter Password" autocomplete="off" v-model="register.password"
                                                         required>
                                                     </b-form-input>
                                                 </div>
@@ -63,7 +63,7 @@
                                                     </b-form-group>
                                                     <b-form-input id="confirm_password" type="password"
                                                         @keyup="passwordValidation()" placeholder="Confirm Password"
-                                                        v-model="register.confirm_password" required>
+                                                        v-model="register.confirm_password" autocomplete="off" required>
                                                     </b-form-input>
                                                     <span class="p-3" id="wrong_pass_alert"></span>
                                                 </div>
@@ -378,7 +378,7 @@ export default {
             }
             else {
                 document.getElementById('wrong_pass_alert').style.color = 'green';
-                document.getElementById('wrong_pass_alert').innerHTML = 'Aju Nice!';
+                document.getElementById('wrong_pass_alert').innerHTML = 'Passwords Matched!';
             }
 
         },
