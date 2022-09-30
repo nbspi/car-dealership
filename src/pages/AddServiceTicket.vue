@@ -30,7 +30,6 @@
                                                     <b-form-datepicker :date-format-options="{ year: 'numeric', month: 'short', day: '2-digit', weekday: 'short' }" v-model="ticket.date_received">
                                                     </b-form-datepicker>
                                                 </div>
-
                                                 
                                                 <!-- @mechanic -->
                                                 <div class="mb-3">
@@ -38,9 +37,6 @@
                                                         :state="ticket.mechanic_id">
                                                     </b-form-group>
                                                     <b-button block v-b-modal.mechanic-modal>Select</b-button>
-                                                    <!-- <b-form-input placeholder="Enter Mechanic Name"
-                                                        v-model="ticket.mechanic_id" required>
-                                                    </b-form-input> -->
                                                 </div>
 
                                                 <b-modal id="mechanic-modal" title="Mechanic" centered size="xl">
@@ -69,10 +65,6 @@
                                                     <b-form-group label="Car" id="label" class="ml-2"
                                                         :state="ticket.car_id">
                                                     </b-form-group>
-                                                    <!-- <b-form-input placeholder="Enter Car" v-model="ticket.car_id"
-                                                        required>
-                                                    </b-form-input> -->
-
                                                     <b-button block v-b-modal.car-modal>Select</b-button>
                                                 </div>
 
@@ -116,9 +108,6 @@
                                                     <b-form-group label="Customer Name" id="label" class="ml-2"
                                                         :state="ticket.customer_id">
                                                     </b-form-group>
-                                                    <!-- <b-form-input placeholder="Enter Customer Name"
-                                                        v-model="ticket.customer_id" required>
-                                                    </b-form-input> -->
                                                     <b-button block v-b-modal.customer-modal>Select</b-button>
 
                                                 </div>
@@ -143,16 +132,12 @@
                                                 </b-row>
                                             </b-modal>
                                                
-
                                                 <!-- @Service -->
                                                 <div class="mb-3">
                                                     <b-form-group label="Service" id="label" class="ml-2"
                                                         :state="ticket.service_id">
                                                     </b-form-group>
                                                     <b-button block v-b-modal.service-modal>Select</b-button>
-                                                    <!-- <b-form-input placeholder="Enter Service"
-                                                        v-model="ticket.service_id" required>
-                                                    </b-form-input> -->
                                                 </div>
 
                                                 <b-modal id="service-modal" title="Service" centered size="xl">
@@ -174,7 +159,6 @@
                                                     </b-table>
                                                 </b-row>
                                             </b-modal>
-
 
                                             </b-col>
                                         </div>

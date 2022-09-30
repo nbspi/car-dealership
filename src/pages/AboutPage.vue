@@ -16,9 +16,6 @@
                             <li><a class="nav-link" href="#">Services</a></li>
                             <li><a class="nav-link" href="#">Portfolio</a></li>
                             <li><a class="nav-link" href="#">Contact</a></li>
-                            <!-- <li>
-                                <b-button variant="outline-primary" class="register-btn ml-4">Sign Up</b-button>
-                            </li> -->
                         </ul>
                     </nav>
                 </div>
@@ -35,7 +32,7 @@
                             <br>
                             Lorem ipsum dolor sit amet. Et quia dolor sed vitae quia id voluptatem laboriosam ea libero
                             modi et recusandae accusantium sit nihil! Est sapiente dolorum qui quia repellat laborum
-                            excepturi est dolores quis est dignissimos maiores ut voluptas nihil. 
+                            excepturi est dolores quis est dignissimos maiores ut voluptas nihil.
                         </h6>
 
                     </div>

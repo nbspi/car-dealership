@@ -70,7 +70,7 @@
                         </b-col>
                         <b-col md="12" lg="12" xl="9" class="py-2">
                             <!-- left container-->
-                            <b-col class="table-container ">
+                            <b-container fluid class="table-container ">
                                 <b-container class="container-card rounded p-3">
                                     <h5 class="px-3 mb-3">Customer Records</h5>
                                     <div class="table-responsive" >
@@ -99,7 +99,7 @@
                                     </b-row>
                                 </b-container>
 
-                            </b-col>
+                            </b-container>
                         </b-col>
                     </b-row>
                 </b-container>
@@ -348,4 +348,8 @@ div.py-2 {
 .delete-btn {
     color: #fff;
 }
+
+/* #customer-table {
+    width: 100%;
+} */
 </style>
