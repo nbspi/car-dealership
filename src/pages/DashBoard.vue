@@ -29,7 +29,7 @@
               </b-row>
             </b-col>
             <b-col md="12" xl="4" class="table-container">
-              <b-row class="recent-activity p-3">
+              <!-- <b-row class="recent-activity p-3">
                 <b-col>
                   <div class="d-flex justify-content-center">
                     <b-avatar id="avatar" :src="require('../assets/img/avatar2.png')" size="6rem">
@@ -46,7 +46,7 @@
                   </div>
                 </b-col>
 
-              </b-row>
+              </b-row> -->
               <b-row class="recent-activity p-2 mt-3">
                 <h5 class="px-3 mt-1">
                   <p>Recent Activity | <span>Today</span></p>
