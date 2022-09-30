@@ -12,40 +12,77 @@ export default {
   },
   actions: {
     async fetchRegister({ commit }) {
-      const response = await axios.get(`${API_URL}/users`);
-      console.log(response);
-      commit("FETCH_ALL_REGISTER", response.data);
+      return await axios({
+        method: "GET",
+        url: `${API_URL}/users`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          commit("FETCH_ALL_REGISTER", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     async addRegister({ commit }, data) {
-      const response = await axios.post(`${API_URL}/register`, {
-        firstname: data.firstname,
-        lastname: data.lastname,
-        email: data.email,
-        password: data.password,
-      });
-      console.log(response);
-      commit("ADD_REGISTER", response.data);
+      return await axios({
+        method: "POST",
+        url: `${API_URL}/register`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        data: {
+          firstname: data.firstname,
+          lastname: data.lastname,
+          email: data.email,
+          password: data.password,
+        },
+      })
+        .then((response) => {
+          commit("ADD_REGISTER", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     async deleteRegister({ commit }, user_id) {
-      const response = await axios.patch(`${API_URL}/user/delete/${user_id}`);
-
-      commit("DELETE_REGISTER", response.data);
-      console.log(response.data);
+      return await axios({
+        method: "PATCH",
+        url: `${API_URL}/user/delete/${user_id}`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+        .then((response) => {
+          commit("DELETE_REGISTER", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     async editRegister({ commit }, register) {
-      await axios
-        .put(`${API_URL}/user/edit/${register.user_id}`, {
+      return await axios({
+        method: "PUT",
+        url: `${API_URL}/user/edit/${register.user_id}`,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        data: {
           firstname: register.firstname,
           lastname: register.lastname,
-          password: register.password
-        })
+          password: register.password,
+        },
+      })
         .then((response) => {
           commit("UPDATE_REGISTER", response.data);
-          console.log(response.data);
-          return response;
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
   },
@@ -58,7 +95,7 @@ export default {
       let index = state.registerState.findIndex(
         (register) => register.user_id == user_id
       );
-      console.log(index);
+      
       state.registerState.splice(index, 0);
     },
   },

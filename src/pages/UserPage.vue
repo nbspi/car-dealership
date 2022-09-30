@@ -244,7 +244,7 @@ export default {
                 message: ""
             },
             fields: [
-                { key: "user_id", label: "ID", sortable: true },
+                // { key: "user_id", label: "ID", sortable: true },
                 { key: "firstname", label: "First Name", sortable: true },
                 { key: "lastname", label: "Last Name", sortable: true },
                 { key: "email", label: "Email", sortable: true },

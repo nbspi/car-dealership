@@ -211,14 +211,14 @@ export default {
 
             ],
             salespersonFields: [
-                { key: "salesperson_id", label: "Salesperson ID" },
+                // { key: "salesperson_id", label: "Salesperson ID" },
                 { key: "firstname", label: "First Name" },
                 { key: "lastname", label: "Last Name" },
                 { key: "contact", label: "Contact", sortable: true },
                 { key: "actions", label: "Actions" },
             ],
             customerFields: [
-                { key: "customer_id", label: "ID", sortable: true },
+                // { key: "customer_id", label: "ID", sortable: true },
                 { key: "firstname", label: "First Name", sortable: true },
                 { key: "lastname", label: "Last Name", sortable: true },
                 { key: "contact", label: "Contact", sortable: true },
@@ -232,7 +232,17 @@ export default {
                 { key: "model", label: "Model", sortable: true },
                 { key: "color", label: "Color", sortable: true },
                 { key: "year", label: "Year", sortable: true },
-                { key: "price", label: "Price", sortable: true },
+                {
+                    key: "price", label: "Price", sortable: true,
+                    formatter: (price) => {
+                        let formatter = new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "Php",
+                            minimumFractionDigits: 2
+                        });
+                        return formatter.format(price);
+                    }
+                },
                 { key: "actions", label: "Actions" },
             ],
 

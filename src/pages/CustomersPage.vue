@@ -210,7 +210,7 @@ export default {
                 message: ""
             },
             fields: [
-                { key: "customer_id", label: "ID", sortable: true },
+                // { key: "customer_id", label: "ID", sortable: true },
                 { key: "firstname", label: "First Name", sortable: true },
                 { key: "lastname", label: "Last Name", sortable: true },
                 { key: "contact", label: "Contact", sortable: true },

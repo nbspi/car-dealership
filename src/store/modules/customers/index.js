@@ -146,7 +146,6 @@ export default {
       let index = state.customerState.findIndex(
         (customer) => customer.customer_id == customer_id
       );
-      console.log(index);
       state.customerState.splice(index, 0);
     },
 

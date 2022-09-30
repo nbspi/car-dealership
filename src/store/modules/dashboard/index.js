@@ -23,11 +23,6 @@ export default {
     },
   },
   actions: {
-    // async fetchTopSellersList({ commit }) {
-    //   const response = await axios.get(`${API_URL}/top-sellers`);
-    //   console.log(response.data);
-    //   commit("SET_TOPSELLERS_LIST", response.data);
-    // },
 
     async fetchTopSellersList({ commit }) {
       return await axios({
@@ -45,11 +40,7 @@ export default {
         });
     },
 
-    // async fetchMonthlySales({ commit }) {
-    //   const response = await axios.get(`${API_URL}/sales-number`);
-    //   console.log(response.data);
-    //   commit("SET_MONTHLY_SALES_LIST", response.data[0].count);
-    // },
+
 
 
     async fetchMonthlySales({ commit }) {
@@ -68,11 +59,7 @@ export default {
         });
     },
 
-    // async fetchMonthlyRevenue({ commit }) {
-    //   const response = await axios.get(`${API_URL}/monthly-revenue`);
-    //   console.log(response.data);
-    //   commit("SET_MONTHLY_REVENUE_LIST", response.data[0].month_revenue);
-    // },
+
 
     async fetchMonthlyRevenue({ commit }) {
       return await axios({
@@ -90,12 +77,6 @@ export default {
         });
     },
 
-
-    // async fetchMonthlyCustomer({ commit }) {
-    //   const response = await axios.get(`${API_URL}/customers-count`);
-    //   console.log(response.data);
-    //   commit("SET_MONTHLY_CUSTOMERS_LIST", response.data[0].count);
-    // },
 
     async fetchMonthlyCustomer({ commit }) {
       return await axios({
