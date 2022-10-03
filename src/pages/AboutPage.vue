@@ -7,9 +7,7 @@
           <p>LG Car Dealership</p>
         </div>
       </div>
-      <b-container
-        class="navbar-container d-flex justify-content-sm-center justify-content-xl-center"
-      >
+      <b-container class="navbar-container d-flex justify-content-sm-center justify-content-xl-center">
         <div class="d-flex justify-content-xl-end justify-content-md-center">
           <nav id="navbar" class="navbar">
             <ul>
@@ -24,11 +22,7 @@
       </b-container>
     </b-row>
     <b-row class="hero-container">
-      <b-col
-        md="12"
-        lg="6"
-        class="py-5 d-flex justify-content-center align-items-center"
-      >
+      <b-col md="12" lg="6" class="py-5 d-flex justify-content-center align-items-center">
         <b-col cols="8" class="text-container">
           <h6>The Best Car Facility in Town</h6>
           <h1 class="title" text-justify>
@@ -46,50 +40,43 @@
             </h6>
           </div>
           <div class="button-container d-flex justify-content-center mt-4">
-            <router-link to="/login" class="start-btn px-3"
-              >Get Started</router-link
-            >
+            <router-link to="/login" class="start-btn px-3">Get Started</router-link>
           </div>
         </b-col>
       </b-col>
-      <b-col
-        md="12"
-        lg="6"
-        class="d-flex justify-content-center align-items-center"
-      >
+      <b-col md="12" lg="6" class="d-flex justify-content-center align-items-center">
         <b-col>
           <div class="d-flex justify-content-center">
-            <img
-              class="hero-img"
-              src="../assets/img/4.svg"
-              alt="car-driving.svg"
-            />
+            <img class="hero-img" src="../assets/img/4.svg" alt="car-driving.svg" />
           </div>
         </b-col>
       </b-col>
     </b-row>
     <b-row class="bottom-container pt-4">
       <b-col class="d-flex justify-content-center">
-        <div class="card">
+        <div id="card" class="card">
           <img src="../assets/img/1.png" alt="affordable-rates.png" />
-          <div class="d-flex justify-content-center">
-            <p>Affordable Rates</p>
+          <div class="card-overlay d-flex flex-column justify-content-center">
+            <p class="card-title">Affordable Rates</p>
+            <p class="card-description">Lorem ipsum dolor sit, amet consectetur</p>
           </div>
         </div>
       </b-col>
       <b-col class="d-flex justify-content-center">
-        <div class="card">
-          <img src="../assets/img/2.png" alt="service-experts.png" />
-          <div class="d-flex justify-content-center">
-            <p>Service Experts</p>
+        <div id="card" class="card">
+          <img src="../assets/img/2.png" alt="affordable-rates.png" />
+          <div class="card-overlay d-flex flex-column justify-content-center">
+            <p class="card-title">Service Experts</p>
+            <p class="card-description">Lorem ipsum dolor sit, amet consectetur</p>
           </div>
         </div>
       </b-col>
       <b-col class="d-flex justify-content-center">
-        <div class="card">
-          <img src="../assets/img/3.png" alt="hassle-free.png" />
-          <div class="d-flex justify-content-center">
-            <p>Hassle-Free Transaction</p>
+        <div id="card" class="card">
+          <img src="../assets/img/3.png" alt="affordable-rates.png" />
+          <div class="card-overlay d-flex flex-column justify-content-center">
+            <p class="card-title">Hassle-Free Transaction</p>
+            <p class="card-description">Lorem ipsum dolor sit, amet consectetur</p>
           </div>
         </div>
       </b-col>
@@ -112,22 +99,18 @@ export default {
   padding: 0px !important;
   height: 100vh !important;
   background: rgb(104, 118, 172);
-  background: linear-gradient(
-    95deg,
-    rgba(104, 118, 172, 1) 0%,
-    rgba(130, 155, 184, 1) 100%
-  );
+  background: linear-gradient(95deg,
+      rgba(104, 118, 172, 1) 0%,
+      rgba(130, 155, 184, 1) 100%);
 }
 
 @media (max-width: 1469px) {
   .body-container {
     height: 100% !important;
     background: rgb(104, 118, 172);
-    background: linear-gradient(
-      95deg,
-      rgba(104, 118, 172, 1) 0%,
-      rgba(130, 155, 184, 1) 100%
-    );
+    background: linear-gradient(95deg,
+        rgba(104, 118, 172, 1) 0%,
+        rgba(130, 155, 184, 1) 100%);
   }
 }
 
@@ -213,7 +196,7 @@ export default {
 .navbar a:hover,
 .navbar .active,
 .navbar .active:focus,
-.navbar li:hover > a {
+.navbar li:hover>a {
   color: #f9c74f;
 }
 
@@ -232,11 +215,11 @@ img {
 }
 
 .hero-img {
-  width: 78%;
+  width: 85%;
 }
 
 p {
-  font-size: 17px;
+  font-size: 24px;
   font-weight: 600;
   color: #fff;
 }
@@ -261,6 +244,7 @@ h1 {
 }
 
 .card {
+  position: relative;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(35px);
@@ -282,5 +266,28 @@ h1 {
 
 .title {
   color: #372549 !important;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.card-overlay:hover {
+  opacity: 1;
+}
+
+.card-description {
+  font-size: 16px;
 }
 </style>
