@@ -27,7 +27,7 @@
             <br />
 
             <div class="form-container mt-3">
-              <b-form>
+              <b-form @submit.prevent="handleLogin">
                 <div class="form-container mb-3">
                   <div class="d-flex">
                     <label for="email" class="form-label ml-2 " :state="email">Email Address</label>
@@ -45,7 +45,7 @@
                 </div>
                 <br>
                 <div class="button-container d-flex justify-content-center">
-                  <button type="button" @click="handleLogin" class="col-6 btn btn-block">
+                  <button type="submit" class="col-6 btn btn-block">
                     LOG IN
                   </button>
                 </div>

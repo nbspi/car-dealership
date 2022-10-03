@@ -4,18 +4,19 @@
             <SideBar />
             <b-col xl="10" lg="9" sm="9">
                 <HeaderComponent title="Cars" />
-                <b-container fluid class="pt-2">
+                <b-container fluid class="pt-2">                
                     <b-row class="my-2 d-flex justify-content-end px-3">
                         <router-link to="/cars/add-car" class="btn btn-success" exact>Add Car</router-link>
-                    </b-row>
-                    <b-row class="d-flex justify-content-center my-3">
+                    </b-row>                   
+                    <b-row class="d-flex justify-content-center my-3">                 
                         <b-col md="12" lg="12" xl="12" class="py-2">
                             <!-- left container-->
                             <b-col class="table-container">
-                                <b-container fluid class="container-card rounded p-3">
+                                <b-container fluid class="container-card rounded p-3">                                    
                                     <h5 class="px-3 mb-3">Car Records</h5>
+                                    <b-form-input placeholder="Search" v-model="keyword"></b-form-input>              
                                     <div class="table-responsive">
-                                        <b-table id="cars-table" hover :items="listCars" :fields="fields"
+                                        <b-table id="cars-table" hover :items="items" :fields="fields" :keyword="keyword"
                                             :per-page="perPage" :current-page="currentPage">
                                             <template v-slot:cell(actions)="{ item }">
                                                 <div class="d-flex justify-content-center">
@@ -132,14 +133,7 @@ export default {
         SideBar,
         HeaderComponent,
     },
-    computed: {
-        ...mapState(['carState']),
-        ...mapGetters({ listCars: "fetchCars" }),
-        rows() {
-            return this.listCars.length
-        }
 
-    },
     beforeCreate() {
         this.$store.dispatch("fetchCars")
     },
@@ -153,6 +147,7 @@ export default {
                 prop: "value",
                 event: "update",
             },
+            keyword: "",
             modalShow: false,
             car: {
                 car_id: null,
@@ -195,7 +190,21 @@ export default {
             ],
         }
     },
+    computed: {
+        ...mapState(['carState']),
+        ...mapGetters({ listCars: "fetchCars" }),
+        rows() {
+            return this.listCars.length
+        },
+        items () {
+			return this.keyword
+				? this.listCars.filter(car => car.brand.includes(this.keyword) || car.model.includes(this.keyword) )
+				: this.listCars
+		}
+
+    },
     methods: {
+
         showUpdateModal(item) {
             this.item = {
                 car_id: item.car_id,
