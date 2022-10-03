@@ -1,0 +1,35 @@
+.btn-success {
+    background-color: $green !important;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: $green-hover;
+}
+
+.btn-primary {
+    background-color: $red !important;
+    border: none;
+    height: 38px !important;
+}
+
+.btn-secondary {
+    margin-right: 5px !important;
+}
+
+.btn-secondary,
+.show>.btn-secondary.dropdown-toggle {
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: $secondary-color !important;
+    border-color: $secondary-color !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active {
+    background-color: $primary-color;
+    outline: none !important;
+}

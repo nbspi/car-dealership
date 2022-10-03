@@ -1,0 +1,55 @@
+* {
+    font-family: 'Poppins', sans-serif !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+a,
+a:visited,
+a:hover {
+    text-decoration: none;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+.modal-backdrop {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#sales-modal .modal-content,
+#customer-modal .modal-content,
+#mechanic-modal .modal-content,
+#service-modal .modal-content,
+#car-modal .modal-content {
+    width: 900px !important;
+    height: auto !important;
+}
+
+#delete-modal,
+#modal-form,
+#sales-modal,
+#customer-modal,
+#mechanic-modal,
+#service-modal,
+#car-modal {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#avatar {
+    outline: none !important;
+    border: none !important;
+}
