@@ -8,13 +8,13 @@
             </b-col>
             <b-col sm="12" xl="10" id="search-container"
                 class="d-flex justify-content-sm-between justify-content-xl-end">
-                <b-nav-form class="mr-3">
+                <b-nav-form class="searchbar-container mr-3">
                     <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
                     <b-button variant="outline-light" class="my-sm-0 btn d-flex " type="submit">
                         <b-icon icon="search"></b-icon>
                     </b-button>
                 </b-nav-form>
-                <div>
+                <div class="avatar-container">
                     <b-avatar id="avatar" :src="require('../assets/img/avatar2.png')"></b-avatar>
                     <b-dropdown :text="currentUser.firstname + ` ` + currentUser.lastname" variant="secondary"
                         class="user-dropdown m-2">
@@ -86,5 +86,16 @@ h2 {
     padding-right: 5px !important;
     border: none !important;
 
+}
+
+@media(max-width: 789px) {
+    .searchbar-container {
+        display: none !important;
+    }
+
+    #search-container {
+        display: flex;
+        justify-content: center !important;
+    }
 }
 </style>

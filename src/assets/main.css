@@ -44,6 +44,7 @@ h2 {
     }
 }
 
+
 .btn-success {
     background-color: #40916c !important;
     border: none;
@@ -54,7 +55,8 @@ h2 {
 }
 
 .btn-secondary,
-.show>.btn-secondary.dropdown-toggle {
+.show>.btn-secondary.dropdown-toggle,
+.show >.btn-secondary:focus {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
 }
@@ -198,7 +200,7 @@ input::-webkit-inner-spin-button {
     border-radius: 5px;
     background-color: var(--secondary-color);
 }
-/* 
-.table-responsive {
-    margin-top: 50px !important;
-} */
+
+select option {
+    background-color: none !important;
+}

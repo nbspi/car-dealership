@@ -15,6 +15,12 @@
                         </router-link>
                     </div>
                     <div class="mb-2 inactive">
+                        <router-link to="/catalogue" class="nav-link d-flex align-items-center" exact>
+                            <b-icon class="mr-3" icon="bookmark-heart" aria-hidden="true"></b-icon>
+                            Catalogue
+                        </router-link>
+                    </div>
+                    <div class="mb-2 inactive">
                         <router-link to="/customers" class="nav-link d-flex align-items-center" exact>
                             <b-icon class="mr-3" icon="people-fill" aria-hidden="true"></b-icon>
                             Customers

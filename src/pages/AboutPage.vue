@@ -53,6 +53,7 @@
       </b-col>
     </b-row>
     <b-row class="bottom-container pt-4">
+      <!--first card-->
       <b-col class="d-flex justify-content-center">
         <div id="card" class="card">
           <img src="../assets/img/1.png" alt="affordable-rates.png" />
@@ -62,6 +63,8 @@
           </div>
         </div>
       </b-col>
+
+      <!--second card-->
       <b-col class="d-flex justify-content-center">
         <div id="card" class="card">
           <img src="../assets/img/2.png" alt="affordable-rates.png" />
@@ -71,6 +74,8 @@
           </div>
         </div>
       </b-col>
+
+      <!--third card-->
       <b-col class="d-flex justify-content-center">
         <div id="card" class="card">
           <img src="../assets/img/3.png" alt="affordable-rates.png" />
@@ -128,17 +133,12 @@ export default {
     padding-bottom: 30px;
   }
 
-  /* 
-    #navbar {
-        margin-bottom: 10px !important;
-    } */
 }
 
 #header {
   transition: all 0.5s;
   z-index: 997;
   padding-top: 20px;
-  /* background-color: var(--secondary-color); */
 }
 
 @media (max-width: 768px) {

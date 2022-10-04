@@ -73,7 +73,7 @@
                             </b-button>
                           </div>
                           <div>
-                            <b-button v-b-modal @click="showDeleteModal(item)">
+                            <b-button id="delete-container" v-b-modal @click="showDeleteModal(item)">
                               <b-icon class="delete-btn" icon="trash-fill"></b-icon>
                             </b-button>
                           </div>

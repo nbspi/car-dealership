@@ -13,7 +13,7 @@ import AddCar from "../pages/AddCar.vue";
 import AboutPage from "../pages/AboutPage.vue";
 import AddServiceTicket from "../pages/AddServiceTicket.vue";
 import EditServiceTicket from "../pages/EditServiceTicket.vue";
-
+import CataloguePage from "../pages/CataloguePage.vue";
 import User from "../pages/UserPage.vue";
 
 Vue.use(VueRouter);
@@ -88,6 +88,11 @@ const routes = [
     path: "/user",
     name: "User",
     component: User,
+  },
+  {
+    path: "/catalogue",
+    name: "CataloguePage",
+    component: CataloguePage,
   },
 ];
 
