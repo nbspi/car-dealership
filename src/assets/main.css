@@ -200,7 +200,3 @@ input::-webkit-inner-spin-button {
     border-radius: 5px;
     background-color: var(--secondary-color);
 }
-
-select option {
-    background-color: none !important;
-}

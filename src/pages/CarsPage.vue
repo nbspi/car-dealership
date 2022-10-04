@@ -13,9 +13,15 @@
                             <!-- left container-->
                             <b-col class="table-container">
                                 <b-container fluid class="container-card rounded p-3">
-                                    <h5 class="px-3 mb-3">Car Records</h5>
-                                    <b-form-input placeholder="Search" v-model="keyword"></b-form-input>
-                                    <div class="table-responsive">
+                                    <b-row>
+                                        <b-col class="title-container d-flex align-items-center">
+                                            <h5 class="px-3">Car Records</h5>
+                                        </b-col>
+                                        <b-col>
+                                            <b-form-input placeholder="Search" v-model="keyword"></b-form-input>
+                                        </b-col>
+                                    </b-row>
+                                    <div class="table-responsive mt-3">
                                         <b-table id="cars-table" hover :items="items" :fields="fields"
                                             :keyword="keyword" :per-page="perPage" :current-page="currentPage">
                                             <template v-slot:cell(actions)="{ item }">
@@ -196,12 +202,12 @@ export default {
         rows() {
             return this.listCars.length
         },
-        
+
         items() {
             return this.keyword
-                ? this.listCars.filter (car => car.serial_number.toLowerCase().includes(this.keyword.toLowerCase()) ||
+                ? this.listCars.filter(car => car.serial_number.toLowerCase().includes(this.keyword.toLowerCase()) ||
                     car.brand.toLowerCase().includes(this.keyword.toLowerCase()) || car.model.toLowerCase().includes(this.keyword.toLowerCase())
-                    || car.color.toLowerCase().includes(this.keyword.toLowerCase())  || car.year.includes(this.keyword)
+                    || car.color.toLowerCase().includes(this.keyword.toLowerCase()) || car.year.includes(this.keyword)
                 )
                 : this.listCars
         }
