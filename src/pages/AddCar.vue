@@ -19,6 +19,20 @@
                                     <h4 class="px-3">Add Car</h4>
                                     <b-form @submit.prevent class="d-flex">
                                         <b-col cols="6" class="mt-3">
+                                            <div>
+                                                <b-img v-if="imagePreview" :src="imagePreview" fluid
+                                                    alt="Car"></b-img>
+                                            </div>
+
+                                            <!-- @image -->
+                                            <div class="mb-3">
+                                                <b-form-group label="Image" id="label" class="ml-2"
+                                                    :state="car.image_file">
+                                                </b-form-group>
+                                                <b-form-file type="file" @change="onChange" v-model="car.image_file">
+                                                </b-form-file>
+                                            </div>
+
                                             <!-- @serial_number -->
                                             <div class="mb-3">
                                                 <b-form-group label="Serial Number" id="label" class="ml-2"
@@ -126,6 +140,7 @@ export default {
     },
     data() {
         return {
+            imagePreview: null,
             car: {
                 serial_number: null,
                 brand: null,
@@ -134,6 +149,7 @@ export default {
                 year: null,
                 color: null,
                 brand_new: null,
+                image_file: null,
             },
             item: {
                 car_id: null,
@@ -144,6 +160,7 @@ export default {
                 year: null,
                 color: null,
                 brand_new: null,
+                image_file: null,
             },
             state: {
                 car_id: null,
@@ -173,8 +190,9 @@ export default {
                 variant
             }
         },
-        addCar() {
-            this.$store.dispatch("addCar", this.car)
+        onChange(e) {
+            const file = e.target.files[0];
+            this.imagePreview = URL.createObjectURL(file);
         },
 
         async saveCar() {
@@ -182,9 +200,19 @@ export default {
             if (!this.validation()) {
                 this.showAlert("Warning: Please fill out the fields", "warning");
 
-            } else {
+            } else {              
+
+                let data = new FormData();
+                data.append('serial_number', this.car.serial_number);
+                data.append('brand', this.car.brand);
+                data.append('model', this.car.model);
+                data.append('color', this.car.color);
+                data.append('year', this.car.year);
+                data.append('brand_new', this.car.brand_new);
+                data.append('image_file', this.car.image_file);
+
                 this.$store.dispatch("addCar", this.car);
-                this.showAlert("Successfully Created", "success");              
+                this.showAlert("Successfully Created", "success");
             }
         },
 

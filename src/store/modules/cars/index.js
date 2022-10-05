@@ -23,6 +23,7 @@ export default {
         method: "POST",
         url: `${API_URL}/car/add`,
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: localStorage.getItem("token"),
         },
         data: {
@@ -33,6 +34,7 @@ export default {
           year: data.year,
           price: data.price,
           brand_new: data.brand_new,
+          image_file: data.image_file,
         },
       })
         .then((response) => {
@@ -106,6 +108,7 @@ export default {
           year: car.year,
           price: car.price,
           brand_new: car.brand_new,
+          image_file: car.image_file,
         },
       })
         .then((response) => {
