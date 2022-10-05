@@ -9,7 +9,7 @@
           <b-row class="my-3">
             <b-col sm="12" xl="8" class="upper-container px-2">
               <b-row class="d-flex justify-content-between">
-                <DashboardCard id="sales" title="Total Car Sales" icon="cart4" description="Sales" :value="salesPerMonth" />
+                <DashboardCard id="sales" title="Total Sales" icon="cart4" description="Sales" :value="salesPerMonth" />
                 <DashboardCard id="revenue" title="Total Revenue" icon="cash-stack" description="Profit"
                   :value="monthlyRevenuelist | abbr" />
                 <DashboardCard id="customer" title="Customers" icon="people" description="Clients"
@@ -139,6 +139,10 @@ export default {
 </script>
 
 <style scoped>
+nav {
+  padding: 10px;
+}
+
 p,
 h4 {
   color: var(--primary-color);

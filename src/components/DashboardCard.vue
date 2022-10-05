@@ -1,6 +1,7 @@
 <template>
-  <b-col cols="3" class="sales-card p-2">
-    <b-row class="d-flex pl-2">
+  <b-col cols="4">
+    <div class="sales-card p-2">
+      <b-row class="d-flex pl-2">
       <div>{{ title }} | <span>This Month</span></div>
     </b-row>
     <b-row class="px-1">
@@ -11,11 +12,13 @@
       </b-col>
       <b-col cols="7" class="d-flex flex-column justify-content-center">
         <div class="">
-          <h4>{{ value }}</h4>
+          <h3>{{ value }}</h3>
           <p class="description">{{ description }}</p>
         </div>
       </b-col>
     </b-row>
+    </div>
+
   </b-col>
 </template>
 
@@ -83,14 +86,14 @@ svg {
 
 @media (min-width: 1280px) {
   .circle {
-    height: 55px;
-    width: 55px;
+    height: 90px !important;
+    width: 90px !important;
     border-radius: 50%;
     background-color: #f1f1f1 !important;
   }
 
   #card-icon {
-    font-size: 1.5rem !important;
+    font-size: 3rem !important;
   }
 }
 
