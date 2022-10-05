@@ -14,14 +14,15 @@
                         <!-- whole container-->
                         <b-col xl="6" class="py-2">
                             <!-- left container-->
-                            <b-col class="">
+                            <b-col>
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Car</h4>
                                     <b-form @submit.prevent class="d-flex">
                                         <b-col cols="6" class="mt-3">
-                                            <div>
-                                                <b-img v-if="imagePreview" :src="imagePreview" fluid
-                                                    alt="Car"></b-img>
+
+                                            <!-- @image preview  -->
+                                            <div class="mb-3">
+                                                <b-img v-if="imagePreview" :src="imagePreview" fluid alt="Car"></b-img>
                                             </div>
 
                                             <!-- @image -->
@@ -142,17 +143,6 @@ export default {
         return {
             imagePreview: null,
             car: {
-                serial_number: null,
-                brand: null,
-                model: null,
-                price: null,
-                year: null,
-                color: null,
-                brand_new: null,
-                image_file: null,
-            },
-            item: {
-                car_id: null,
                 serial_number: null,
                 brand: null,
                 model: null,
