@@ -15,7 +15,7 @@
                             <b-col lg="3" class="car-container" v-for="car in listCars" :key="car.car_id">
                                 <div class="container-card flex-column center-flex">
                                     <div class="img-container center-flex">
-                                        <img class="car-container__img" :src="car.image_file" alt="car-image">
+                                        <img class="car-container__img"  :src="`${API_URL}/${car.image_file}`" alt="">                              
                                     </div>
                                     <h5 class="car_container__title mt-4">{{car.model}}</h5>
                                     <div class="mt-2 flex-column center-flex">
@@ -38,6 +38,7 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import SpinnerLoad from "@/components/SpinnerLoad.vue";
+import { API_URL } from "../config/dev.env";
 import { mapGetters } from 'vuex'
 
 export default {
@@ -63,8 +64,7 @@ export default {
     },
     data() {
         return {
-            keyword: "",
-            value: null,
+            API_URL,
             car: {
                 car_id: null,
                 serial_number: null,
