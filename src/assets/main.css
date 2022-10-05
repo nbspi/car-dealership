@@ -200,3 +200,14 @@ input::-webkit-inner-spin-button {
     border-radius: 5px;
     background-color: var(--secondary-color);
 }
+
+.danger {
+    border: solid 1px #941b0c;
+}
+
+a,
+a:visited,
+a:hover,
+#app {
+    color: #2c3e50,
+}
