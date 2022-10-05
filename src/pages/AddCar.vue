@@ -17,95 +17,110 @@
                             <b-col>
                                 <b-container class="container-card rounded p-3">
                                     <h4 class="px-3">Add Car</h4>
-                                    <b-form @submit.prevent class="d-flex">
-                                        <b-col cols="6" class="mt-3">
+                                    <b-form @submit.prevent>
+                                        <b-row>
+                                            <b-col class="center-flex">
+                                                <!-- @image preview  -->
+                                                <div class="preview-container center-flex">
+                                                    <b-img class="car-upload" v-if="imagePreview" :src="imagePreview" fluid alt="Car">
+                                                    </b-img>
+                                                </div>
+                                            </b-col>
+                                            <b-col class="center-flex">
+                                                <!-- @image -->
+                                                <div class="mb-3">
+                                                    <b-form-group label="Image Upload" id="label" class="ml-2"
+                                                        :state="car.image_file">
+                                                    </b-form-group>
+                                                    <b-form-file type="file" @change="onChange"
+                                                        v-model="car.image_file">
+                                                    </b-form-file>
+                                                </div>
+                                            </b-col>
+                                        </b-row>
+                                        <div class="d-flex">
+                                            <b-col cols="6">
+                                                <!-- @serial_number -->
+                                                <div class="mb-3">
+                                                    <b-form-group label="Serial Number" id="label" class="ml-2"
+                                                        :state="car.serial_number">
+                                                    </b-form-group>
+                                                    <b-form-input placeholder="Enter Serial Number"
+                                                        v-model="car.serial_number"></b-form-input>
+                                                </div>
 
-                                            <!-- @image preview  -->
-                                            <div class="mb-3">
-                                                <b-img v-if="imagePreview" :src="imagePreview" fluid alt="Car"></b-img>
-                                            </div>
+                                                <!-- @brand -->
+                                                <div class="mb-3">
+                                                    <b-form-group label="Brand" id="label" class="ml-2"
+                                                        :state="car.brand">
+                                                    </b-form-group>
+                                                    <b-form-input placeholder="Enter Brand" v-model="car.brand">
+                                                    </b-form-input>
+                                                </div>
 
-                                            <!-- @image -->
-                                            <div class="mb-3">
-                                                <b-form-group label="Image" id="label" class="ml-2"
-                                                    :state="car.image_file">
-                                                </b-form-group>
-                                                <b-form-file type="file" @change="onChange" v-model="car.image_file">
-                                                </b-form-file>
-                                            </div>
+                                                <!-- @model -->
+                                                <div class="mb-3">
+                                                    <b-form-group label="Model" id="label" class="ml-2"
+                                                        :state="car.model">
+                                                    </b-form-group>
+                                                    <b-form-input placeholder="Enter Model" v-model="car.model">
+                                                    </b-form-input>
+                                                </div>
+                                            </b-col>
 
-                                            <!-- @serial_number -->
-                                            <div class="mb-3">
-                                                <b-form-group label="Serial Number" id="label" class="ml-2"
-                                                    :state="car.serial_number">
-                                                </b-form-group>
-                                                <b-form-input placeholder="Enter Serial Number"
-                                                    v-model="car.serial_number"></b-form-input>
-                                            </div>
+                                            <b-col cols="6">
 
-                                            <!-- @model -->
-                                            <div class="mb-3">
-                                                <b-form-group label="Model" id="label" class="ml-2" :state="car.model">
-                                                </b-form-group>
-                                                <b-form-input placeholder="Enter Model" v-model="car.model">
-                                                </b-form-input>
-                                            </div>
+                                                <!-- @year -->
+                                                <div class="mb-3">
+                                                    <b-form-group label="Year" id="label" class="ml-2"
+                                                        :state="car.year">
+                                                    </b-form-group>
+                                                    <b-form-input placeholder="Enter Year" v-model="car.year">
+                                                    </b-form-input>
+                                                </div>
+                                                <!-- @price -->
+                                                <div class="mb-3">
+                                                    <b-form-group label="Price" id="label" class="ml-2"
+                                                        :state="car.price">
+                                                    </b-form-group>
+                                                    <b-form-input placeholder="Enter Price" v-model="car.price">
+                                                    </b-form-input>
+                                                </div>
 
-                                            <!-- @year -->
-                                            <div class="mb-3">
-                                                <b-form-group label="Year" id="label" class="ml-2" :state="car.year">
-                                                </b-form-group>
-                                                <b-form-input placeholder="Enter Year" v-model="car.year">
-                                                </b-form-input>
-                                            </div>
-                                        </b-col>
 
-                                        <b-col cols="6" class="mt-3">
-                                            <!-- @price -->
-                                            <div class="mb-3">
-                                                <b-form-group label="Price" id="label" class="ml-2" :state="car.price">
-                                                </b-form-group>
-                                                <b-form-input placeholder="Enter Price" v-model="car.price">
-                                                </b-form-input>
-                                            </div>
+                                                <!-- @color -->
+                                                <div class="mb-3">
+                                                    <b-form-group label="Color" id="label" class="ml-2"
+                                                        :state="car.color">
+                                                    </b-form-group>
+                                                    <b-form-input placeholder="Enter Color" v-model="car.color">
+                                                    </b-form-input>
+                                                </div>
 
-                                            <!-- @brand -->
-                                            <div class="mb-3">
-                                                <b-form-group label="Brand" id="label" class="ml-2" :state="car.brand">
-                                                </b-form-group>
-                                                <b-form-input placeholder="Enter Brand" v-model="car.brand">
-                                                </b-form-input>
-                                            </div>
+                                                <!-- @car_for_sale -->
+                                                <div class="mb-3">
+                                                    <b-form-group label="Brand New?" class="ml-2" :state="car.brand_new"
+                                                        v-slot="{ ariaDescribedby }">
+                                                        <b-row class="d-flex radio">
+                                                            <b-form-radio v-model="car.brand_new"
+                                                                :aria-describedby="ariaDescribedby" value="true">Yes
+                                                            </b-form-radio>
+                                                            <b-form-radio class="ml-3" v-model="car.brand_new"
+                                                                :aria-describedby="ariaDescribedby" value="false">No
+                                                            </b-form-radio>
+                                                        </b-row>
+                                                    </b-form-group>
+                                                </div>
+                                                <b-container class="button-container d-flex justify-content-end">
+                                                    <b-button class="mr-2" type="reset">Reset</b-button>
+                                                    <b-button variant="success" type="submit"
+                                                        class="btn btn-success send" @click="saveCar">
+                                                        Submit</b-button>
+                                                </b-container>
+                                            </b-col>
+                                        </div>
 
-                                            <!-- @color -->
-                                            <div class="mb-3">
-                                                <b-form-group label="Color" id="label" class="ml-2" :state="car.color">
-                                                </b-form-group>
-                                                <b-form-input placeholder="Enter Color" v-model="car.color">
-                                                </b-form-input>
-                                            </div>
 
-                                            <!-- @car_for_sale -->
-                                            <div class="mb-3">
-                                                <b-form-group label="Brand New?" class="ml-2" :state="car.brand_new"
-                                                    v-slot="{ ariaDescribedby }">
-                                                    <b-row class="d-flex">
-                                                        <b-form-radio v-model="car.brand_new"
-                                                            :aria-describedby="ariaDescribedby" value="true">Yes
-                                                        </b-form-radio>
-                                                        <b-form-radio class="ml-3" v-model="car.brand_new"
-                                                            :aria-describedby="ariaDescribedby" value="false">No
-                                                        </b-form-radio>
-                                                    </b-row>
-                                                </b-form-group>
-                                            </div>
-                                            <b-container class="button-container d-flex justify-content-end">
-                                                <b-button class="mr-2" type="reset">Reset</b-button>
-                                                <b-button variant="success" type="submit" class="btn btn-success send"
-                                                    @click="saveCar">
-                                                    Submit</b-button>
-                                            </b-container>
-                                        </b-col>
                                     </b-form>
                                 </b-container>
                                 <div class="alert-container mt-3">
@@ -190,7 +205,7 @@ export default {
             if (!this.validation()) {
                 this.showAlert("Warning: Please fill out the fields", "warning");
 
-            } else {              
+            } else {
 
                 let data = new FormData();
                 data.append('serial_number', this.car.serial_number);
@@ -255,10 +270,6 @@ export default {
 </script>
   
 <style scoped>
-nav {
-    padding: 10px;
-}
-
 div.py-2 {
     padding: 0 !important;
 }
@@ -269,6 +280,21 @@ div.py-2 {
 
 #return-btn:hover {
     background-color: var(--secondary-color) !important;
+}
+
+.preview-container {
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+
+}
+
+.radio {
+    padding-bottom: 5px;
+}
+
+.car-upload:hover {
+    transform: scale(1.3);
 }
 </style>
   

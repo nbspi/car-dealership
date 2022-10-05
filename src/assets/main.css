@@ -98,8 +98,11 @@ td {
     padding-left: 0px !important;
 }
 
-.form-control {
+.form-control,
+.custom-file-label:focus,
+.custom-file-label:active {
     outline: none !important;
+    
 }
 
 .page-link {
@@ -210,4 +213,10 @@ a:visited,
 a:hover,
 #app {
     color: #2c3e50,
+}
+
+.center-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

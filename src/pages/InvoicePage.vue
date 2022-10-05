@@ -292,10 +292,6 @@ export default {
 </script>
 
 <style scoped>
-nav {
-    padding: 10px;
-}
-
 div.py-2 {
     padding: 0 !important;
 }

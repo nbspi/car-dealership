@@ -139,10 +139,6 @@ export default {
 </script>
 
 <style scoped>
-nav {
-  padding: 10px;
-}
-
 p,
 h4 {
   color: var(--primary-color);

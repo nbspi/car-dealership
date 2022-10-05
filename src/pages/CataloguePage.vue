@@ -7,9 +7,6 @@
                 <HeaderComponent title="Catalogue" />
                 <b-container fluid>
                     <b-col class="my-2">
-                        <b-col>
-                            <b-form-input placeholder="Search" v-model="keyword"></b-form-input>
-                        </b-col>
                         <b-row cols="12" class="d-flex" :keyword="keyword">
 
                             <b-col lg="3" class="car-container" v-for="car in listCars" :key="car.car_id">
