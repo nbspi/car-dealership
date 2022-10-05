@@ -19,27 +19,29 @@
                                     <h4 class="px-3">Add Car</h4>
                                     <b-form @submit.prevent>
                                         <b-row>
-                                            <b-col class="center-flex">
+                                            <b-col xl="6" class="center-flex">
                                                 <!-- @image preview  -->
                                                 <div class="preview-container center-flex">
-                                                    <b-img class="car-upload" v-if="imagePreview" :src="imagePreview" fluid alt="Car">
+                                                    <b-img class="car-upload" v-if="imagePreview" :src="imagePreview"
+                                                        fluid alt="Car">
                                                     </b-img>
                                                 </div>
                                             </b-col>
-                                            <b-col class="center-flex">
+                                            <b-col xl="6" class="center-flex">
                                                 <!-- @image -->
                                                 <div class="mb-3">
                                                     <b-form-group label="Image Upload" id="label" class="ml-2"
-                                                        :state="car.image_file">
+                                                        :state="car.image_file" description="Upload PNG or JPG files only">
+                                                        <b-form-file type="file" @change="onChange"
+                                                            v-model="car.image_file">
+                                                        </b-form-file>
                                                     </b-form-group>
-                                                    <b-form-file type="file" @change="onChange"
-                                                        v-model="car.image_file">
-                                                    </b-form-file>
+
                                                 </div>
                                             </b-col>
                                         </b-row>
                                         <div class="d-flex">
-                                            <b-col cols="6">
+                                            <b-col cols="6" class="left-form">
                                                 <!-- @serial_number -->
                                                 <div class="mb-3">
                                                     <b-form-group label="Serial Number" id="label" class="ml-2"
@@ -68,8 +70,7 @@
                                                 </div>
                                             </b-col>
 
-                                            <b-col cols="6">
-
+                                            <b-col cols="6" class="right-form">
                                                 <!-- @year -->
                                                 <div class="mb-3">
                                                     <b-form-group label="Year" id="label" class="ml-2"
@@ -296,5 +297,24 @@ div.py-2 {
 .car-upload:hover {
     transform: scale(1.3);
 }
+
+@media (max-width: 991px) {
+    .container-card {
+        margin-top: 20px !important;
+    }
+
+    .left-form,
+    .right-form {
+        margin-top: 20px !important;
+    }
+
+}
+
+/* @media (max-width: 575px) {
+    .container-card {
+        margin-top: 20px !important;
+    }
+
+} */
 </style>
   
