@@ -16,7 +16,7 @@
                                     <b-row>
                                         <b-col class="title-container d-flex align-items-center">
                                             <h5 class="px-3">Car Records</h5>
-                                        </b-col>
+                                        </b-col> 
                                         <b-col>
                                             <b-form-input placeholder="Search" v-model="keyword"></b-form-input>
                                         </b-col>
