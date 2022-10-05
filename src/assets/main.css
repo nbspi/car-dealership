@@ -220,3 +220,7 @@ a:hover,
     align-items: center;
     justify-content: center;
 }
+
+#delete-container {
+    background-color: #941b0c !important;
+}
