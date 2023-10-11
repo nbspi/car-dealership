@@ -1,5 +1,4 @@
 <template>
-
   <body>
     <b-container fluid>
       <b-row id="header" class="d-flex justify-content-center">
@@ -32,8 +31,8 @@
                   <div class="d-flex">
                     <label for="email" class="form-label ml-2 " :state="email">Email Address</label>
                   </div>
-                  <input type="text" v-model="email" placeholder="email@example.com"
-                    class="form-control form-control-lg" autocomplete="off" required>
+                  <input type="text" v-model="email" placeholder="email@example.com" class="form-control form-control-lg"
+                    autocomplete="off" required>
                 </div>
 
                 <div class="mb-3">
@@ -61,7 +60,7 @@
       <div class="d-flex justify-content-end">
         <b-alert class="alert" v-model="alert.showAlert" @dismissed="alert.showAlert = null" :variant="alert.variant">
           <div>
-            <b-icon class="mr-2" :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill' "
+            <b-icon class="mr-2" :icon="alert.variant == 'success' ? 'check-lg' : 'exclamation-triangle-fill'"
               fill="black">
             </b-icon>
             {{ alert.message }}
@@ -168,7 +167,6 @@ body {
 @media (min-width: 992px) {
   body {
     background-image: url(../assets/img/background.svg);
-
   }
 }
 
@@ -190,7 +188,7 @@ body {
   }
 
 }
-  
+
 .navbar {
   padding: 0;
 }

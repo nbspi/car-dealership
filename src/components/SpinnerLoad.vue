@@ -128,7 +128,7 @@ export default {
 
 .loadingio-spinner-ellipsis-0pbqog48zpcm {
     width: 100%;
-    height: 100%;
+    height: 80%;
     position: fixed;
     top: 0;
     left: 0;
@@ -141,7 +141,7 @@ export default {
 
 .ldio-n0rvatz0l1p {
     width: 100%;
-    height: 100%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;

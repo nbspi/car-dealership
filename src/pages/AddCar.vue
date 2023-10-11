@@ -8,7 +8,7 @@
                     <b-row class="my-2 d-flex px-3">
                         <router-link pill="true" to="/cars" class=" btn btn-success" id="return-btn" exact>
                             <b-icon icon="arrow-left-circle" aria-hidden="true"></b-icon>
-                        </router-link>``
+                        </router-link>
                     </b-row>
                     <b-row class="d-flex justify-content-center my-3">
                         <!-- whole container-->

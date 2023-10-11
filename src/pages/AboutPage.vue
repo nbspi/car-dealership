@@ -25,7 +25,7 @@
       <b-col md="12" lg="6" class="py-5 d-flex justify-content-center align-items-center">
         <b-col cols="8" class="text-container">
           <h6>The Best Car Facility in Town</h6>
-          <h1 class="title" text-justify>
+          <h1 class="title" text-justify text-bold>
             Lou Geh Car Dealership & Service Facility
           </h1>
           <div class="text-justify mt-2">
@@ -39,8 +39,9 @@
               est dolores quis est dignissimos maiores ut voluptas nihil.
             </h6>
           </div>
-          <div class="button-container d-flex justify-content-center mt-4">
+          <div class="button-container d-flex mt-4">
             <router-link to="/login" class="start-btn px-3">Get Started</router-link>
+            <router-link to="#" class="learn-btn px-3">Learn More</router-link>
           </div>
         </b-col>
       </b-col>
@@ -124,7 +125,7 @@ export default {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2390accc' fill-opacity='0.07'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-@media (max-width: 1470px) {
+@media (max-width: 1825px) {
   .card {
     margin: 20px 0px 20px 0px !important;
   }
@@ -133,6 +134,10 @@ export default {
     padding-bottom: 30px;
   }
 
+}
+
+.bottom-container {
+  padding: 0rem 12rem;
 }
 
 #header {
@@ -145,6 +150,10 @@ export default {
   #header {
     padding-top: 10px;
   }
+
+  .bottom-container {
+    padding: 0;
+  }
 }
 
 @media (min-width: 1614px) {
@@ -155,6 +164,7 @@ export default {
   .navbar-container {
     justify-content: end !important;
   }
+
 }
 
 .navbar {
@@ -211,7 +221,7 @@ export default {
 }
 
 img {
-  width: 450px;
+  width: 400px;
 }
 
 .hero-img {
@@ -230,12 +240,31 @@ p {
   color: #fff;
   font-size: 18px;
   font-weight: 500;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 7px;
+  margin-right: 16px !important;
 }
 
 .start-btn:hover {
   background-color: var(--primary-color);
+  color: #fff;
+}
+
+.learn-btn {
+  text-decoration: none !important;
+  background-color: transparent;
+  color: var(--secondary-color);
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 7px;
+  margin-right: 16px !important;
+  border: solid 2px var(--secondary-color);
+}
+
+.learn-btn:hover {
+  background-color: var(--primary-color);
+  border: solid 2px var(--primary-color);
   color: #fff;
 }
 
@@ -251,6 +280,10 @@ h1 {
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .register-btn {

@@ -77,7 +77,7 @@ export default {
 
     filters: {
         pesoFormat: function (num) {
-            var formatter = new Intl.NumberFormat('en-US', {
+            const formatter = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: 'Php'
             });
