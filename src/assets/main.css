@@ -223,4 +223,10 @@ a:hover,
 
 #delete-container {
     background-color: #941b0c !important;
+    border-color: #941b0c !important;
+}
+
+.modal-title {
+    color: #941b0c;
+    font-weight: 600;
 }

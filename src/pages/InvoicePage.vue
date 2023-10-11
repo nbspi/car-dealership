@@ -1,5 +1,6 @@
 <template>
     <b-container fluid>
+        <spinner-load />
         <b-row>
             <SideBar />
             <b-col xl="10" lg="9" sm="9">
@@ -145,13 +146,14 @@ import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import { mapGetters, mapState } from 'vuex'
 import moment from "moment";
-
+import SpinnerLoad from '@/components/SpinnerLoad.vue';
 
 export default {
     name: "InvoicePage",
     components: {
         SideBar,
         HeaderComponent,
+        SpinnerLoad,
     },
     computed: {
         ...mapState(['invoiceState']),

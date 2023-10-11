@@ -1,5 +1,6 @@
 <template>
     <b-container fluid id="hero">
+        <spinner-load />
         <b-row>
             <SideBar />
             <b-col xl="10" lg="9" sm="9">
@@ -21,13 +22,8 @@
                                             <template v-slot:cell(actions)="{ item }">
                                                 <div class="d-flex justify-content-center">
                                                     <div>
-                                                        <!-- <b-button
-                                                            :to="{ name: 'EditServiceTicket', params: { id: item.service_ticket_id } }">
-                                                            <b-icon class="edit-btn" icon="pencil-square"></b-icon>
-                                                        </b-button> -->
-                                                    </div>
-                                                    <div>
-                                                        <b-button id="delete-container" v-b-modal @click="showDeleteModal(item)">
+                                                        <b-button id="delete-container" v-b-modal
+                                                            @click="showDeleteModal(item)">
                                                             <b-icon class="delete-btn" icon="trash-fill"></b-icon>
                                                         </b-button>
                                                     </div>
@@ -48,7 +44,7 @@
         </b-row>
 
         <!-- delete-modal -->
-        <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem" >
+        <b-modal id="delete-modal" title="Delete Confirmation" @ok="deleteItem">
             <b-row class="d-flex justify-content-center">
                 <img src="../assets/img/delete.svg" alt="" style="height:200px; width:200px">
 
@@ -63,12 +59,14 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import { mapGetters, mapState } from 'vuex'
+import SpinnerLoad from '@/components/SpinnerLoad.vue';
 
 export default {
     name: "ServiceTicketPage",
     components: {
         SideBar,
         HeaderComponent,
+        SpinnerLoad,
     },
     computed: {
         ...mapState(['ticketState']),
@@ -111,7 +109,7 @@ export default {
                 date_returned: null,
                 customer_id: null,
                 mechanic_id: null,
-                car_id: null,   
+                car_id: null,
                 service_id: null,
                 comment: null
             },
@@ -137,30 +135,30 @@ export default {
         // },
 
         showUpdateModal(item) {
-        this.item = {
-            mechanic_id: item.mechanic_id,
-            firstname: item.firstname,
-            lastname: item.lastname,
-            contact: item.contact
-      };
-      this.$bvModal.show("modal-form")
-    },
+            this.item = {
+                mechanic_id: item.mechanic_id,
+                firstname: item.firstname,
+                lastname: item.lastname,
+                contact: item.contact
+            };
+            this.$bvModal.show("modal-form")
+        },
 
-    showDeleteModal(item) {
-        this.item = {
-            service_ticket_id: item.service_ticket_id,
+        showDeleteModal(item) {
+            this.item = {
+                service_ticket_id: item.service_ticket_id,
                 service_ticket_number: item.service_ticket_number,
                 date_received: item.date_received,
                 date_returned: item.date_returned,
                 customer_id: item.customer_id,
                 mechanic_id: item.mechanic_id,
-                car_id: item.car_id,   
+                car_id: item.car_id,
                 service_id: item.service_id,
                 comments: item.comments
-      };
-      this.$bvModal.show("delete-modal");
-      console.log(item);
-    },
+            };
+            this.$bvModal.show("delete-modal");
+            console.log(item);
+        },
 
         async deleteItem() {
             try {
@@ -171,7 +169,7 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-    },
+        },
     }
 }
 </script>

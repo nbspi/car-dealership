@@ -102,17 +102,17 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  // If the user is not logged in, redirect to /login
-  const publicPages = ["/", "/login"];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem("user");
+// router.beforeEach((to, from, next) => {
+//   // If the user is not logged in, redirect to /login
+//   const publicPages = ["/", "/login"];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem("user");
 
-  if (authRequired && !loggedIn) {
-    return next("/");
-  }
+//   if (authRequired && !loggedIn) {
+//     return next("/");
+//   }
 
-  next();
-});
+//   next();
+// });
 
 export default router;

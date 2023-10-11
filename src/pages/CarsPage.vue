@@ -1,5 +1,6 @@
 <template>
     <b-container fluid id="hero">
+       <spinner-load />
         <b-row>
             <SideBar />
             <b-col xl="10" lg="9" sm="9">
@@ -16,14 +17,14 @@
                                     <b-row>
                                         <b-col class="title-container d-flex align-items-center">
                                             <h5 class="px-3">Car Records</h5>
-                                        </b-col> 
+                                        </b-col>
                                         <b-col>
                                             <b-form-input placeholder="Search" v-model="keyword"></b-form-input>
                                         </b-col>
                                     </b-row>
                                     <div class="table-responsive mt-3">
-                                        <b-table id="cars-table" hover :items="items" :fields="fields"
-                                            :keyword="keyword" :per-page="perPage" :current-page="currentPage">
+                                        <b-table id="cars-table" hover :items="items" :fields="fields" :keyword="keyword"
+                                            :per-page="perPage" :current-page="currentPage">
                                             <template v-slot:cell(actions)="{ item }">
                                                 <div class="d-flex justify-content-center">
                                                     <div>
@@ -32,7 +33,8 @@
                                                         </b-button>
                                                     </div>
                                                     <div>
-                                                        <b-button id="delete-container" v-b-modal @click="showDeleteModal(item)">
+                                                        <b-button id="delete-container" v-b-modal
+                                                            @click="showDeleteModal(item)">
                                                             <b-icon class="delete-btn" icon="trash-fill"></b-icon>
                                                         </b-button>
                                                     </div>
@@ -132,12 +134,15 @@
 import SideBar from "../layouts/SideBar.vue"
 import HeaderComponent from "../layouts/HeaderComponent.vue"
 import { mapGetters, mapState } from 'vuex'
+import SpinnerLoad from '@/components/SpinnerLoad.vue';
+
 
 export default {
     name: "CarsPage",
     components: {
         SideBar,
         HeaderComponent,
+        SpinnerLoad,
     },
 
     beforeCreate() {
